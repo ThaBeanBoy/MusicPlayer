@@ -1,28 +1,26 @@
 import React, { useEffect, useRef, useState } from 'react';
 import perry from './assets/perry.jpg';
+import { songType } from './types';
+
+import * as Slider from '@radix-ui/react-slider';
+import * as Progress from '@radix-ui/react-progress';
+
 import { BsFillPlayFill, BsPauseFill, BsSearch } from 'react-icons/bs';
 import { AiFillCaretLeft } from 'react-icons/ai';
 
-import './audioControls.css';
-
+import { millisToMinutesAndSeconds } from './hooks/Time';
 import { useInput } from './input';
+import { useSongTime } from './hooks/Time';
 
-type songType = {
-  title: string;
-  artists: string[];
-  features: string[];
-  coverUrl: string;
-  songUrl: string;
-  duration: number;
-};
+import './audioControls.css';
 
 const songs: songType[] = [
   {
     title: 'Homies in Paris',
     artists: ['Jay-Z', 'Kanye West'],
     features: [],
-    coverUrl: '/african-americans-in-america.png',
-    songUrl: '/african-americans-in-america.mp3',
+    coverUrl: '/african-americans-in-america/cover.png',
+    songUrl: '/african-americans-in-america/song.mp3',
     duration: 251000,
   },
   {
@@ -59,12 +57,6 @@ const songs: songType[] = [
   },
 ];
 
-function millisToMinutesAndSeconds(millis: number) {
-  const minutes = Math.floor(millis / 60000);
-  const seconds = (millis % 60000) / 1000;
-  return minutes + ':' + (seconds < 10 ? '0' : '') + seconds.toFixed(0);
-}
-
 function displayArtists(artists: string[]) {
   return artists.length > 1
     ? `${artists.slice(0, -1).join(', ')} & ${artists[artists.length - 1]}`
@@ -99,17 +91,21 @@ function Song({
 }
 
 function App() {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [audioPlayerExpanded, setaudioPlayerExpanded] = useState(false);
   const [audioPlaying, setAudioPlaying] = useState(false);
   const [currentSong, setCurrentSong] = useState<
     { index: number; song: songType } | undefined
   >(undefined);
+  const songTime = useSongTime(currentSong?.song);
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [audioTime, setaudioTime] = useState(0);
+  useEffect(() => {
+    if (currentSong) {
+      songTime.setSong(currentSong.song);
+    }
+  }, [currentSong]);
 
   const audioPlayer = useRef<HTMLAudioElement>(null);
-  const audioProgressBar = useRef<HTMLInputElement>(null);
 
   const searchInput = useInput();
 
@@ -181,28 +177,42 @@ function App() {
       {currentSong && (
         <div
           id='audio-controls-container'
-          className='group fixed bottom-0 w-full bg-white z-50 left-1/2 translate-x-[-50%] border-t text-lg px-2 py-2'
+          className='group fixed bottom-0 w-full bg-white z-50 left-1/2 translate-x-[-50%] border-t text-lg px-2 pb-2'
           data-aria-expanded={audioPlayerExpanded}
           data-expanded={audioPlayerExpanded}
         >
-          <div id='audio-controlls' className='mx-auto max-w-2xl'>
-            <div className='group-[[data-expanded="true"]]:hidden w-full mb-3 flex gap-3 items-center text-sm'>
-              <span>{millisToMinutesAndSeconds(audioTime)}</span>
-              <input
-                type='range'
-                id='seek-slider'
-                max='100'
-                defaultValue={(audioTime / currentSong.song.duration) * 100}
-                className='w-full block flex-1'
-                ref={audioProgressBar}
-                onChange={(e) => {
+          <Progress.Root className='relative overflow-hidden bg-blue-200 rounded-full w-full h-[2px] mb-2'>
+            <Progress.Indicator
+              className='bg-blue-500 w-full h-full transition-transform duration-[660ms] ease-[cubic-bezier(0.65, 0, 0.35, 1)]'
+              style={{
+                transform: `translateX(-${
+                  100 - songTime.progress.get.percentage()
+                }%)`,
+              }}
+            />
+          </Progress.Root>
+
+          <div id='audio-controls' className='mx-auto max-w-2xl'>
+            <div className='group-data-[expanded=false]:hidden w-full mb-3 flex gap-3 items-center text-sm'>
+              <span>{songTime.progress.get.string()}</span>
+              <Slider.Root
+                className='relative flex items-center select-none flex-1 touch-none w-[200px] h-5'
+                max={100}
+                value={[songTime.progress.get.percentage()]}
+                onValueChange={(newTimePercentnage) => {
                   if (audioPlayer.current) {
+                    songTime.progress.set.percentage(newTimePercentnage[0]);
                     audioPlayer.current.currentTime =
-                      (parseInt(e.currentTarget.value) / 100) *
-                      (currentSong.song.duration / 1000);
+                      songTime.progress.get.seconds();
                   }
                 }}
-              />
+              >
+                <Slider.Track className='bg-blue-200 relative grow rounded-full h-[3px]'>
+                  <Slider.Range className='absolute bg-blue-500 rounded-full h-full' />
+                </Slider.Track>
+                <Slider.Thumb className='block w-5 h-5 bg-white shadow-[0_2px_10px] shadow-black rounded-[10px] hover:bg-blue-100 focus:outline-none focus:shadow-[0_0_0_5px] focus:border-blue-500' />
+              </Slider.Root>
+
               <span>
                 {millisToMinutesAndSeconds(currentSong.song.duration)}
               </span>
@@ -243,13 +253,9 @@ function App() {
               onPlay={() => setAudioPlaying(true)}
               onPause={() => setAudioPlaying(false)}
               onTimeUpdate={() => {
-                setaudioTime((audioPlayer.current?.currentTime ?? 0) * 1000);
-                if (audioProgressBar.current !== null) {
-                  audioProgressBar.current.value = (
-                    (audioTime / currentSong.song.duration) *
-                    100
-                  ).toString();
-                }
+                songTime.progress.set.seconds(
+                  audioPlayer.current?.currentTime ?? 0
+                );
               }}
               onEnded={() => {
                 const songIsLast = currentSong.index === songs.length - 1;
