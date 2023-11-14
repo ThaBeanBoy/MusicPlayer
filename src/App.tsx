@@ -1,127 +1,110 @@
-import React, { useEffect, useRef, useState } from 'react';
-import perry from './assets/perry.jpg';
-import { songType } from './types';
+import { useEffect, useRef, useState, createContext } from 'react';
+import { playlistType, songType } from './types';
 
 import * as Slider from '@radix-ui/react-slider';
 import * as Progress from '@radix-ui/react-progress';
 import * as Dialog from '@radix-ui/react-dialog';
 
-import { AiFillCaretLeft, AiOutlineHeart, AiFillHeart } from 'react-icons/ai';
+import { AiFillCaretLeft, AiOutlineHeart } from 'react-icons/ai';
 import {
   BsFillPlayFill,
   BsPauseFill,
-  BsSearch,
   BsSkipEnd,
   BsSkipStart,
 } from 'react-icons/bs';
 import { BiCommentDetail } from 'react-icons/bi';
-import { FiShare2, FiRepeat } from 'react-icons/fi';
+import { FiShare2 } from 'react-icons/fi';
 import { PiCaretDownBold } from 'react-icons/pi';
 import { MdPlaylistAdd } from 'react-icons/md';
 import { TbRewindBackward10, TbRewindForward10 } from 'react-icons/tb';
 
-import { millisToMinutesAndSeconds } from './hooks/Time';
+import { millisToMinutesAndSeconds, useSongTimeType } from './hooks/Time';
 import { useSongTime } from './hooks/Time';
 
-import { useInput } from './components/input';
+import { Playlist, displayArtists } from './components/song';
 import Button from './components/button';
 
 import { cn } from './utils/cn';
 
-const songs: songType[] = [
-  {
-    title: 'Ni**as In Paris',
-    artists: ['Jay-Z', 'Kanye West'],
-    features: [],
-    coverUrl: '/african-americans-in-america/cover.png',
-    songUrl: '/african-americans-in-america/song.mp3',
-    duration: 251000,
-  },
-  {
-    title: 'Soul to Soul',
-    artists: ['Kelvin Momo'],
-    features: [],
-    coverUrl: '/soul-to-soul.jpg',
-    songUrl: '/soul-to-soul.mp3',
-    duration: 481000,
-  },
-  {
-    title: 'Soul to Soul',
-    artists: ['Kelvin Momo'],
-    features: [],
-    coverUrl: '/soul-to-soul.jpg',
-    songUrl: '/soul-to-soul.mp3',
-    duration: 481000,
-  },
-  {
-    title: 'Soul to Soul',
-    artists: ['Kelvin Momo'],
-    features: [],
-    coverUrl: '/soul-to-soul.jpg',
-    songUrl: '/soul-to-soul.mp3',
-    duration: 481000,
-  },
-  {
-    title: 'Soul to Soul',
-    artists: ['Kelvin Momo'],
-    features: [],
-    coverUrl: '/soul-to-soul.jpg',
-    songUrl: '/soul-to-soul.mp3',
-    duration: 481000,
-  },
-];
+export const songContext = createContext<
+  | {
+      playlist?: playlistType;
+      current?: songType;
+      time: useSongTimeType;
+      play: (props: { song: songType; playlist?: playlistType }) => void;
+    }
+  | undefined
+>(undefined);
 
-function displayArtists(artists: string[]) {
-  return artists.length > 1
-    ? `${artists.slice(0, -1).join(', ')} & ${artists[artists.length - 1]}`
-    : artists;
-}
-
-function Song({
-  title,
-  artists,
-  coverUrl,
-  duration,
-  onClick,
-}: { onClick?: React.MouseEventHandler<HTMLButtonElement> } & songType) {
-  return (
-    <button onClick={onClick} className='flex gap-2 w-full items-center'>
-      <img
-        src={coverUrl}
-        width={56}
-        height={56}
-        className='rounded-lg border'
-        alt='song cover'
-      />
-
-      <div className='flex-1 flex flex-col items-start'>
-        <span className='font-bold'>{title}</span> <br />
-        <span className='text-gray-600 text-sm'>{displayArtists(artists)}</span>
-      </div>
-
-      <span>{millisToMinutesAndSeconds(duration)}</span>
-    </button>
-  );
-}
+const testPlaylist: playlistType = {
+  title: 'Birthday Playlist',
+  cover: '/african-americans-in-america/cover.png',
+  songs: [
+    {
+      id: 0,
+      title: 'Ni**as In Paris',
+      artists: ['Jay-Z', 'Kanye West'],
+      features: [],
+      coverUrl: '/african-americans-in-america/cover.png',
+      songUrl: '/african-americans-in-america/song.mp3',
+      duration: 251000,
+    },
+    {
+      id: 1,
+      title: 'Soul to Soul',
+      artists: ['Kelvin Momo'],
+      features: [],
+      coverUrl: '/soul-to-soul.jpg',
+      songUrl: '/soul-to-soul.mp3',
+      duration: 481000,
+    },
+    {
+      id: 2,
+      title: 'Soul to Soul',
+      artists: ['Kelvin Momo'],
+      features: [],
+      coverUrl: '/soul-to-soul.jpg',
+      songUrl: '/soul-to-soul.mp3',
+      duration: 481000,
+    },
+    {
+      id: 3,
+      title: 'Soul to Soul',
+      artists: ['Kelvin Momo'],
+      features: [],
+      coverUrl: '/soul-to-soul.jpg',
+      songUrl: '/soul-to-soul.mp3',
+      duration: 481000,
+    },
+    {
+      id: 4,
+      title: 'Soul to Soul',
+      artists: ['Kelvin Momo'],
+      features: [],
+      coverUrl: '/soul-to-soul.jpg',
+      songUrl: '/soul-to-soul.mp3',
+      duration: 481000,
+    },
+  ],
+};
 
 function App() {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [audioPlayerExpanded, setaudioPlayerExpanded] = useState(false);
   const [audioPlaying, setAudioPlaying] = useState(false);
-  const [currentSong, setCurrentSong] = useState<
-    { index: number; song: songType } | undefined
+  const [currentPlaylist, setCurrentPlaylist] = useState<
+    playlistType | undefined
   >(undefined);
-  const songTime = useSongTime(currentSong?.song);
+  const [currentSong, setCurrentSong] = useState<songType | undefined>(
+    undefined
+  );
+  const songTime = useSongTime(currentSong);
 
   useEffect(() => {
     if (currentSong) {
-      songTime.setSong(currentSong.song);
+      songTime.setSong(currentSong);
     }
   }, [currentSong]);
 
   const audioPlayer = useRef<HTMLAudioElement>(null);
-
-  const searchInput = useInput();
 
   const handlePlayPause = async () => {
     if (audioPlaying) {
@@ -138,7 +121,17 @@ function App() {
   };
 
   return (
-    <>
+    <songContext.Provider
+      value={{
+        playlist: currentPlaylist,
+        current: currentSong,
+        time: songTime,
+        play({ song, playlist }) {
+          setCurrentPlaylist(playlist);
+          setCurrentSong(song);
+        },
+      }}
+    >
       <div className='flex gap-3 items-center pt-3'>
         <button>
           <AiFillCaretLeft />
@@ -150,45 +143,15 @@ function App() {
       </div>
       <img
         className='w-full rounded-3xl mt-4'
-        src={/* currentSong ? currentSong.song.coverUrl : */ perry}
+        src={testPlaylist.cover}
         alt='perry'
       />
 
-      <div className='relative w-full'>
-        <input
-          placeholder='search'
-          className='px-2 py-3 border-b-2 w-full border-gray-300 outline-none focus:border-blue-500'
-          {...searchInput.inputProps}
-        />
-        <BsSearch className='absolute right-2 bottom-3 translate-y-[-2px]' />
-      </div>
-
-      <ul className={cn({ 'pb-[74.8px]': currentSong })}>
-        {songs
-          .filter(({ title, artists, features }) => {
-            if (searchInput.valueIsEmpty) return true;
-
-            // searching by name
-            if (title.toLowerCase().includes(searchInput.value.toLowerCase()))
-              return true;
-
-            // searching by artist & feature names
-            return [...artists, ...features].some((artist) =>
-              artist.toLowerCase().includes(searchInput.value)
-            );
-          })
-          .map(({ ...props }, key) => (
-            <li key={key} className='border-b py-2'>
-              <Song
-                {...props}
-                onClick={() => {
-                  setCurrentSong({ index: key, song: { ...props } });
-                  audioPlayer.current?.load();
-                }}
-              />
-            </li>
-          ))}
-      </ul>
+      <Playlist
+        playlist={testPlaylist}
+        className={cn({ 'pb-[74.8px]': currentSong })}
+        searchbar
+      />
 
       {currentSong && (
         <div
@@ -211,12 +174,9 @@ function App() {
             <div className='flex gap-2 w-full items-center'>
               <Dialog.Root>
                 <Dialog.Trigger asChild>
-                  <button
-                    className='flex flex-1 gap-2 justify-start'
-                    onClick={() => setaudioPlayerExpanded(true)}
-                  >
+                  <button className='flex flex-1 gap-2 justify-start'>
                     <img
-                      src={currentSong.song.coverUrl}
+                      src={currentSong.coverUrl}
                       width={56}
                       height={56}
                       className='rounded-lg border'
@@ -224,12 +184,10 @@ function App() {
                     />
 
                     <div>
-                      <span className='font-bold'>
-                        {currentSong.song.title}
-                      </span>
+                      <span className='font-bold'>{currentSong.title}</span>
                       <br />
                       <span className='text-gray-600 text-sm'>
-                        {displayArtists(currentSong.song.artists)}
+                        {displayArtists(currentSong.artists)}
                       </span>
                     </div>
                   </button>
@@ -237,13 +195,51 @@ function App() {
 
                 <Dialog.Portal>
                   <Dialog.Content className='w-screen h-screen fixed bg-white z-50 left-0 top-0 flex justify-center'>
+                    {currentPlaylist && (
+                      <div
+                        id='current-playlist'
+                        className='max-w-xs w-full pt-14 border-r pr-2'
+                      >
+                        <div className='mb-3 border-b gap-2 pb-2 flex'>
+                          <img
+                            src={currentPlaylist.cover}
+                            width={56}
+                            height={56}
+                            className='rounded-lg border'
+                            alt='song cover'
+                          />
+                          <div className='flex-1 items-center'>
+                            <h2 className='text-xl font-semibold'>
+                              {currentPlaylist.title}
+                            </h2>
+                            <p>
+                              {millisToMinutesAndSeconds(
+                                currentPlaylist?.songs
+                                  .map(({ duration }) => duration)
+                                  .reduce((partialSum, a) => partialSum + a, 0)
+                              )}{' '}
+                              minutes long
+                            </p>
+                          </div>
+
+                          <Button
+                            icon={<FiShare2 />}
+                            variant='flat'
+                            className='text-xl'
+                          />
+                        </div>
+
+                        <Playlist playlist={currentPlaylist} searchbar />
+                      </div>
+                    )}
+
                     <div id='song-section' className='max-w-xl px-4'>
                       <Dialog.Close className='text-2xl ml-auto mb-4' asChild>
                         <Button icon={<PiCaretDownBold />} variant='flat' />
                       </Dialog.Close>
 
                       <img
-                        src={currentSong.song.coverUrl}
+                        src={currentSong.coverUrl}
                         className='rounded-3xl border mb-6'
                         alt='song cover'
                         width={420}
@@ -251,9 +247,9 @@ function App() {
 
                       <div className='mb-4 text-center'>
                         <h1 className='text-2xl font-bold'>
-                          {currentSong.song.title}
+                          {currentSong.title}
                         </h1>
-                        <h2>{displayArtists(currentSong.song.artists)}</h2>
+                        <h2>{displayArtists(currentSong.artists)}</h2>
                       </div>
 
                       <div className='w-full flex mb-4 flex-wrap gap-2'>
@@ -339,11 +335,10 @@ function App() {
                           value={[songTime.progress.get.percentage()]}
                           onValueChange={(newTimePercentnage) => {
                             if (audioPlayer.current) {
-                              songTime.progress.set.percentage(
-                                newTimePercentnage[0]
-                              );
                               audioPlayer.current.currentTime =
-                                songTime.progress.get.seconds();
+                                ((newTimePercentnage[0] / 100) *
+                                  currentSong.duration) /
+                                1000;
                             }
                           }}
                         >
@@ -354,10 +349,12 @@ function App() {
                         </Slider.Root>
 
                         <span>
-                          {millisToMinutesAndSeconds(currentSong.song.duration)}
+                          {millisToMinutesAndSeconds(currentSong.duration)}
                         </span>
                       </div>
                     </div>
+
+                    <div className='max-w-sm w-full pt-14'>Lyrics</div>
                   </Dialog.Content>
                 </Dialog.Portal>
               </Dialog.Root>
@@ -370,7 +367,7 @@ function App() {
             </div>
 
             <audio
-              src={currentSong.song.songUrl}
+              src={currentSong.songUrl}
               preload='metadata'
               ref={audioPlayer}
               onPlay={() => setAudioPlaying(true)}
@@ -381,12 +378,12 @@ function App() {
                 );
               }}
               onEnded={() => {
-                const songIsLast = currentSong.index === songs.length - 1;
-                const nextSongIndex = songIsLast ? 0 : currentSong.index++;
-                setCurrentSong({
-                  index: nextSongIndex,
-                  song: songs[nextSongIndex],
-                });
+                // const songIsLast = currentSong.index === songs.length - 1;
+                // const nextSongIndex = songIsLast ? 0 : currentSong.index++;
+                // setCurrentSong({
+                //   index: nextSongIndex,
+                //   song: songs[nextSongIndex],
+                // });
               }}
             ></audio>
 
@@ -394,7 +391,7 @@ function App() {
           </div>
         </div>
       )}
-    </>
+    </songContext.Provider>
   );
 }
 
