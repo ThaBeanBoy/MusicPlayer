@@ -15,9 +15,10 @@ import {
   BsSkipStart,
 } from 'react-icons/bs';
 import { BiCommentDetail } from 'react-icons/bi';
-import { FiShare2 } from 'react-icons/fi';
+import { FiShare2, FiRepeat } from 'react-icons/fi';
 import { PiCaretDownBold } from 'react-icons/pi';
 import { MdPlaylistAdd } from 'react-icons/md';
+import { TbRewindBackward10, TbRewindForward10 } from 'react-icons/tb';
 
 import { millisToMinutesAndSeconds } from './hooks/Time';
 import { useSongTime } from './hooks/Time';
@@ -25,12 +26,11 @@ import { useSongTime } from './hooks/Time';
 import { useInput } from './components/input';
 import Button from './components/button';
 
-import './audioControls.css';
 import { cn } from './utils/cn';
 
 const songs: songType[] = [
   {
-    title: 'Homies in Paris',
+    title: 'Ni**as In Paris',
     artists: ['Jay-Z', 'Kanye West'],
     features: [],
     coverUrl: '/african-americans-in-america/cover.png',
@@ -241,56 +241,94 @@ function App() {
                       <Dialog.Close className='text-2xl ml-auto mb-4' asChild>
                         <Button icon={<PiCaretDownBold />} variant='flat' />
                       </Dialog.Close>
+
                       <img
                         src={currentSong.song.coverUrl}
-                        className='rounded-3xl border mx-auto'
+                        className='rounded-3xl border mb-6'
                         alt='song cover'
                         width={420}
                       />
 
-                      <Button
-                        icon={<AiOutlineHeart />}
-                        label='8.2k'
-                        variant='hollow'
-                        className='flex-row-reverse shadow-none px-2 py-1 border-blue-300'
-                      />
+                      <div className='mb-4 text-center'>
+                        <h1 className='text-2xl font-bold'>
+                          {currentSong.song.title}
+                        </h1>
+                        <h2>{displayArtists(currentSong.song.artists)}</h2>
+                      </div>
 
-                      <Button
-                        icon={<BiCommentDetail />}
-                        label='720'
-                        variant='hollow'
-                        className='flex-row-reverse px-2 py-1 shadow-none border-blue-300'
-                      />
+                      <div className='w-full flex mb-4 flex-wrap gap-2'>
+                        <Button
+                          icon={<AiOutlineHeart />}
+                          label='8.2k'
+                          variant='hollow'
+                          className='flex-row-reverse shadow-none px-2 py-1 border-blue-300'
+                        />
 
-                      <Button
-                        icon={<MdPlaylistAdd />}
-                        label='Add to playlist'
-                        variant='hollow'
-                        className='flex-row-reverse px-2 py-1 shadow-none border-blue-300'
-                      />
+                        <Button
+                          icon={<BiCommentDetail />}
+                          label='720'
+                          variant='hollow'
+                          className='flex-row-reverse px-2 py-1 shadow-none border-blue-300'
+                        />
 
-                      <Button
-                        icon={<FiShare2 />}
-                        label='Share'
-                        variant='hollow'
-                        className='flex-row-reverse px-2 py-1 shadow-none border-blue-300'
-                      />
+                        <Button
+                          icon={<MdPlaylistAdd />}
+                          label='Add to playlist'
+                          variant='hollow'
+                          className='flex-row-reverse px-2 py-1 shadow-none border-blue-300'
+                        />
 
-                      <div className='flex items-center gap-8 mx-auto'>
+                        <Button
+                          icon={<FiShare2 />}
+                          onClick={async () => {
+                            try {
+                              await navigator.share({
+                                url: '',
+                                title: 'songs',
+                              });
+                            } catch (error) {
+                              alert('something went wrong');
+                              console.error(error);
+                            }
+                          }}
+                          label='Share'
+                          variant='hollow'
+                          className='flex-row-reverse px-2 py-1 shadow-none border-blue-300'
+                        />
+                      </div>
+
+                      <div className='flex items-center mb-4 gap-8 justify-center'>
                         <Button
                           icon={<BsSkipStart />}
                           className='text-[32px]'
                           variant='flat'
                         />
-                        <button
+
+                        <Button
+                          icon={<TbRewindBackward10 />}
+                          variant='flat'
+                          className='text-[32px]'
+                        />
+
+                        <Button
+                          icon={
+                            audioPlaying ? <BsPauseFill /> : <BsFillPlayFill />
+                          }
+                          className='text-[32px] h-16 w-16 rounded-full'
                           onClick={handlePlayPause}
-                          className='text-[64px]'
-                        >
-                          {audioPlaying ? <BsPauseFill /> : <BsFillPlayFill />}
-                        </button>
-                        <button className='text-[32px]'>
-                          <BsSkipEnd />
-                        </button>
+                        />
+
+                        <Button
+                          icon={<TbRewindForward10 />}
+                          variant='flat'
+                          className='text-[32px]'
+                        />
+
+                        <Button
+                          icon={<BsSkipEnd />}
+                          className='text-[32px]'
+                          variant='flat'
+                        />
                       </div>
 
                       <div className='w-full mb-3 flex gap-3 items-center text-sm'>
@@ -323,12 +361,12 @@ function App() {
                   </Dialog.Content>
                 </Dialog.Portal>
               </Dialog.Root>
-              <button
+              <Button
+                icon={audioPlaying ? <BsPauseFill /> : <BsFillPlayFill />}
                 onClick={handlePlayPause}
-                className='text-[48px] border-l'
-              >
-                {audioPlaying ? <BsPauseFill /> : <BsFillPlayFill />}
-              </button>
+                className='text-[48px] border-l border-gray-500'
+                variant='flat'
+              />
             </div>
 
             <audio
