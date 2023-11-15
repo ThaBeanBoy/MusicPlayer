@@ -1,9 +1,11 @@
 import { useEffect, useRef, useState, createContext } from 'react';
-import { playlistType, songType } from './types';
+import axios from 'axios';
 
 import * as Slider from '@radix-ui/react-slider';
 import * as Progress from '@radix-ui/react-progress';
 import * as Dialog from '@radix-ui/react-dialog';
+
+import { Lrc, useRecoverAutoScrollImmediately } from 'react-lrc';
 
 import { AiFillCaretLeft, AiOutlineHeart } from 'react-icons/ai';
 import {
@@ -18,6 +20,8 @@ import { PiCaretDownBold } from 'react-icons/pi';
 import { MdPlaylistAdd } from 'react-icons/md';
 import { TbRewindBackward10, TbRewindForward10 } from 'react-icons/tb';
 
+import { playlistType, songType } from './types';
+
 import { millisToMinutesAndSeconds, useSongTimeType } from './hooks/Time';
 import { useSongTime } from './hooks/Time';
 
@@ -25,6 +29,8 @@ import { Playlist, displayArtists } from './components/song';
 import Button from './components/button';
 
 import { cn } from './utils/cn';
+
+import './lrc.css';
 
 export const songContext = createContext<
   | {
@@ -47,7 +53,8 @@ const testPlaylist: playlistType = {
       features: [],
       coverUrl: '/african-americans-in-america/cover.png',
       songUrl: '/african-americans-in-america/song.mp3',
-      duration: 251000,
+      lyricsUrl: '/african-americans-in-america/lyrics.lrc',
+      duration: 232000,
     },
     {
       id: 1,
@@ -96,13 +103,32 @@ function App() {
   const [currentSong, setCurrentSong] = useState<songType | undefined>(
     undefined
   );
+  const [lyrics, setLyrics] = useState<string | undefined>(undefined);
   const songTime = useSongTime(currentSong);
+
+  const { signal, recoverAutoScrollImmediately } =
+    useRecoverAutoScrollImmediately();
 
   useEffect(() => {
     if (currentSong) {
+      // setting song
       songTime.setSong(currentSong);
+
+      //fetching lyrics
+      if (currentSong.lyricsUrl) {
+        axios
+          .get<string>(currentSong.lyricsUrl)
+          .then((response) => setLyrics(response.data))
+          .catch(() => setLyrics(undefined));
+      } else {
+        setLyrics(undefined);
+      }
     }
   }, [currentSong]);
+
+  useEffect(() => {
+    console.log(signal);
+  }, [signal]);
 
   const audioPlayer = useRef<HTMLAudioElement>(null);
 
@@ -354,7 +380,32 @@ function App() {
                       </div>
                     </div>
 
-                    <div className='max-w-sm w-full pt-14'>Lyrics</div>
+                    {lyrics && (
+                      <div className='max-w-lg w-full pt-14'>
+                        <Lrc
+                          lrc={lyrics}
+                          className='lrc'
+                          style={{ height: '100%' }}
+                          lineRenderer={({ active, line }) => (
+                            <p
+                              data-active={active}
+                              className='text-gray-400 font-bold text-2xl cursor-pointer transition-all origin-left duration-300 data-[active=true]:text-black data-[active=false]:scale-75'
+                              onClick={() => {
+                                if (audioPlayer.current) {
+                                  audioPlayer.current.currentTime =
+                                    line.startMillisecond / 1000;
+                                }
+                              }}
+                            >
+                              {line.content}
+                            </p>
+                          )}
+                          currentMillisecond={songTime.progress.get.milliseconds()}
+                          recoverAutoScrollSingal={signal}
+                          recoverAutoScrollInterval={3000}
+                        />
+                      </div>
+                    )}
                   </Dialog.Content>
                 </Dialog.Portal>
               </Dialog.Root>

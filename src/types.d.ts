@@ -6,6 +6,7 @@ export type songType = {
   coverUrl: string;
   songUrl: string;
   duration: number;
+  lyricsUrl?: string;
 };
 
 export type playlistType = {
