@@ -1,8 +1,13 @@
+export type artistType = {
+  name: string;
+  link?: string;
+};
+
 export type songType = {
   id: number;
   title: string;
-  artists: string[];
-  features: string[];
+  artists: artistType[];
+  features: artistType[];
   coverUrl: string;
   songUrl: string;
   duration: number;

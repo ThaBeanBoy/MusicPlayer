@@ -1,99 +1,121 @@
 import { useEffect, useRef, useState, createContext } from 'react';
 import axios from 'axios';
 
-import * as Slider from '@radix-ui/react-slider';
-import * as Progress from '@radix-ui/react-progress';
 import * as Dialog from '@radix-ui/react-dialog';
 
-import { Lrc, useRecoverAutoScrollImmediately } from 'react-lrc';
+import { AiFillCaretLeft } from 'react-icons/ai';
+import { BsFillPlayFill, BsPauseFill } from 'react-icons/bs';
+import { FiShare2, FiMinimize2, FiX } from 'react-icons/fi';
 
-import { AiFillCaretLeft, AiOutlineHeart } from 'react-icons/ai';
-import {
-  BsFillPlayFill,
-  BsPauseFill,
-  BsSkipEnd,
-  BsSkipStart,
-} from 'react-icons/bs';
-import { BiCommentDetail } from 'react-icons/bi';
-import { FiShare2 } from 'react-icons/fi';
-import { PiCaretDownBold } from 'react-icons/pi';
-import { MdPlaylistAdd } from 'react-icons/md';
-import { TbRewindBackward10, TbRewindForward10 } from 'react-icons/tb';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
+import 'swiper/css/pagination';
 
 import { playlistType, songType } from './types';
 
-import { millisToMinutesAndSeconds, useSongTimeType } from './hooks/Time';
+import { useSongTimeType } from './hooks/Time';
 import { useSongTime } from './hooks/Time';
 
-import { Playlist, displayArtists } from './components/song';
+import { Playlist, Artists } from './components/song';
 import Button from './components/button';
+import { Lyrics, CurrentPlaylist, Controls } from './context/song';
 
 import { cn } from './utils/cn';
 
-import './lrc.css';
+import CurrentSongProgress from './components/songProgress';
+
+import { testPlaylist } from './assets/fakeDb';
+import useWindowDimensions, { useScreen } from './hooks/windowDimensions';
 
 export const songContext = createContext<
   | {
       playlist?: playlistType;
       current?: songType;
       time: useSongTimeType;
-      play: (props: { song: songType; playlist?: playlistType }) => void;
+      lyrics: string | undefined;
+      controls: {
+        expand: () => void;
+        collapse: () => void;
+        expanded: boolean;
+        songTime: useSongTimeType;
+        isPlaying: boolean;
+        play: () => Promise<void> | undefined;
+        pause: () => void;
+        playPause: () => Promise<void>;
+        jumpTo: {
+          millisecond: (millisecond: number) => void;
+          second: (second: number) => void;
+        };
+      };
+      playSong: (args: {
+        song: songType;
+        playlist?: playlistType;
+      }) => Promise<void> | undefined;
     }
   | undefined
 >(undefined);
 
-const testPlaylist: playlistType = {
-  title: 'Birthday Playlist',
-  cover: '/african-americans-in-america/cover.png',
-  songs: [
-    {
-      id: 0,
-      title: 'Ni**as In Paris',
-      artists: ['Jay-Z', 'Kanye West'],
-      features: [],
-      coverUrl: '/african-americans-in-america/cover.png',
-      songUrl: '/african-americans-in-america/song.mp3',
-      lyricsUrl: '/african-americans-in-america/lyrics.lrc',
-      duration: 232000,
-    },
-    {
-      id: 1,
-      title: 'Soul to Soul',
-      artists: ['Kelvin Momo'],
-      features: [],
-      coverUrl: '/soul-to-soul.jpg',
-      songUrl: '/soul-to-soul.mp3',
-      duration: 481000,
-    },
-    {
-      id: 2,
-      title: 'Soul to Soul',
-      artists: ['Kelvin Momo'],
-      features: [],
-      coverUrl: '/soul-to-soul.jpg',
-      songUrl: '/soul-to-soul.mp3',
-      duration: 481000,
-    },
-    {
-      id: 3,
-      title: 'Soul to Soul',
-      artists: ['Kelvin Momo'],
-      features: [],
-      coverUrl: '/soul-to-soul.jpg',
-      songUrl: '/soul-to-soul.mp3',
-      duration: 481000,
-    },
-    {
-      id: 4,
-      title: 'Soul to Soul',
-      artists: ['Kelvin Momo'],
-      features: [],
-      coverUrl: '/soul-to-soul.jpg',
-      songUrl: '/soul-to-soul.mp3',
-      duration: 481000,
-    },
-  ],
-};
+/*
+  Make playlists for:
+
+  ! Add artist links
+  
+  - Judge me, I don't care (Tineyi & ${original artist's name})
+  - Gamers GG (Gta Themes, Nintendo Wii)
+  - Hip Hop (M.A.A.D, Cole's library, FPS, Wow freestyle 6 God, It aint hard to tell)
+  - Save the semester mode
+  - Sandile Strict Session vol 4
+  - Tanatswa (Ganster Nkazana - Musikana Wemacider)
+  - Tanaka & Aneen (Vasikana va mwari)
+  - Kudzi (Amai Papa Bear)
+  - Rivo (Munghana Rulani & Prince Rhangani)
+  - Sesi (Khosikadzi va mavenda)
+  - Mpumi, Nkosana & Andrew (name: Past Paper Chowers United, playlist: E Les Foyer Cremming) | Andrew hip hop Idlozi
+  - Delulu's child (not destiny's child) - Electrotechnics Engineer Abongile -> Kwa Zulu & Snr AWS Cloud Engineer Mohlakoane -> Basetsana babapedi
+  - Group Leader Tshabalala
+  - Mudhara Kayz
+  - Zim dancehall
+  - Jared, Nepo,  Gamers GG & Royal College (Anime)
+  - Morena aka Moreezy (Classics)
+  - Mama
+  - Baba
+  - Kundi, Uzozisola, Winky, Lambo mercy
+    - Foot's wife
+  - Charlene & Primrose (My Sisters)
+  - Taps
+  - Amai Aku
+  - Yongama
+  - Amber (Daft punk)
+  - High class papi
+  - Ashley
+  - Risky Life Holy Ten
+  - Need to ask Trevor
+  - Kung Fu Kenny -> Money tress, mad city, the heart part 4, mortal man
+
+  # DEMO
+
+  Ufunani
+  Musazvituma / Time (Holy)
+  Intro + Steve Biko + Award Tour(Tribe called quest) - Displays auto next
+  Uzozisola
+  As it was
+  M.A.A.D City
+  Money Tress
+  Neighbors
+  It aint hard to tell (Nas)
+  Something About us
+
+  # Improvements
+
+  - API -> Database -> AWS S3 or any storage solution
+      Would allow us to implement features like 'likes', 'comments' & 'playlists'
+      Normal user could have their own dashboard where they can manage their liked songs, playlists & perform CRUD ops on those things
+      API & DB would also allow user accounts and we can could implement a Artsists dashborard where they can perform CRUD on their songs, albums etc..
+  - Auto swipe to the Song controller when dialogue is open, (Swiper is fustrating)
+  - Onswipe, the bar thing should also move to indicate to the user which section of swiper they on
+  - The scroll input isn't working due to swiper taking over when a user wants to scroll.
+  - Make PWA
+*/
 
 function App() {
   const [audioPlaying, setAudioPlaying] = useState(false);
@@ -106,8 +128,14 @@ function App() {
   const [lyrics, setLyrics] = useState<string | undefined>(undefined);
   const songTime = useSongTime(currentSong);
 
-  const { signal, recoverAutoScrollImmediately } =
-    useRecoverAutoScrollImmediately();
+  const [audioPlayDialogOpen, setAudioPlayDialogOpen] = useState(false);
+
+  const defaultSlide = currentPlaylist ? 1 : 0;
+  const [activeSlide, setActiveSlide] = useState(defaultSlide);
+
+  const { desktop } = useScreen();
+
+  const audioPlayer = useRef<HTMLAudioElement>(null);
 
   useEffect(() => {
     if (currentSong) {
@@ -126,12 +154,6 @@ function App() {
     }
   }, [currentSong]);
 
-  useEffect(() => {
-    console.log(signal);
-  }, [signal]);
-
-  const audioPlayer = useRef<HTMLAudioElement>(null);
-
   const handlePlayPause = async () => {
     if (audioPlaying) {
       audioPlayer.current?.pause();
@@ -146,15 +168,72 @@ function App() {
     }
   };
 
+  const { width } = useWindowDimensions();
+  let slidesPerView = 3;
+  if (width < 768) slidesPerView = 1;
+  else if (width < 1280) slidesPerView = 2;
+
+  const jumpTo = {
+    millisecond(millisecond: number) {
+      if (currentSong && audioPlayer.current) {
+        if (millisecond < 0 || millisecond > currentSong?.duration) {
+          throw new Error(
+            `time cannot exceed the duration of the song (${currentSong?.duration}ms)`
+          );
+        }
+
+        audioPlayer.current.currentTime = millisecond / 1000;
+      }
+    },
+
+    second(second: number) {
+      if (currentSong && audioPlayer.current) {
+        if (second < 0 || second > currentSong?.duration / 1000) {
+          throw new Error(
+            `time cannot exceed the duration of the song (${
+              currentSong?.duration / 1000
+            }s)`
+          );
+        }
+
+        audioPlayer.current.currentTime = second;
+      }
+    },
+  };
+
   return (
     <songContext.Provider
       value={{
         playlist: currentPlaylist,
         current: currentSong,
         time: songTime,
-        play({ song, playlist }) {
+        lyrics,
+        controls: {
+          expand() {
+            setAudioPlayDialogOpen(true);
+          },
+          collapse() {
+            setAudioPlayDialogOpen(false);
+          },
+          expanded: audioPlayDialogOpen,
+          songTime,
+          isPlaying: audioPlaying,
+          play() {
+            return audioPlayer.current?.play();
+          },
+          pause() {
+            audioPlayer.current?.pause();
+          },
+          playPause: handlePlayPause,
+          jumpTo,
+        },
+        playSong({ song, playlist }) {
+          audioPlayer.current?.pause();
+
           setCurrentPlaylist(playlist);
           setCurrentSong(song);
+
+          return audioPlayer.current?.play();
         },
       }}
     >
@@ -184,21 +263,15 @@ function App() {
           id='audio-controls-container'
           className='group fixed bottom-0 w-full bg-white z-40 left-1/2 translate-x-[-50%] border-t text-lg px-2 pb-2'
         >
-          <Progress.Root className='relative overflow-hidden bg-blue-200 rounded-full w-full h-[2px] mb-2'>
-            <Progress.Indicator
-              className='bg-blue-500 w-full h-full transition-transform duration-[660ms] ease-[cubic-bezier(0.65, 0, 0.35, 1)]'
-              style={{
-                transform: `translateX(-${
-                  100 - songTime.progress.get.percentage()
-                }%)`,
-              }}
-            />
-          </Progress.Root>
+          <CurrentSongProgress className='mb-2' />
 
           <div id='audio-controls' className='mx-auto max-w-2xl'>
             {/* song info */}
             <div className='flex gap-2 w-full items-center'>
-              <Dialog.Root>
+              <Dialog.Root
+                open={audioPlayDialogOpen}
+                onOpenChange={setAudioPlayDialogOpen}
+              >
                 <Dialog.Trigger asChild>
                   <button className='flex flex-1 gap-2 justify-start'>
                     <img
@@ -212,200 +285,89 @@ function App() {
                     <div>
                       <span className='font-bold'>{currentSong.title}</span>
                       <br />
-                      <span className='text-gray-600 text-sm'>
-                        {displayArtists(currentSong.artists)}
-                      </span>
+                      <Artists
+                        artists={currentSong.artists}
+                        className='text-gray-600 text-sm'
+                      />
                     </div>
                   </button>
                 </Dialog.Trigger>
 
                 <Dialog.Portal>
-                  <Dialog.Content className='w-screen h-screen fixed bg-white z-50 left-0 top-0 flex justify-center'>
-                    {currentPlaylist && (
+                  <Dialog.Content className='w-screen h-screen flex flex-col items-center fixed bg-white z-50 left-0 top-0'>
+                    <div className='w-full max-w-md px-4 flex items-center justify-between border-b mb-2'>
                       <div
-                        id='current-playlist'
-                        className='max-w-xs w-full pt-14 border-r pr-2'
+                        className={cn('rounded-full w-[72px] bg-blue-200', {
+                          invisible: desktop,
+                        })}
                       >
-                        <div className='mb-3 border-b gap-2 pb-2 flex'>
-                          <img
-                            src={currentPlaylist.cover}
-                            width={56}
-                            height={56}
-                            className='rounded-lg border'
-                            alt='song cover'
-                          />
-                          <div className='flex-1 items-center'>
-                            <h2 className='text-xl font-semibold'>
-                              {currentPlaylist.title}
-                            </h2>
-                            <p>
-                              {millisToMinutesAndSeconds(
-                                currentPlaylist?.songs
-                                  .map(({ duration }) => duration)
-                                  .reduce((partialSum, a) => partialSum + a, 0)
-                              )}{' '}
-                              minutes long
-                            </p>
-                          </div>
+                        <div
+                          data-slide={activeSlide}
+                          data-slide-per-view={slidesPerView}
+                          className='block w-6 h-1 bg-blue-500 rounded-full transition-transform duration-300 data-[slide-per-view=2]:w-12 data-[slide-per-view=2]:bg-red-500 data-[slide=1]:translate-x-[24px] data-[slide=2]:translate-x-[48px]'
+                        />
+                      </div>
 
+                      <div className='flex items-center'>
+                        <Dialog.Close asChild>
                           <Button
-                            icon={<FiShare2 />}
+                            icon={<FiX />}
                             variant='flat'
-                            className='text-xl'
+                            onClick={() => {
+                              jumpTo.second(0);
+                              setCurrentSong(undefined);
+                              setCurrentPlaylist(undefined);
+                            }}
                           />
-                        </div>
-
-                        <Playlist playlist={currentPlaylist} searchbar />
-                      </div>
-                    )}
-
-                    <div id='song-section' className='max-w-xl px-4'>
-                      <Dialog.Close className='text-2xl ml-auto mb-4' asChild>
-                        <Button icon={<PiCaretDownBold />} variant='flat' />
-                      </Dialog.Close>
-
-                      <img
-                        src={currentSong.coverUrl}
-                        className='rounded-3xl border mb-6'
-                        alt='song cover'
-                        width={420}
-                      />
-
-                      <div className='mb-4 text-center'>
-                        <h1 className='text-2xl font-bold'>
-                          {currentSong.title}
-                        </h1>
-                        <h2>{displayArtists(currentSong.artists)}</h2>
-                      </div>
-
-                      <div className='w-full flex mb-4 flex-wrap gap-2'>
-                        <Button
-                          icon={<AiOutlineHeart />}
-                          label='8.2k'
-                          variant='hollow'
-                          className='flex-row-reverse shadow-none px-2 py-1 border-blue-300'
-                        />
-
-                        <Button
-                          icon={<BiCommentDetail />}
-                          label='720'
-                          variant='hollow'
-                          className='flex-row-reverse px-2 py-1 shadow-none border-blue-300'
-                        />
-
-                        <Button
-                          icon={<MdPlaylistAdd />}
-                          label='Add to playlist'
-                          variant='hollow'
-                          className='flex-row-reverse px-2 py-1 shadow-none border-blue-300'
-                        />
-
-                        <Button
-                          icon={<FiShare2 />}
-                          onClick={async () => {
-                            try {
-                              await navigator.share({
-                                url: '',
-                                title: 'songs',
-                              });
-                            } catch (error) {
-                              alert('something went wrong');
-                              console.error(error);
-                            }
-                          }}
-                          label='Share'
-                          variant='hollow'
-                          className='flex-row-reverse px-2 py-1 shadow-none border-blue-300'
-                        />
-                      </div>
-
-                      <div className='flex items-center mb-4 gap-8 justify-center'>
-                        <Button
-                          icon={<BsSkipStart />}
-                          className='text-[32px]'
-                          variant='flat'
-                        />
-
-                        <Button
-                          icon={<TbRewindBackward10 />}
-                          variant='flat'
-                          className='text-[32px]'
-                        />
-
-                        <Button
-                          icon={
-                            audioPlaying ? <BsPauseFill /> : <BsFillPlayFill />
-                          }
-                          className='text-[32px] h-16 w-16 rounded-full'
-                          onClick={handlePlayPause}
-                        />
-
-                        <Button
-                          icon={<TbRewindForward10 />}
-                          variant='flat'
-                          className='text-[32px]'
-                        />
-
-                        <Button
-                          icon={<BsSkipEnd />}
-                          className='text-[32px]'
-                          variant='flat'
-                        />
-                      </div>
-
-                      <div className='w-full mb-3 flex gap-3 items-center text-sm'>
-                        <span>{songTime.progress.get.string()}</span>
-                        <Slider.Root
-                          className='relative flex items-center select-none flex-1 touch-none w-[200px] h-5'
-                          max={100}
-                          value={[songTime.progress.get.percentage()]}
-                          onValueChange={(newTimePercentnage) => {
-                            if (audioPlayer.current) {
-                              audioPlayer.current.currentTime =
-                                ((newTimePercentnage[0] / 100) *
-                                  currentSong.duration) /
-                                1000;
-                            }
-                          }}
-                        >
-                          <Slider.Track className='bg-blue-200 relative grow rounded-full h-[3px]'>
-                            <Slider.Range className='absolute bg-blue-500 rounded-full h-full' />
-                          </Slider.Track>
-                          <Slider.Thumb className='block w-5 h-5 bg-white shadow-[0_2px_10px] shadow-black rounded-[10px] hover:bg-blue-100 focus:outline-none focus:shadow-[0_0_0_5px] focus:border-blue-500' />
-                        </Slider.Root>
-
-                        <span>
-                          {millisToMinutesAndSeconds(currentSong.duration)}
-                        </span>
+                        </Dialog.Close>
+                        <Dialog.Close asChild>
+                          <Button icon={<FiMinimize2 />} variant='flat' />
+                        </Dialog.Close>
                       </div>
                     </div>
+                    {/* <div
+                      id='desktop'
+                      className='hidden xl:flex gap-4 justify-center w-full h-full'
+                    >
+                      <CurrentPlaylist className='max-w-xs w-full pt-14 border-r pr-2' />
 
-                    {lyrics && (
-                      <div className='max-w-lg w-full pt-14'>
-                        <Lrc
-                          lrc={lyrics}
-                          className='lrc'
-                          style={{ height: '100%' }}
-                          lineRenderer={({ active, line }) => (
-                            <p
-                              data-active={active}
-                              className='text-gray-400 font-bold text-2xl cursor-pointer transition-all origin-left duration-300 data-[active=true]:text-black data-[active=false]:scale-75'
-                              onClick={() => {
-                                if (audioPlayer.current) {
-                                  audioPlayer.current.currentTime =
-                                    line.startMillisecond / 1000;
-                                }
-                              }}
-                            >
-                              {line.content}
+                      <Controls className='max-w-xl' />
+
+                      <Lyrics className='xl:block max-w-lg w-full pt-14' />
+                    </div> */}
+
+                    <Swiper
+                      slidesPerView={slidesPerView}
+                      spaceBetween={16}
+                      className='px-4 flex-1 w-full'
+                      onSlideChange={(swiper) =>
+                        setActiveSlide(swiper.activeIndex)
+                      }
+                    >
+                      <SwiperSlide className='flex justify-center'>
+                        {currentPlaylist ? (
+                          <CurrentPlaylist className='w-full max-w-md md:max-w-none' />
+                        ) : (
+                          <p className='text-gray-400 font-bold text-2xl'>
+                            Not in playlist
+                          </p>
+                        )}
+                      </SwiperSlide>
+                      <SwiperSlide className='flex justify-center'>
+                        <Controls className='w-full' />
+                      </SwiperSlide>
+                      {
+                        <SwiperSlide className='flex justify-center'>
+                          {lyrics ? (
+                            <Lyrics className='w-full max-w-md md:max-w-none' />
+                          ) : (
+                            <p className='text-gray-400 font-bold text-2xl'>
+                              No Lyrics
                             </p>
                           )}
-                          currentMillisecond={songTime.progress.get.milliseconds()}
-                          recoverAutoScrollSingal={signal}
-                          recoverAutoScrollInterval={3000}
-                        />
-                      </div>
-                    )}
+                        </SwiperSlide>
+                      }
+                    </Swiper>
                   </Dialog.Content>
                 </Dialog.Portal>
               </Dialog.Root>
@@ -437,8 +399,6 @@ function App() {
                 // });
               }}
             ></audio>
-
-            {/* <ReactAudioPlayer src={}  /> */}
           </div>
         </div>
       )}
