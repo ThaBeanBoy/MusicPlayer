@@ -1,7 +1,7 @@
 import * as Progress from '@radix-ui/react-progress';
 import { cn } from '../utils/cn';
 import { useContext } from 'react';
-import { songContext } from '../App';
+import songContext from '../context/song/context';
 
 export default function CurrentSongProgress({
   className,

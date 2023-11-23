@@ -1,12 +1,12 @@
-import React, { forwardRef, useContext } from 'react';
+import { forwardRef, useContext, HtmlHTMLAttributes } from 'react';
 
 import { Lrc, useRecoverAutoScrollImmediately } from 'react-lrc';
 
-import { songContext } from '../App';
+import * as Slider from '@radix-ui/react-slider';
+
+import songContext from './song/context';
 
 import { millisToMinutesAndSeconds } from '../hooks/Time';
-
-import * as Slider from '@radix-ui/react-slider';
 
 import Button from '../components/button';
 import { Artists, Playlist } from '../components/song';
@@ -29,7 +29,7 @@ import './lrc.css';
 
 export const Lyrics = forwardRef<
   HTMLDivElement,
-  React.HtmlHTMLAttributes<HTMLDivElement>
+  HtmlHTMLAttributes<HTMLDivElement>
 >((props, ref) => {
   const currentSong = useContext(songContext);
   const { signal } = useRecoverAutoScrollImmediately();
@@ -64,7 +64,7 @@ export const Lyrics = forwardRef<
 
 export const CurrentPlaylist = forwardRef<
   HTMLDivElement,
-  React.HtmlHTMLAttributes<HTMLDivElement>
+  HtmlHTMLAttributes<HTMLDivElement>
 >((props, ref) => {
   const currentSong = useContext(songContext);
 
@@ -104,7 +104,7 @@ export const CurrentPlaylist = forwardRef<
 
 export const Controls = forwardRef<
   HTMLDivElement,
-  React.HtmlHTMLAttributes<HTMLDivElement>
+  HtmlHTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => {
   const currentSong = useContext(songContext);
 

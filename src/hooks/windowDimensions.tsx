@@ -29,19 +29,18 @@ export default function useWindowDimensions() {
 
 const screenSizes = {
   desktop: 1280,
-  tablet: 720,
-  phone: 360,
+  tablet: 1120,
+  phone: 800,
 };
 
-export function useScreen() {
+export type screen = 'mobile' | 'tablet' | 'desktop';
+
+export function useScreen(): screen {
   const { width } = useWindowDimensions();
 
-  const tablet = width >= screenSizes.phone && width < screenSizes.desktop;
-  const obj = {
-    desktop: width > screenSizes.desktop && !tablet,
-    tablet,
-    phone: width < screenSizes.phone,
-  };
+  if (width < screenSizes.phone) return 'mobile';
 
-  return obj;
+  if (width < screenSizes.tablet) return 'tablet';
+
+  return 'desktop';
 }

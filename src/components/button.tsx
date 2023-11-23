@@ -34,7 +34,8 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
           'border-red-500 bg-red-500': desctructive,
 
           // flat
-          'text-blue-500 border-none bg-white shadow-none': variant === 'flat',
+          'text-blue-500 border-none bg-transparent border-0 shadow-none':
+            variant === 'flat',
 
           'text-red-500':
             (desctructive && variant === 'hollow') ||

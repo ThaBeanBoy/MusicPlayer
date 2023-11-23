@@ -3,10 +3,12 @@ import { millisToMinutesAndSeconds } from '../hooks/Time';
 import { artistType, playlistType, songType } from '../types';
 import { useInput } from './input';
 import { useContext } from 'react';
-import { songContext } from '../App';
+import songContext from '../context/song/context';
 import { cn } from '../utils/cn';
 import Button from './button';
 import CurrentSongProgress from './songProgress';
+import { FaPlay } from 'react-icons/fa';
+import * as Dialog from '@radix-ui/react-dialog';
 
 export function Song({
   title,
@@ -25,10 +27,12 @@ export function Song({
     if (!isBeingPlayed) {
       // loading the song
       try {
-        await currentSong?.playSong({
+        currentSong?.playSong({
           song: { title, artists, coverUrl, duration, id, ...props },
           playlist: fromPlaylist,
         });
+
+        console.log(`button event : ${currentSong?.current?.title}`);
 
         return;
       } catch (error) {
@@ -37,8 +41,8 @@ export function Song({
     }
 
     // opening expansion
-    if (currentSong && !currentSong.controls.expanded) {
-      currentSong.controls.expand();
+    if (currentSong && !currentSong.dialog?.isOpen) {
+      currentSong.dialog?.open();
     }
   };
 
@@ -48,7 +52,7 @@ export function Song({
         <button
           onClick={handleClick}
           className='flex gap-2 w-full py-2 items-center'
-          disabled={isBeingPlayed && currentSong.controls.expanded}
+          // disabled={isBeingPlayed && currentSong.dialog?.isOpen}
         >
           <img
             src={coverUrl}
@@ -94,56 +98,90 @@ export function Playlist({
   searchbar,
   className,
   ulClassName,
+  variant = 'list',
 }: {
   playlist: playlistType;
   searchbar?: boolean;
   className?: string;
   ulClassName?: string;
+  variant?: 'box' | 'list';
 }) {
   const searchInput = useInput();
 
+  if (variant === 'list')
+    return (
+      <div className={className}>
+        {searchbar && (
+          <div className='relative w-full'>
+            <input
+              placeholder='search'
+              className='px-2 py-3 border-b-2 w-full border-gray-300 outline-none focus:border-blue-500'
+              {...searchInput.inputProps}
+            />
+            <BsSearch className='absolute right-2 bottom-3 translate-y-[-2px]' />
+          </div>
+        )}
+
+        <ul className={ulClassName}>
+          {playlist.songs
+            .filter(({ title, artists, features }) => {
+              if (searchInput.valueIsEmpty) return true;
+
+              // searching by name
+              if (
+                title
+                  .toLowerCase()
+                  .replace(/\s/g, '')
+                  .includes(searchInput.value.toLowerCase().replace(/\s/g, ''))
+              )
+                return true;
+
+              // searching by artist & feature names
+              return [...artists, ...features].some((artist) =>
+                artist.name
+                  .toLowerCase()
+                  .replace(/\s/g, '')
+                  .includes(searchInput.value.replace(/\s/g, ''))
+              );
+            })
+            .map(({ ...props }, key) => (
+              <li key={key} className='border-b'>
+                <Song {...props} fromPlaylist={playlist} />
+              </li>
+            ))}
+        </ul>
+      </div>
+    );
+
+  const artists = playlist.songs
+    .map((song) => song.artists)
+    .reduce((prev, next) => prev.concat(next));
+
   return (
-    <div className={className}>
-      {searchbar && (
-        <div className='relative w-full'>
-          <input
-            placeholder='search'
-            className='px-2 py-3 border-b-2 w-full border-gray-300 outline-none focus:border-blue-500'
-            {...searchInput.inputProps}
-          />
-          <BsSearch className='absolute right-2 bottom-3 translate-y-[-2px]' />
-        </div>
-      )}
-
-      <ul className={ulClassName}>
-        {playlist.songs
-          .filter(({ title, artists, features }) => {
-            if (searchInput.valueIsEmpty) return true;
-
-            // searching by name
-            if (
-              title
-                .toLowerCase()
-                .replace(/\s/g, '')
-                .includes(searchInput.value.toLowerCase().replace(/\s/g, ''))
-            )
-              return true;
-
-            // searching by artist & feature names
-            return [...artists, ...features].some((artist) =>
-              artist.name
-                .toLowerCase()
-                .replace(/\s/g, '')
-                .includes(searchInput.value.replace(/\s/g, ''))
-            );
-          })
-          .map(({ ...props }, key) => (
-            <li key={key} className='border-b'>
-              <Song {...props} fromPlaylist={playlist} />
-            </li>
-          ))}
-      </ul>
-    </div>
+    <Dialog.Root>
+      <Dialog.Trigger>
+        <button
+          className={cn('group flex flex-col items-start w-52', className)}
+        >
+          <div className='relative w-full'>
+            <img
+              src={playlist.cover}
+              alt={`${playlist.title} cover`}
+              className='rounded-2xl border w-full group-hover:brightness-75 transition'
+            />
+            <Button
+              icon={<FaPlay />}
+              className='opacity-0 group-hover:opacity-100 absolute top-4 right-4 transition text-3xl'
+              variant='flat'
+            />
+          </div>
+          <div className='px-2 text-left w-full text-ellipsis truncate'>
+            <p className='font-semibold w-full truncate'>{playlist.title}</p>
+            <Artists artists={artists} className='text-sm w-full truncate' />
+          </div>
+        </button>
+      </Dialog.Trigger>
+    </Dialog.Root>
   );
 }
 
