@@ -1,14 +1,13 @@
 import { BsFillPlayFill, BsPauseFill, BsSearch } from 'react-icons/bs';
 import { millisToMinutesAndSeconds } from '../hooks/Time';
 import { artistType, playlistType, songType } from '../types';
-import { useInput } from './input';
+import Input, { useInput } from './input';
 import { useContext } from 'react';
 import songContext from '../context/song/context';
 import { cn } from '../utils/cn';
 import Button from './button';
 import CurrentSongProgress from './songProgress';
-import { FaPlay } from 'react-icons/fa';
-import * as Dialog from '@radix-ui/react-dialog';
+import { NavLink } from 'react-router-dom';
 
 export function Song({
   title,
@@ -106,20 +105,30 @@ export function Playlist({
   ulClassName?: string;
   variant?: 'box' | 'list';
 }) {
+  const currentSong = useContext(songContext);
+  const isBeingPlayed = currentSong?.playlist?.id === playlist.id;
   const searchInput = useInput();
 
   if (variant === 'list')
     return (
       <div className={className}>
         {searchbar && (
-          <div className='relative w-full'>
-            <input
-              placeholder='search'
-              className='px-2 py-3 border-b-2 w-full border-gray-300 outline-none focus:border-blue-500'
+          <>
+            {/* <div className='relative w-full'>
+              <input
+                placeholder='search'
+                className='px-2 py-3 border-b-2 w-full border-gray-300 outline-none focus:border-blue-500'
+                
+              />
+              <BsSearch className='absolute right-2 bottom-3 translate-y-[-2px]' />
+            </div> */}
+            <Input
+              icon={<BsSearch />}
+              wrapperClassname='max-w-none w-full'
+              placeholder={`Search in '${playlist.title}'`}
               {...searchInput.inputProps}
             />
-            <BsSearch className='absolute right-2 bottom-3 translate-y-[-2px]' />
-          </div>
+          </>
         )}
 
         <ul className={ulClassName}>
@@ -158,30 +167,36 @@ export function Playlist({
     .reduce((prev, next) => prev.concat(next));
 
   return (
-    <Dialog.Root>
-      <Dialog.Trigger>
-        <button
-          className={cn('group flex flex-col items-start w-52', className)}
+    <NavLink
+      to={`list/${playlist.id}`}
+      className={cn(
+        'text-black hover:text-black group flex flex-col items-start w-52',
+        className
+      )}
+    >
+      <div className='relative w-full'>
+        <img
+          src={playlist.cover}
+          alt={`${playlist.title} cover`}
+          className={cn(
+            'rounded-2xl border w-full group-hover:brightness-75 transition',
+            { 'brightness-75': isBeingPlayed }
+          )}
+        />
+        <span
+          className={cn(
+            'absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white font-bold opacity-0',
+            { 'opacity-100': isBeingPlayed }
+          )}
         >
-          <div className='relative w-full'>
-            <img
-              src={playlist.cover}
-              alt={`${playlist.title} cover`}
-              className='rounded-2xl border w-full group-hover:brightness-75 transition'
-            />
-            <Button
-              icon={<FaPlay />}
-              className='opacity-0 group-hover:opacity-100 absolute top-4 right-4 transition text-3xl'
-              variant='flat'
-            />
-          </div>
-          <div className='px-2 text-left w-full text-ellipsis truncate'>
-            <p className='font-semibold w-full truncate'>{playlist.title}</p>
-            <Artists artists={artists} className='text-sm w-full truncate' />
-          </div>
-        </button>
-      </Dialog.Trigger>
-    </Dialog.Root>
+          Is Playing
+        </span>
+      </div>
+      <div className='px-2 text-left w-full text-ellipsis truncate'>
+        <p className='font-semibold w-full truncate'>{playlist.title}</p>
+        <Artists artists={artists} className='text-sm w-full truncate' />
+      </div>
+    </NavLink>
   );
 }
 
@@ -191,7 +206,7 @@ export function Artist({
   provideLink = false,
 }: artistType & { provideLink?: boolean }) {
   return link && provideLink ? (
-    <a href={link} className='text-blue-500'>
+    <a href={link} target='_blank' className='text-blue-500'>
       {name}
     </a>
   ) : (

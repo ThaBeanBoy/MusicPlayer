@@ -15,7 +15,9 @@ export type songType = {
 };
 
 export type playlistType = {
+  id: number;
   title: string;
   cover?: string;
   songs: songType[];
+  description?: React.ReactNode;
 };

@@ -175,6 +175,7 @@ export function SongProvider({ children }: { children: ReactNode }) {
         onTimeUpdate={() => {
           songTime.progress.set.seconds(audioPlayer.current?.currentTime ?? 0);
         }}
+        autoPlay
         onEnded={() => {
           // const songIsLast = currentSong.index === songs.length - 1;
           // const nextSongIndex = songIsLast ? 0 : currentSong.index++;

@@ -1,6 +1,8 @@
-import { ReactNode, useContext, useState } from 'react';
+import { useContext, useState } from 'react';
 
-import songContext from './context/song/context';
+import { NavLink, Outlet } from 'react-router-dom';
+
+import songContext from '../context/song/context';
 
 import * as Dialog from '@radix-ui/react-dialog';
 
@@ -9,15 +11,16 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 
 import { FiMinimize2, FiX } from 'react-icons/fi';
-import { cn } from './utils/cn';
+import { cn } from '../utils/cn';
 
-import { useScreen } from './hooks/windowDimensions';
+import { useScreen } from '../hooks/windowDimensions';
 
-import CurrentSongProgress from './components/songProgress';
-import Button from './components/button';
-import { Controls, CurrentPlaylist, Lyrics } from './context/song';
-import { BsFillPlayFill, BsPauseFill } from 'react-icons/bs';
-import { Artists } from './components/song';
+import CurrentSongProgress from '../components/songProgress';
+import Button from '../components/button';
+import Input from '../components/input';
+import { Controls, CurrentPlaylist, Lyrics } from '../context/song';
+import { BsFillPlayFill, BsPauseFill, BsSearch } from 'react-icons/bs';
+import { Artists } from '../components/song';
 
 export type songDialogControlsType = {
   open: () => void;
@@ -25,7 +28,7 @@ export type songDialogControlsType = {
   isOpen: boolean;
 };
 
-export default function Layout({ children }: { children: ReactNode }) {
+export default function Layout() {
   const Song = useContext(songContext);
 
   const defaultSlide = Song?.playlist ? 1 : 0;
@@ -41,9 +44,20 @@ export default function Layout({ children }: { children: ReactNode }) {
     //   value={{ open, close, isOpen: audioPlayDialogOpen }}
     // >
     <div className='relative w-full min-h-screen'>
-      <nav>Nav</nav>
+      <header className='flex justify-between border-b w-full max-w-6xl mx-auto py-3 mb-4 items-center'>
+        {/* <img src='' alt='logo' /> */}
+        <NavLink to='/'>
+          <span className='text-2xl'>🍰</span>
+        </NavLink>
 
-      <div className='w-full'>{children}</div>
+        <Input icon={<BsSearch />} />
+
+        <nav className='capitalize gap-3 items-center hidden sm:flex'>
+          <NavLink to='/'>home</NavLink>
+        </nav>
+      </header>
+
+      <main className='w-full'>{<Outlet />}</main>
 
       {Song && Song.current && (
         <div

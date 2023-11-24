@@ -1,6 +1,6 @@
-import playlists from './assets/db/playlists';
+import playlists from '../assets/db/playlists';
 
-import { Playlist } from './components/song';
+import { Playlist } from '../components/song';
 
 /*
   Make playlists for:
@@ -38,6 +38,7 @@ import { Playlist } from './components/song';
   - Risky Life Holy Ten
   - Need to ask Trevor
   - Kung Fu Kenny -> Money tress, mad city, the heart part 4, mortal man
+  - Lee Letsoso
 
   # DEMO
 

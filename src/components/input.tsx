@@ -1,4 +1,33 @@
-import { Dispatch, SetStateAction, useState } from 'react';
+import { Dispatch, SetStateAction, forwardRef, useState } from 'react';
+import { cn } from '../utils/cn';
+
+export type InputProps = {
+  icon?: React.ReactElement;
+  wrapperClassname?: string;
+} & React.InputHTMLAttributes<HTMLInputElement>;
+
+const Input = forwardRef<HTMLInputElement, InputProps>(
+  ({ className, icon, wrapperClassname, ...props }, ref) => (
+    <div className={cn('relative max-w-xs', wrapperClassname)}>
+      <input
+        type='text'
+        placeholder='search'
+        className={cn(
+          'border rounded-md px-3 py-2 text-sm outline-none w-full focus:border-blue-500',
+          { 'pr-7': icon },
+          className
+        )}
+        ref={ref}
+        {...props}
+      />
+      {<div className='absolute top-1/2 right-2 -translate-y-1/2'>{icon}</div>}
+    </div>
+  )
+);
+
+Input.displayName = 'Input';
+
+export default Input;
 
 export type updateableInputType = {
   value: string;
