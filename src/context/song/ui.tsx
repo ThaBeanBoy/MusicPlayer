@@ -4,12 +4,12 @@ import { Lrc, useRecoverAutoScrollImmediately } from 'react-lrc';
 
 import * as Slider from '@radix-ui/react-slider';
 
-import songContext from './song/context';
+import songContext from './context';
 
-import { millisToMinutesAndSeconds } from '../hooks/Time';
+import { millisToMinutesAndSeconds } from '../../hooks/Time';
 
-import Button from '../components/button';
-import { Artists, Playlist } from '../components/song';
+import Button from '../../components/button';
+import { Artists, Playlist } from '../../components/song';
 
 import { FiShare2 } from 'react-icons/fi';
 import { AiOutlineHeart } from 'react-icons/ai';
@@ -23,7 +23,7 @@ import {
 } from 'react-icons/bs';
 import { TbRewindBackward10, TbRewindForward10 } from 'react-icons/tb';
 
-import { cn } from '../utils/cn';
+import { cn } from '../../utils/cn';
 
 import './lrc.css';
 
@@ -121,7 +121,7 @@ export const Controls = forwardRef<
       >
         <img
           src={currentSong.current.coverUrl}
-          className='rounded-3xl border mb-6'
+          className='rounded-3xl w-full border mb-6'
           alt='song cover'
         />
 
@@ -185,6 +185,7 @@ export const Controls = forwardRef<
             icon={<BsSkipStart />}
             className='text-[32px]'
             variant='flat'
+            onClick={() => controls.loadPreviousSong()}
           />
 
           <Button
@@ -219,7 +220,14 @@ export const Controls = forwardRef<
             }}
           />
 
-          <Button icon={<BsSkipEnd />} className='text-[32px]' variant='flat' />
+          <Button
+            icon={<BsSkipEnd />}
+            className='text-[32px]'
+            variant='flat'
+            onClick={() => {
+              controls.loadNextSong();
+            }}
+          />
         </div>
 
         <div className='w-full mb-3 flex gap-3 items-center text-sm'>

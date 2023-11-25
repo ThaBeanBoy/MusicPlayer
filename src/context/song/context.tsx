@@ -19,6 +19,8 @@ type contextType = {
       second: (second: number) => void;
     };
     stopPlaying: () => void;
+    loadPreviousSong: () => void;
+    loadNextSong: () => void;
   };
   dialog: {
     isOpen: boolean;
@@ -28,7 +30,7 @@ type contextType = {
     set: React.Dispatch<React.SetStateAction<boolean>>;
   };
   // dialog?: songDialogControlsType;
-  playSong: (args: {
+  loadSong: (args: {
     song: songType;
     playlist?: playlistType;
     openDialog?: boolean;
@@ -112,6 +114,49 @@ export function SongProvider({ children }: { children: ReactNode }) {
     },
   };
 
+  const loadSong = ({
+    song,
+    playlist,
+    openDialog,
+  }: {
+    song: songType;
+    playlist?: playlistType;
+    openDialog?: boolean;
+  }) => {
+    setCurrentPlaylist(playlist);
+
+    console.log(`loading ${song.title}`);
+    setCurrentSong(song);
+
+    if (openDialog) {
+      setdialogOpen(false);
+    }
+  };
+
+  const currentSongIndex = () => {
+    if (currentSong === undefined) throw new Error('No song available');
+
+    if (currentPlaylist === undefined) throw new Error('No playlist available');
+
+    const { songs } = currentPlaylist;
+
+    return songs.map(({ id }) => id).indexOf(currentSong.id);
+  };
+
+  const loadNextSong = () => {
+    if (currentPlaylist === undefined) throw new Error('No playlist available');
+
+    const { songs } = currentPlaylist;
+
+    const songIndx = currentSongIndex();
+    const isLastSong = songIndx === songs.length - 1;
+
+    loadSong({
+      song: isLastSong ? songs[0] : songs[songIndx + 1],
+      playlist: currentPlaylist,
+    });
+  };
+
   return (
     <songContext.Provider
       value={{
@@ -134,6 +179,25 @@ export function SongProvider({ children }: { children: ReactNode }) {
             setCurrentPlaylist(undefined);
           },
           playPause: handlePlayPause,
+          loadPreviousSong() {
+            if (currentPlaylist === undefined)
+              throw new Error('No playlist available');
+
+            if (currentSong === undefined) throw new Error('No song available');
+
+            const { songs } = currentPlaylist;
+
+            const songIndx = currentSongIndex();
+            const isFirstSong = songIndx === 0;
+
+            if (isFirstSong) {
+              throw new Error(
+                `There is no song before song-${currentSong.id} (${currentSong.title}) in playlist-${currentPlaylist.id} (${currentPlaylist.title}) `
+              );
+            }
+            loadSong({ song: songs[songIndx - 1], playlist: currentPlaylist });
+          },
+          loadNextSong,
           jumpTo,
         },
         dialog: {
@@ -151,16 +215,7 @@ export function SongProvider({ children }: { children: ReactNode }) {
           },
           set: setdialogOpen,
         },
-        playSong({ song, playlist, openDialog }) {
-          setCurrentPlaylist(playlist);
-
-          console.log(`loading ${song.title}`);
-          setCurrentSong(song);
-
-          if (openDialog) {
-            setdialogOpen(false);
-          }
-        },
+        loadSong,
         // dialog: songDialoguseContext,
       }}
     >
@@ -176,14 +231,7 @@ export function SongProvider({ children }: { children: ReactNode }) {
           songTime.progress.set.seconds(audioPlayer.current?.currentTime ?? 0);
         }}
         autoPlay
-        onEnded={() => {
-          // const songIsLast = currentSong.index === songs.length - 1;
-          // const nextSongIndex = songIsLast ? 0 : currentSong.index++;
-          // setCurrentSong({
-          //   index: nextSongIndex,
-          //   song: songs[nextSongIndex],
-          // });
-        }}
+        onEnded={loadNextSong}
       ></audio>
     </songContext.Provider>
   );

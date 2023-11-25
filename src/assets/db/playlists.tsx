@@ -20,6 +20,13 @@ const playlists: playlistType[] = [
   // testPlaylist,
   // testPlaylist,
   // testPlaylist,
+  {
+    id: 1,
+    title: "Don't judge me",
+    cover: '/african-americans-in-america/cover.png',
+    songs: [songs[2], songs[3], songs[4]],
+    description: <>Judge me all you want, these songs are bangers 🥲</>,
+  },
 ];
 
 export default playlists;

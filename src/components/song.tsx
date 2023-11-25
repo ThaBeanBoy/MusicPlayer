@@ -26,7 +26,7 @@ export function Song({
     if (!isBeingPlayed) {
       // loading the song
       try {
-        currentSong?.playSong({
+        currentSong?.loadSong({
           song: { title, artists, coverUrl, duration, id, ...props },
           playlist: fromPlaylist,
         });

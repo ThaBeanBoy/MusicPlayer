@@ -18,7 +18,7 @@ import { useScreen } from '../hooks/windowDimensions';
 import CurrentSongProgress from '../components/songProgress';
 import Button from '../components/button';
 import Input from '../components/input';
-import { Controls, CurrentPlaylist, Lyrics } from '../context/song';
+import { Controls, CurrentPlaylist, Lyrics } from '../context/song/ui';
 import { BsFillPlayFill, BsPauseFill, BsSearch } from 'react-icons/bs';
 import { Artists } from '../components/song';
 
@@ -36,7 +36,6 @@ export default function Layout() {
 
   const screen = useScreen();
 
-  console.log(screen);
   const slidesPerView = screen === 'desktop' ? 3 : screen === 'tablet' ? 2 : 1;
 
   return (

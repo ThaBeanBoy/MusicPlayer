@@ -1,23 +1,25 @@
-import { NavLink, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import playlists from '../../assets/db/playlists';
 import { Artists, Playlist } from '../../components/song';
 import { millisToMinutesAndSeconds } from '../../hooks/Time';
 import { useContext } from 'react';
 import songContext from '../../context/song/context';
 import { cn } from '../../utils/cn';
+import Button from '../../components/button';
+import { IoChevronBack } from 'react-icons/io5';
 
 export default function List() {
   const currentSong = useContext(songContext);
   const { id } = useParams();
+  const navigate = useNavigate();
 
   if (id === undefined) throw new Error();
 
-  // check valid id
-
-  // check if the list is valid
-
   const playlist = playlists[parseInt(id)];
   const { songs, description, cover, title } = playlist;
+  const goBack = () => {
+    navigate(-1);
+  };
 
   const artists = playlist.songs
     .map((song) => song.artists)
@@ -25,7 +27,12 @@ export default function List() {
 
   return (
     <div className='max-w-6xl w-fit mx-auto items-start flex flex-col md:flex-row gap-4'>
-      <NavLink to='/'>back</NavLink>
+      <Button
+        icon={<IoChevronBack />}
+        onClick={goBack}
+        className='text-xl'
+        variant='flat'
+      />
 
       <div className='w-full max-w-md'>
         <img

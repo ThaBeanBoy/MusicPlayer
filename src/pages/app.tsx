@@ -7,7 +7,7 @@ import { Playlist } from '../components/song';
 
   ! Add artist links
   
-  - Judge me, I don't care (Tineyi & ${original artist's name})
+ <> Judge me, I don't care (Tineyi & ${original artist's name})
   - Gamers GG (Gta Themes, Nintendo Wii)
   - Hip Hop (M.A.A.D, Cole's library, FPS, Wow freestyle 6 God, It aint hard to tell)
   - Save the semester mode
@@ -27,7 +27,6 @@ import { Playlist } from '../components/song';
   - Mama
   - Baba
   - Kundi, Uzozisola, Winky, Lambo mercy
-    - Foot's wife
   - Charlene & Primrose (My Sisters)
   - Taps
   - Amai Aku
@@ -39,6 +38,8 @@ import { Playlist } from '../components/song';
   - Need to ask Trevor
   - Kung Fu Kenny -> Money tress, mad city, the heart part 4, mortal man
   - Lee Letsoso
+  - Precious 
+  - Paida
 
   # DEMO
 
