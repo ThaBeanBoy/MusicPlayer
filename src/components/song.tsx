@@ -114,14 +114,6 @@ export function Playlist({
       <div className={className}>
         {searchbar && (
           <>
-            {/* <div className='relative w-full'>
-              <input
-                placeholder='search'
-                className='px-2 py-3 border-b-2 w-full border-gray-300 outline-none focus:border-blue-500'
-                
-              />
-              <BsSearch className='absolute right-2 bottom-3 translate-y-[-2px]' />
-            </div> */}
             <Input
               icon={<BsSearch />}
               wrapperClassname='max-w-none w-full'
@@ -150,7 +142,7 @@ export function Playlist({
                 artist.name
                   .toLowerCase()
                   .replace(/\s/g, '')
-                  .includes(searchInput.value.replace(/\s/g, ''))
+                  .includes(searchInput.value.toLowerCase().replace(/\s/g, ''))
               );
             })
             .map(({ ...props }, key) => (
@@ -168,7 +160,7 @@ export function Playlist({
 
   return (
     <NavLink
-      to={`list/${playlist.id}`}
+      to={`/list/${playlist.id}`}
       className={cn(
         'text-black hover:text-black group flex flex-col items-start w-52',
         className

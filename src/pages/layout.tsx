@@ -42,7 +42,11 @@ export default function Layout() {
     // <songDialogContext.Provider
     //   value={{ open, close, isOpen: audioPlayDialogOpen }}
     // >
-    <div className='relative w-full min-h-screen'>
+    <div
+      className={cn('relative w-full min-h-screen', {
+        'pb-[75px]': Song?.current,
+      })}
+    >
       <header className='flex justify-between border-b w-full max-w-6xl mx-auto py-3 mb-4 items-center'>
         {/* <img src='' alt='logo' /> */}
         <NavLink to='/'>
@@ -82,7 +86,7 @@ export default function Layout() {
                       alt='song cover'
                     />
 
-                    <div>
+                    <div className='flex flex-col items-start'>
                       <span className='font-bold'>{Song.current.title}</span>
                       <br />
                       <Artists

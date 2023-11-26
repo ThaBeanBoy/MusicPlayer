@@ -23,9 +23,26 @@ const playlists: playlistType[] = [
   {
     id: 1,
     title: "Don't judge me",
-    cover: '/african-americans-in-america/cover.png',
-    songs: [songs[2], songs[3], songs[4]],
+    cover: '/playlist-covers/me.jpeg',
+    songs: [
+      songs[2],
+      songs[3],
+      songs[4],
+      songs[5],
+      songs[6],
+      songs[7],
+      songs[8],
+      songs[9],
+      songs[10],
+    ],
     description: <>Judge me all you want, these songs are bangers 🥲</>,
+  },
+  {
+    id: 2,
+    title: 'Weeb Nation',
+    cover: '/playlist-covers/weeb-nation.jpg',
+    songs: [songs[11], songs[12], songs[13]],
+    description: <>For the weebs</>,
   },
 ];
 

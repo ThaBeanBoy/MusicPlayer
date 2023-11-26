@@ -40,6 +40,8 @@ import { Playlist } from '../components/song';
   - Lee Letsoso
   - Precious 
   - Paida
+  - Tshego and the gang (including Leon)
+  - Russy and friend
 
   # DEMO
 
