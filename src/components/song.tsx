@@ -11,6 +11,8 @@ import { NavLink } from 'react-router-dom';
 
 import * as AspectRatio from '@radix-ui/react-aspect-ratio';
 
+import artistTable from '../assets/db/artists';
+
 export function Song({
   title,
   artists,
@@ -115,6 +117,8 @@ export function Playlist({
   const isBeingPlayed = currentSong?.playlist?.id === playlist.id;
   const searchInput = useInput();
 
+  const { songs } = playlist;
+
   if (variant === 'list')
     return (
       <div className={className}>
@@ -160,7 +164,7 @@ export function Playlist({
       </div>
     );
 
-  const artists = playlist.songs
+  const artists = songs
     .map((song) => song.artists)
     .reduce((prev, next) => prev.concat(next));
 
@@ -195,6 +199,15 @@ export function Playlist({
         >
           Is Playing
         </span>
+
+        <span className='bg-white text-xs px-2 py-1 absolute top-2 right-2 rounded-md opacity-0 group-hover:opacity-100 transition'>
+          {millisToMinutesAndSeconds(
+            songs
+              .map(({ duration }) => duration)
+              .reduce((partialSum, a) => partialSum + a, 0)
+          )}{' '}
+          minutes
+        </span>
       </div>
       <div className='px-2 text-left w-full text-ellipsis truncate'>
         <p className='font-semibold w-full truncate'>{playlist.title}</p>
@@ -205,10 +218,14 @@ export function Playlist({
 }
 
 export function Artist({
-  name,
-  link,
+  artist,
   provideLink = false,
-}: artistType & { provideLink?: boolean }) {
+}: {
+  artist: artistType;
+  provideLink?: boolean;
+}) {
+  const { name, link } = artist;
+
   return link && provideLink ? (
     <a href={link} target='_blank' className='text-blue-500'>
       {name}
@@ -227,17 +244,21 @@ export function Artists({
   className?: string;
   provideArtistLink?: boolean;
 }) {
+  const artistSet = [...new Set(artists.map(({ id }) => id))].map(
+    (id) => artistTable[id]
+  );
+
   return (
     <ul className={cn('', className)}>
       {artists.length > 1 ? (
         // Multiple artist
-        artists.map(({ name, link }, key) => {
+        artistSet.map((artist, key) => {
           const justBeforeLastArtsist = key === artists.length - 2;
           const lastArtist = key === artists.length - 1;
 
           return (
             <li className='inline' key={key}>
-              <Artist name={name} link={link} provideLink={provideArtistLink} />
+              <Artist artist={artist} provideLink={provideArtistLink} />
               {!lastArtist && (justBeforeLastArtsist ? ' & ' : ', ')}
             </li>
           );
@@ -245,11 +266,7 @@ export function Artists({
       ) : (
         // Only 1 artist
         <li className='inline'>
-          <Artist
-            name={artists[0].name}
-            link={artists[0].link}
-            provideLink={provideArtistLink}
-          />
+          <Artist artist={artists[0]} provideLink={provideArtistLink} />
         </li>
       )}
     </ul>

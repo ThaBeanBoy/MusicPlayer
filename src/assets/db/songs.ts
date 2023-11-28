@@ -1,16 +1,11 @@
 import { songType } from '../../types';
+import { artistNames } from './artists';
 
 const songs: songType[] = [
   {
     id: 0,
     title: 'Ni**as In Paris',
-    artists: [
-      { name: 'Jay-Z', link: 'https://en.wikipedia.org/wiki/Jay-Z' },
-      {
-        name: 'Kanye West',
-        link: 'https://en.wikipedia.org/wiki/Kanye_West',
-      },
-    ],
+    artists: [artistNames.jayz, artistNames.kanye],
     features: [],
     coverUrl: '/african-americans-in-america/cover.png',
     songUrl: '/african-americans-in-america/song.mp3',
@@ -20,7 +15,7 @@ const songs: songType[] = [
   {
     id: 1,
     title: 'Soul to Soul',
-    artists: [{ name: 'Kelvin Momo' }],
+    artists: [],
     features: [],
     coverUrl: '/soul-to-soul.jpg',
     songUrl: '/soul-to-soul.mp3',
@@ -29,7 +24,7 @@ const songs: songType[] = [
   {
     id: 2,
     title: 'Call Me Maybe',
-    artists: [{ name: 'Carly Rae Jepsen' }],
+    artists: [artistNames.carly_rae_Jepsen],
     features: [],
     coverUrl: '/call-me-maybe/cover.jpeg',
     songUrl: '/call-me-maybe/song.mp3',
@@ -39,7 +34,7 @@ const songs: songType[] = [
   {
     id: 3,
     title: 'Shake It Off',
-    artists: [{ name: 'Taylor Swift' }],
+    artists: [artistNames.taylor_swift],
     features: [],
     coverUrl: '/shake-it-off/cover.png',
     songUrl: '/shake-it-off/song.mp3',
@@ -49,7 +44,7 @@ const songs: songType[] = [
   {
     id: 4,
     title: 'As It Was',
-    artists: [{ name: 'Harry Styles' }],
+    artists: [artistNames.harry_styles],
     features: [],
     coverUrl: '/as-it-was/cover.png',
     songUrl: '/as-it-was/song.mp3',
@@ -59,7 +54,7 @@ const songs: songType[] = [
   {
     id: 5,
     title: 'Watermelon Sugar',
-    artists: [{ name: 'Harry Styles' }],
+    artists: [artistNames.harry_styles],
     features: [],
     coverUrl: '/watermelon/cover.png',
     songUrl: '/watermelon/song.mp3',
@@ -69,7 +64,7 @@ const songs: songType[] = [
   {
     id: 6,
     title: 'Adore You',
-    artists: [{ name: 'Harry Styles' }],
+    artists: [artistNames.harry_styles],
     features: [],
     coverUrl: '/adore-you/cover.png',
     songUrl: '/adore-you/song.mp3',
@@ -79,7 +74,7 @@ const songs: songType[] = [
   {
     id: 7,
     title: 'Late Night Talking',
-    artists: [{ name: 'Harry Styles' }],
+    artists: [artistNames.harry_styles],
     features: [],
     coverUrl: '/late-night-talking/cover.png',
     songUrl: '/late-night-talking/song.mp3',
@@ -89,7 +84,7 @@ const songs: songType[] = [
   {
     id: 8,
     title: '1 Thing',
-    artists: [{ name: 'Amerie' }],
+    artists: [artistNames.amerie],
     features: [],
     coverUrl: '/1-thing/cover.png',
     songUrl: '/1-thing/song.mp3',
@@ -99,7 +94,7 @@ const songs: songType[] = [
   {
     id: 9,
     title: 'Save Your Tears',
-    artists: [{ name: 'The Weeknd' }],
+    artists: [artistNames.the_weeknd],
     features: [],
     coverUrl: '/save-your-tears/cover.png',
     songUrl: '/save-your-tears/song.mp3',
@@ -109,7 +104,7 @@ const songs: songType[] = [
   {
     id: 10,
     title: 'Childsplay',
-    artists: [{ name: 'IAMDDB' }],
+    artists: [artistNames.iamddb],
     features: [],
     coverUrl: '/childs-play/cover.png',
     songUrl: '/childs-play/song.mp3',
@@ -119,7 +114,7 @@ const songs: songType[] = [
   {
     id: 11,
     title: 'Re:Re',
-    artists: [{ name: 'ASIAN KUNG-FU GENERATION - リライト' }],
+    artists: [artistNames.asian_kung_fu_generation],
     features: [],
     coverUrl: '/rere/cover.png',
     songUrl: '/rere/song.mp3',
@@ -129,7 +124,7 @@ const songs: songType[] = [
   {
     id: 12,
     title: 'Seishun Kyousoukyoku',
-    artists: [{ name: 'ASIAN KUNG-FU GENERATION - リライト' }],
+    artists: [artistNames.asian_kung_fu_generation],
     features: [],
     coverUrl: '/seishun-kyousoukyoku/cover.png',
     songUrl: '/seishun-kyousoukyoku/song.mp3',
@@ -139,7 +134,7 @@ const songs: songType[] = [
   {
     id: 13,
     title: '99',
-    artists: [{ name: 'MOB CHOIR' }],
+    artists: [artistNames.mob_choir],
     features: [],
     coverUrl: '/99/cover.png',
     songUrl: '/99/song.mp3',
@@ -149,11 +144,31 @@ const songs: songType[] = [
   {
     id: 14,
     title: "Isabella's Lullaby",
-    artists: [{ name: 'Sarah Àlainn' }],
+    artists: [artistNames.sarah_alainn],
     features: [],
     coverUrl: '/isabella-lullaby/cover.jpeg',
     songUrl: '/isabella-lullaby/song.mp3',
     duration: 324000,
+  },
+  {
+    id: 15,
+    title: 'The Rumbling',
+    artists: [artistNames.sim],
+    features: [],
+    coverUrl: '/Rumbling/cover.png',
+    songUrl: '/Rumbling/song.mp3',
+    lyricsUrl: '/Rumbling/lyrics.lrc',
+    duration: 221000,
+  },
+  {
+    id: 16,
+    title: 'You Say Run',
+    artists: [artistNames.mha],
+    features: [],
+    coverUrl: '/MHA/cover.png',
+    songUrl: '/MHA/song.mp3',
+    // lyricsUrl: '/MHA/lyrics.lrc',
+    duration: 229000,
   },
 ];
 
