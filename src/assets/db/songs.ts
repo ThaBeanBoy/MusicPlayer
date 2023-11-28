@@ -146,6 +146,15 @@ const songs: songType[] = [
     lyricsUrl: '/99/lyrics.lrc',
     duration: 238000,
   },
+  {
+    id: 14,
+    title: "Isabella's Lullaby",
+    artists: [{ name: 'Sarah Àlainn' }],
+    features: [],
+    coverUrl: '/isabella-lullaby/cover.jpeg',
+    songUrl: '/isabella-lullaby/song.mp3',
+    duration: 324000,
+  },
 ];
 
 export default songs;

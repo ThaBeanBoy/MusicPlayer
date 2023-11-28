@@ -41,7 +41,7 @@ const playlists: playlistType[] = [
     id: 2,
     title: 'Weeb Nation',
     cover: '/playlist-covers/weeb-nation.jpg',
-    songs: [songs[11], songs[12], songs[13]],
+    songs: [songs[11], songs[12], songs[13], songs[14]],
     description: <>For the weebs</>,
   },
 ];

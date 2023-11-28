@@ -9,6 +9,8 @@ import Button from './button';
 import CurrentSongProgress from './songProgress';
 import { NavLink } from 'react-router-dom';
 
+import * as AspectRatio from '@radix-ui/react-aspect-ratio';
+
 export function Song({
   title,
   artists,
@@ -53,13 +55,17 @@ export function Song({
           className='flex gap-2 w-full py-2 items-center'
           // disabled={isBeingPlayed && currentSong.dialog?.isOpen}
         >
-          <img
-            src={coverUrl}
-            width={56}
-            height={56}
-            className='rounded-lg border'
-            alt='song cover'
-          />
+          <div className='rounded-lg border w-14 h-14 overflow-hidden'>
+            <AspectRatio.Root ratio={1}>
+              <img
+                src={coverUrl}
+                width={56}
+                height={56}
+                className='h-full w-full object-cover'
+                alt='song cover'
+              />
+            </AspectRatio.Root>
+          </div>
 
           <div className='flex-1 flex flex-col items-start'>
             <span className='font-bold'>{title}</span> <br />
@@ -167,14 +173,20 @@ export function Playlist({
       )}
     >
       <div className='relative w-full'>
-        <img
-          src={playlist.cover}
-          alt={`${playlist.title} cover`}
+        <div
           className={cn(
-            'rounded-2xl border w-full group-hover:brightness-75 transition',
+            'rounded-2xl border overflow-hidden w-full group-hover:brightness-75 transition',
             { 'brightness-75': isBeingPlayed }
           )}
-        />
+        >
+          <AspectRatio.Root ratio={1}>
+            <img
+              className='h-full w-full object-cover'
+              src={playlist.cover}
+              alt={`${playlist.title} cover`}
+            />
+          </AspectRatio.Root>
+        </div>
         <span
           className={cn(
             'absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white font-bold opacity-0',

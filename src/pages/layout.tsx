@@ -5,6 +5,7 @@ import { NavLink, Outlet } from 'react-router-dom';
 import songContext from '../context/song/context';
 
 import * as Dialog from '@radix-ui/react-dialog';
+import * as AspectRatio from '@radix-ui/react-aspect-ratio';
 
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
@@ -20,6 +21,7 @@ import Button from '../components/button';
 import Input from '../components/input';
 import { Controls, CurrentPlaylist, Lyrics } from '../context/song/ui';
 import { BsFillPlayFill, BsPauseFill, BsSearch } from 'react-icons/bs';
+import { TbFilterSearch } from 'react-icons/tb';
 import { Artists } from '../components/song';
 
 export type songDialogControlsType = {
@@ -53,7 +55,10 @@ export default function Layout() {
           <span className='text-2xl'>🍰</span>
         </NavLink>
 
-        <Input icon={<BsSearch />} />
+        <div className='flex items-center gap-1'>
+          <Input icon={<BsSearch />} />
+          <Button icon={<TbFilterSearch />} variant='flat' />
+        </div>
 
         <nav className='capitalize gap-3 items-center hidden sm:flex'>
           <NavLink to='/'>home</NavLink>
@@ -78,13 +83,15 @@ export default function Layout() {
               >
                 <Dialog.Trigger asChild>
                   <button className='flex flex-1 gap-2 justify-start'>
-                    <img
-                      src={Song.current.coverUrl}
-                      width={56}
-                      height={56}
-                      className='rounded-lg border'
-                      alt='song cover'
-                    />
+                    <div className='rounded-lg border overflow-hidden w-14 h-14'>
+                      <AspectRatio.Root>
+                        <img
+                          src={Song.current.coverUrl}
+                          className='h-full w-full object-cover'
+                          alt='song cover'
+                        />
+                      </AspectRatio.Root>
+                    </div>
 
                     <div className='flex flex-col items-start'>
                       <span className='font-bold'>{Song.current.title}</span>
@@ -144,7 +151,7 @@ export default function Layout() {
                         setActiveSlide(swiper.activeIndex)
                       }
                     >
-                      <SwiperSlide className='!flex justify-center'>
+                      <SwiperSlide className='!flex justify-center overflow-y-scroll'>
                         {Song.playlist ? (
                           <CurrentPlaylist className='w-full max-w-md md:max-w-none' />
                         ) : (
@@ -153,11 +160,11 @@ export default function Layout() {
                           </p>
                         )}
                       </SwiperSlide>
-                      <SwiperSlide className='!flex justify-center'>
+                      <SwiperSlide className='!flex justify-center overflow-y-scroll'>
                         <Controls className='w-full' />
                       </SwiperSlide>
                       {
-                        <SwiperSlide className='!flex justify-center'>
+                        <SwiperSlide className='!flex justify-center overflow-y-scroll'>
                           {Song.lyrics ? (
                             <Lyrics className='w-full max-w-md md:max-w-none' />
                           ) : (

@@ -7,8 +7,9 @@ import { Playlist } from '../components/song';
 
   ! Add artist links
   
- <> Judge me, I don't care (Tineyi & ${original artist's name})
-  - Gamers GG (Gta Themes, Nintendo Wii)
+ >< Judge me, I don't care (Tineyi & ${original artist's name})
+  <> Weeb Nation
+ - Gamers GG (Gta Themes, Nintendo Wii)
   - Hip Hop (M.A.A.D, Cole's library, FPS, Wow freestyle 6 God, It aint hard to tell)
   - Save the semester mode
   - Sandile Strict Session vol 4
@@ -66,6 +67,7 @@ import { Playlist } from '../components/song';
   - Onswipe, the bar thing should also move to indicate to the user which section of swiper they on
   - The scroll input isn't working due to swiper taking over when a user wants to scroll.
   - Make PWA
+  - save song id in session/local storage and the progress for page refresh purposes
 */
 
 function App() {

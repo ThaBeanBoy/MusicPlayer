@@ -2,6 +2,7 @@ import { forwardRef, useContext, HtmlHTMLAttributes } from 'react';
 
 import { Lrc, useRecoverAutoScrollImmediately } from 'react-lrc';
 
+import * as AspectRatio from '@radix-ui/react-aspect-ratio';
 import * as Slider from '@radix-ui/react-slider';
 
 import songContext from './context';
@@ -72,13 +73,15 @@ export const CurrentPlaylist = forwardRef<
     currentSong?.playlist && (
       <div {...props} ref={ref}>
         <div className='mb-3 border-b gap-2 pb-2 flex'>
-          <img
-            src={currentSong.playlist.cover}
-            width={56}
-            height={56}
-            className='rounded-lg border'
-            alt='song cover'
-          />
+          <div className='rounded-lg border w-14 h-14 overflow-hidden'>
+            <AspectRatio.Root ratio={1}>
+              <img
+                src={currentSong.playlist.cover}
+                className='h-full w-full object-cover'
+                alt='song cover'
+              />
+            </AspectRatio.Root>
+          </div>
           <div className='flex-1 items-center'>
             <h2 className='text-xl font-semibold'>
               {currentSong.playlist.title}
@@ -119,11 +122,15 @@ export const Controls = forwardRef<
         {...props}
         ref={ref}
       >
-        <img
-          src={currentSong.current.coverUrl}
-          className='rounded-3xl w-full border mb-6'
-          alt='song cover'
-        />
+        <div className='rounded-3xl w-full border mb-6 overflow-hidden'>
+          <AspectRatio.Root ratio={1}>
+            <img
+              src={currentSong.current.coverUrl}
+              className='h-full w-full object-cover'
+              alt='song cover'
+            />
+          </AspectRatio.Root>
+        </div>
 
         <div className='mb-4 text-center'>
           <h1 className='text-2xl font-bold'>{currentSong.current.title}</h1>
