@@ -12,14 +12,6 @@ export const testPlaylist: playlistType = {
 
 const playlists: playlistType[] = [
   testPlaylist,
-  // testPlaylist,
-  // testPlaylist,
-  // testPlaylist,
-  // testPlaylist,
-  // testPlaylist,
-  // testPlaylist,
-  // testPlaylist,
-  // testPlaylist,
   {
     id: 1,
     title: "Don't judge me",
@@ -41,7 +33,19 @@ const playlists: playlistType[] = [
     id: 2,
     title: 'Weeb Nation',
     cover: '/playlist-covers/weeb-nation.jpg',
-    songs: [songs[11], songs[12], songs[13], songs[14], songs[15], songs[16]],
+    songs: [
+      songs[11],
+      songs[12],
+      songs[13],
+      songs[14],
+      songs[15],
+      songs[16],
+      songs[17],
+      songs[18],
+      songs[19],
+      songs[20],
+      songs[21],
+    ],
     description: <>For the weebs</>,
   },
 ];

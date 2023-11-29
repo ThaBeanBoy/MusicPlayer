@@ -10,7 +10,8 @@ import songContext from './context';
 import { millisToMinutesAndSeconds } from '../../hooks/Time';
 
 import Button from '../../components/button';
-import { Artists, Playlist } from '../../components/song';
+import Playlist from '../../components/playlist';
+import { Artists } from '../../components/artist';
 
 import { FiShare2 } from 'react-icons/fi';
 import { AiOutlineHeart } from 'react-icons/ai';
@@ -99,7 +100,7 @@ export const CurrentPlaylist = forwardRef<
           <Button icon={<FiShare2 />} variant='flat' className='text-xl' />
         </div>
 
-        <Playlist playlist={currentSong.playlist} searchbar />
+        <Playlist playlist={currentSong.playlist} className='pb-4' searchbar />
       </div>
     )
   );

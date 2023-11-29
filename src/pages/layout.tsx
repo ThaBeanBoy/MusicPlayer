@@ -5,7 +5,7 @@ import { NavLink, Outlet } from 'react-router-dom';
 import songContext from '../context/song/context';
 
 import * as Dialog from '@radix-ui/react-dialog';
-import * as AspectRatio from '@radix-ui/react-aspect-ratio';
+import { Song as SongCompoonent } from '../components/song';
 
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
@@ -20,9 +20,8 @@ import CurrentSongProgress from '../components/songProgress';
 import Button from '../components/button';
 import Input from '../components/input';
 import { Controls, CurrentPlaylist, Lyrics } from '../context/song/ui';
-import { BsFillPlayFill, BsPauseFill, BsSearch } from 'react-icons/bs';
+import { BsSearch } from 'react-icons/bs';
 import { TbFilterSearch } from 'react-icons/tb';
-import { Artists } from '../components/song';
 
 export type songDialogControlsType = {
   open: () => void;
@@ -41,9 +40,6 @@ export default function Layout() {
   const slidesPerView = screen === 'desktop' ? 3 : screen === 'tablet' ? 2 : 1;
 
   return (
-    // <songDialogContext.Provider
-    //   value={{ open, close, isOpen: audioPlayDialogOpen }}
-    // >
     <div
       className={cn('relative w-full min-h-screen', {
         'pb-[75px]': Song?.current,
@@ -70,7 +66,7 @@ export default function Layout() {
       {Song && Song.current && (
         <div
           id='audio-controls-container'
-          className='group fixed bottom-0 w-full bg-white z-40 left-1/2 translate-x-[-50%] border-t text-lg px-2 pb-2'
+          className='group fixed bottom-0 w-full bg-white z-40 left-1/2 translate-x-[-50%] border-t text-lg px-2'
         >
           <CurrentSongProgress className='mb-2' />
 
@@ -82,26 +78,11 @@ export default function Layout() {
                 onOpenChange={Song.dialog.set}
               >
                 <Dialog.Trigger asChild>
-                  <button className='flex flex-1 gap-2 justify-start'>
-                    <div className='rounded-lg border overflow-hidden w-14 h-14'>
-                      <AspectRatio.Root>
-                        <img
-                          src={Song.current.coverUrl}
-                          className='h-full w-full object-cover'
-                          alt='song cover'
-                        />
-                      </AspectRatio.Root>
-                    </div>
-
-                    <div className='flex flex-col items-start'>
-                      <span className='font-bold'>{Song.current.title}</span>
-                      <br />
-                      <Artists
-                        artists={Song.current.artists}
-                        className='text-gray-600 text-sm'
-                      />
-                    </div>
-                  </button>
+                  <SongCompoonent
+                    {...Song.current}
+                    className='w-full max-w-none py-0'
+                    hideProgress
+                  />
                 </Dialog.Trigger>
 
                 <Dialog.Portal>
@@ -178,19 +159,10 @@ export default function Layout() {
                   </Dialog.Content>
                 </Dialog.Portal>
               </Dialog.Root>
-              <Button
-                icon={
-                  Song.controls.isPlaying ? <BsPauseFill /> : <BsFillPlayFill />
-                }
-                onClick={Song.controls.playPause}
-                className='text-[48px] border-l border-gray-500'
-                variant='flat'
-              />
             </div>
           </div>
         </div>
       )}
     </div>
-    // </songDialogContext.Provider>
   );
 }

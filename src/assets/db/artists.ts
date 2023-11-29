@@ -14,11 +14,21 @@ const artists: artistType[] = [
   { id: 6, name: 'Amerie' },
   { id: 7, name: 'The Weeknd' },
   { id: 8, name: 'IAMDDB' },
-  { id: 9, name: 'ASIAN KUNG-FU GENERATION - リライト' },
+  {
+    id: 9,
+    name: 'ASIAN KUNG-FU GENERATION - リライト',
+    coverUrl: '/public/artists/asian-kungfu.jpeg',
+    description:
+      'Asian Kung-Fu Generation is a Japanese alternative rock band formed in Yokohama in 1996. For its entire career, the band has consisted of vocalist Masafumi Gotoh, guitarist Kensuke Kita, bassist Takahiro Yamada, and drummer Kiyoshi Ijichi.',
+  },
   { id: 10, name: 'MOB CHOIR' },
   { id: 11, name: 'Sarah Àlainn' },
   { id: 12, name: 'SiM' },
   { id: 13, name: '林ゆうき' },
+  { id: 14, name: 'NobodyKnows+' },
+  { id: 15, name: 'kankakupiero' },
+  { id: 16, name: 'LiSA' },
+  { id: 17, name: 'Yui' },
 ];
 
 export const artistNames = {
@@ -36,6 +46,10 @@ export const artistNames = {
   sarah_alainn: artists[11],
   sim: artists[12],
   mha: artists[13],
+  nobody_knows: artists[14],
+  kankakupiero: artists[15],
+  lisa: artists[16],
+  yui: artists[17],
 };
 
 export default artists;

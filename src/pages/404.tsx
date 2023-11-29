@@ -1,6 +1,6 @@
 import { NavLink } from 'react-router-dom';
 import playlists from '../assets/db/playlists';
-import { Playlist } from '../components/song';
+import Playlist from '../components/playlist';
 
 export default function NotFound() {
   return (

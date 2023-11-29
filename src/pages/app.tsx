@@ -1,6 +1,6 @@
 import playlists from '../assets/db/playlists';
 
-import { Playlist } from '../components/song';
+import Playlist from '../components/playlist';
 
 /*
   Make playlists for:
@@ -39,8 +39,7 @@ import { Playlist } from '../components/song';
   - Need to ask Trevor
   - Kung Fu Kenny -> Money tress, mad city, the heart part 4, mortal man
   - Lee Letsoso
-  - Precious 
-  - Paida
+  - Precious, Paida, Tylon, Rethabile
   - Tshego and the gang (including Leon)
   - Russy and friend
 

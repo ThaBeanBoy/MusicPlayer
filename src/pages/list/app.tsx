@@ -1,6 +1,7 @@
 import { useNavigate, useParams } from 'react-router-dom';
 import playlists from '../../assets/db/playlists';
-import { Artists, Playlist } from '../../components/song';
+import Playlist from '../../components/playlist';
+import { Artists } from '../../components/artist';
 import { millisToMinutesAndSeconds } from '../../hooks/Time';
 import { useContext } from 'react';
 import songContext from '../../context/song/context';
