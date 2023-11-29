@@ -31,11 +31,11 @@ export default function List() {
       <Button
         icon={<IoChevronBack />}
         onClick={goBack}
-        className='text-xl'
+        className='text-xl md:sticky md:top-4'
         variant='flat'
       />
 
-      <div className='w-full max-w-md'>
+      <div className='w-full max-w-md md:sticky md:top-4'>
         <img
           src={cover}
           alt={`${title} cover`}

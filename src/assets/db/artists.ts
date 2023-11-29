@@ -29,6 +29,12 @@ const artists: artistType[] = [
   { id: 15, name: 'kankakupiero' },
   { id: 16, name: 'LiSA' },
   { id: 17, name: 'Yui' },
+  { id: 18, name: 'Ikimonogakari' },
+  { id: 19, name: 'Porno Graffitti' },
+  { id: 20, name: 'Kana-Boon' },
+  { id: 21, name: 'FLOW' },
+  { id: 22, name: 'Long Shot Party' },
+  { id: 23, name: 'King Gnu' },
 ];
 
 export const artistNames = {
@@ -50,6 +56,12 @@ export const artistNames = {
   kankakupiero: artists[15],
   lisa: artists[16],
   yui: artists[17],
+  ikimonogakari: artists[18],
+  porno_graffitti: artists[19],
+  kana_boon: artists[20],
+  flow: artists[21],
+  long_shot_party: artists[22],
+  king_gnu: artists[23],
 };
 
 export default artists;
