@@ -16,7 +16,8 @@ const playlists: playlistType[] = [
   {
     id: 1,
     title: "Don't judge me",
-    cover: '/playlist-covers/me.jpeg',
+    cover:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/playlist-covers/me.jpeg',
     songs: [
       songs[2],
       songs[3],
@@ -33,7 +34,8 @@ const playlists: playlistType[] = [
   {
     id: 2,
     title: 'Weeb Nation',
-    cover: '/playlist-covers/weeb-nation.jpg',
+    cover:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/playlist-covers/weeb-nation.jpg',
     songs: [
       songs[11],
       songs[12],
@@ -58,7 +60,7 @@ const playlists: playlistType[] = [
   {
     id: 3,
     title: '2014 Forest Hills Drive',
-    cover: '/2014/cover.png',
+    cover: 'https://bev-streams.s3.eu-central-1.amazonaws.com/2014/cover.png',
     songs: [
       songs[29],
       songs[28],

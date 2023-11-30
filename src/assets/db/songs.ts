@@ -44,9 +44,12 @@ const songs: songType[] = [
     title: 'Shake It Off',
     artists: [artistNames.taylor_swift],
     features: [],
-    coverUrl: '/shake-it-off/cover.png',
-    songUrl: '/shake-it-off/song.mp3',
-    lyricsUrl: '/shake-it-off/lyrics.lrc',
+    coverUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/shake-it-off/cover.png',
+    songUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/shake-it-off/song.mp3',
+    lyricsUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/shake-it-off/lyrics.lrc',
     duration: 220000,
   },
   {
@@ -54,9 +57,12 @@ const songs: songType[] = [
     title: 'As It Was',
     artists: [artistNames.harry_styles],
     features: [],
-    coverUrl: '/as-it-was/cover.png',
-    songUrl: '/as-it-was/song.mp3',
-    lyricsUrl: '/as-it-was/lyrics.lrc',
+    coverUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/as-it-was/cover.png',
+    songUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/as-it-was/song.mp3',
+    lyricsUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/as-it-was/lyrics.lrc',
     duration: 168000,
   },
   {
@@ -64,9 +70,12 @@ const songs: songType[] = [
     title: 'Watermelon Sugar',
     artists: [artistNames.harry_styles],
     features: [],
-    coverUrl: '/watermelon/cover.png',
-    songUrl: '/watermelon/song.mp3',
-    lyricsUrl: '/watermelon/lyrics.lrc',
+    coverUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/watermelon/cover.png',
+    songUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/watermelon/song.mp3',
+    lyricsUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/watermelon/lyrics.lrc',
     duration: 174000,
   },
   {
@@ -74,9 +83,12 @@ const songs: songType[] = [
     title: 'Adore You',
     artists: [artistNames.harry_styles],
     features: [],
-    coverUrl: '/adore-you/cover.png',
-    songUrl: '/adore-you/song.mp3',
-    lyricsUrl: '/adore-you/lyrics.lrc',
+    coverUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/adore-you/cover.png',
+    songUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/adore-you/song.mp3',
+    lyricsUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/adore-you/lyrics.lrc',
     duration: 208000,
   },
   {
@@ -84,9 +96,12 @@ const songs: songType[] = [
     title: 'Late Night Talking',
     artists: [artistNames.harry_styles],
     features: [],
-    coverUrl: '/late-night-talking/cover.png',
-    songUrl: '/late-night-talking/song.mp3',
-    lyricsUrl: '/late-night-talking/lyrics.lrc',
+    coverUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/late-night-talking/cover.png',
+    songUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/late-night-talking/song.mp3',
+    lyricsUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/late-night-talking/lyrics.lrc',
     duration: 178000,
   },
   {
@@ -94,9 +109,12 @@ const songs: songType[] = [
     title: '1 Thing',
     artists: [artistNames.amerie],
     features: [],
-    coverUrl: '/1-thing/cover.png',
-    songUrl: '/1-thing/song.mp3',
-    lyricsUrl: '/1-thing/lyrics.lrc',
+    coverUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/1-thing/cover.png',
+    songUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/1-thing/song.mp3',
+    lyricsUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/1-thing/lyrics.lrc',
     duration: 239000,
   },
   {
@@ -104,9 +122,12 @@ const songs: songType[] = [
     title: 'Save Your Tears',
     artists: [artistNames.the_weeknd],
     features: [],
-    coverUrl: '/save-your-tears/cover.png',
-    songUrl: '/save-your-tears/song.mp3',
-    lyricsUrl: '/save-your-tears/lyrics.lrc',
+    coverUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/save-your-tears/cover.png',
+    songUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/save-your-tears/song.mp3',
+    lyricsUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/save-your-tears/lyrics.lrc',
     duration: 216000,
   },
   {
@@ -114,9 +135,11 @@ const songs: songType[] = [
     title: 'Childsplay',
     artists: [artistNames.iamddb],
     features: [],
-    coverUrl: '/childs-play/cover.png',
-    songUrl: '/childs-play/song.mp3',
-    // lyricsUrl: '/childs-play/lyrics.lrc',
+    coverUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/childs-play/cover.png',
+    songUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/childs-play/song.mp3',
+    // lyricsUrl: 'https://bev-streams.s3.eu-central-1.amazonaws.com/childs-play/lyrics.lrc',
     duration: 226000,
   },
   {
@@ -124,9 +147,11 @@ const songs: songType[] = [
     title: 'Re:Re',
     artists: [artistNames.asian_kung_fu_generation],
     features: [],
-    coverUrl: '/rere/cover.png',
-    songUrl: '/rere/song.mp3',
-    lyricsUrl: '/rere/lyrics.lrc',
+    coverUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/rere/cover.png',
+    songUrl: 'https://bev-streams.s3.eu-central-1.amazonaws.com/rere/song.mp3',
+    lyricsUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/rere/lyrics.lrc',
     duration: 333000,
   },
   {
@@ -134,9 +159,12 @@ const songs: songType[] = [
     title: 'Seishun Kyousoukyoku',
     artists: [artistNames.asian_kung_fu_generation],
     features: [],
-    coverUrl: '/seishun-kyousoukyoku/cover.png',
-    songUrl: '/seishun-kyousoukyoku/song.mp3',
-    lyricsUrl: '/seishun-kyousoukyoku/lyrics.lrc',
+    coverUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/seishun-kyousoukyoku/cover.png',
+    songUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/seishun-kyousoukyoku/song.mp3',
+    lyricsUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/seishun-kyousoukyoku/lyrics.lrc',
     duration: 287000,
   },
   {
@@ -144,9 +172,10 @@ const songs: songType[] = [
     title: '99',
     artists: [artistNames.mob_choir],
     features: [],
-    coverUrl: '/99/cover.png',
-    songUrl: '/99/song.mp3',
-    lyricsUrl: '/99/lyrics.lrc',
+    coverUrl: 'https://bev-streams.s3.eu-central-1.amazonaws.com/99/cover.png',
+    songUrl: 'https://bev-streams.s3.eu-central-1.amazonaws.com/99/song.mp3',
+    lyricsUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/99/lyrics.lrc',
     duration: 238000,
   },
   {
@@ -154,8 +183,10 @@ const songs: songType[] = [
     title: "Isabella's Lullaby",
     artists: [artistNames.sarah_alainn],
     features: [],
-    coverUrl: '/isabella-lullaby/cover.jpeg',
-    songUrl: '/isabella-lullaby/song.mp3',
+    coverUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/isabella-lullaby/cover.jpeg',
+    songUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/isabella-lullaby/song.mp3',
     duration: 324000,
   },
   {
@@ -163,9 +194,12 @@ const songs: songType[] = [
     title: 'The Rumbling',
     artists: [artistNames.sim],
     features: [],
-    coverUrl: '/Rumbling/cover.png',
-    songUrl: '/Rumbling/song.mp3',
-    lyricsUrl: '/Rumbling/lyrics.lrc',
+    coverUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/Rumbling/cover.png',
+    songUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/Rumbling/song.mp3',
+    lyricsUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/Rumbling/lyrics.lrc',
     duration: 221000,
   },
   {
@@ -173,9 +207,9 @@ const songs: songType[] = [
     title: 'You Say Run',
     artists: [artistNames.mha],
     features: [],
-    coverUrl: '/MHA/cover.png',
-    songUrl: '/MHA/song.mp3',
-    // lyricsUrl: '/MHA/lyrics.lrc',
+    coverUrl: 'https://bev-streams.s3.eu-central-1.amazonaws.com/MHA/cover.png',
+    songUrl: 'https://bev-streams.s3.eu-central-1.amazonaws.com/MHA/song.mp3',
+    // lyricsUrl: 'https://bev-streams.s3.eu-central-1.amazonaws.com/MHA/lyrics.lrc',
     duration: 229000,
   },
   {
@@ -183,9 +217,12 @@ const songs: songType[] = [
     title: "Hero's Comeback",
     artists: [artistNames.nobody_knows],
     features: [],
-    coverUrl: '/heros_comeback/cover.png',
-    songUrl: '/heros_comeback/song.mp3',
-    lyricsUrl: '/heros_comeback/lyrics.lrc',
+    coverUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/heros_comeback/cover.png',
+    songUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/heros_comeback/song.mp3',
+    lyricsUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/heros_comeback/lyrics.lrc',
     duration: 274000,
   },
   {
@@ -193,9 +230,12 @@ const songs: songType[] = [
     title: 'Harukamirai',
     artists: [artistNames.kankakupiero],
     features: [],
-    coverUrl: '/harukamirai/cover.png',
-    songUrl: '/harukamirai/song.mp3',
-    lyricsUrl: '/harukamirai/lyrics.lrc',
+    coverUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/harukamirai/cover.png',
+    songUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/harukamirai/song.mp3',
+    lyricsUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/harukamirai/lyrics.lrc',
     duration: 178000,
   },
   {
@@ -203,9 +243,12 @@ const songs: songType[] = [
     title: 'Gurenge',
     artists: [artistNames.lisa],
     features: [],
-    coverUrl: '/gurenge/cover.png',
-    songUrl: '/gurenge/song.mp3',
-    lyricsUrl: '/gurenge/lyrics.lrc',
+    coverUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/gurenge/cover.png',
+    songUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/gurenge/song.mp3',
+    lyricsUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/gurenge/lyrics.lrc',
     duration: 338000,
   },
   {
@@ -213,9 +256,12 @@ const songs: songType[] = [
     title: 'Blood Circulator',
     artists: [artistNames.asian_kung_fu_generation],
     features: [],
-    coverUrl: '/blood-circulator/cover.png',
-    songUrl: '/blood-circulator/song.mp3',
-    lyricsUrl: '/blood-circulator/lyrics.lrc',
+    coverUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/blood-circulator/cover.png',
+    songUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/blood-circulator/song.mp3',
+    lyricsUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/blood-circulator/lyrics.lrc',
     duration: 224000,
   },
   {
@@ -223,9 +269,11 @@ const songs: songType[] = [
     title: 'Again',
     artists: [artistNames.yui],
     features: [],
-    coverUrl: '/again/cover.png',
-    songUrl: '/again/song.mp3',
-    lyricsUrl: '/again/lyrics.lrc',
+    coverUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/again/cover.png',
+    songUrl: 'https://bev-streams.s3.eu-central-1.amazonaws.com/again/song.mp3',
+    lyricsUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/again/lyrics.lrc',
     duration: 255000,
   },
   {
@@ -233,9 +281,12 @@ const songs: songType[] = [
     title: 'blue bird',
     artists: [artistNames.ikimonogakari],
     features: [],
-    coverUrl: '/blue-bird/cover.png',
-    songUrl: '/blue-bird/song.mp3',
-    lyricsUrl: '/blue-bird/lyrics.lrc',
+    coverUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/blue-bird/cover.png',
+    songUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/blue-bird/song.mp3',
+    lyricsUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/blue-bird/lyrics.lrc',
     duration: 219000,
   },
   {
@@ -243,9 +294,12 @@ const songs: songType[] = [
     title: 'The Day',
     artists: [artistNames.porno_graffitti],
     features: [],
-    coverUrl: '/the-day/cover.png',
-    songUrl: '/the-day/song.mp3',
-    lyricsUrl: '/the-day/lyrics.lrc',
+    coverUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/the-day/cover.png',
+    songUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/the-day/song.mp3',
+    lyricsUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/the-day/lyrics.lrc',
     duration: 241000,
   },
   {
@@ -253,9 +307,12 @@ const songs: songType[] = [
     title: 'Silhouette',
     artists: [artistNames.kana_boon],
     features: [],
-    coverUrl: '/kana-boon/cover.jpg',
-    songUrl: '/kana-boon/song.mp3',
-    lyricsUrl: '/kana-boon/lyrics.lrc',
+    coverUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/kana-boon/cover.jpg',
+    songUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/kana-boon/song.mp3',
+    lyricsUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/kana-boon/lyrics.lrc',
     duration: 241000,
   },
   {
@@ -263,9 +320,10 @@ const songs: songType[] = [
     title: 'GO!!!',
     artists: [artistNames.flow],
     features: [],
-    coverUrl: '/go/cover.png',
-    songUrl: '/go/song.mp3',
-    lyricsUrl: '/go/lyrics.lrc',
+    coverUrl: 'https://bev-streams.s3.eu-central-1.amazonaws.com/go/cover.png',
+    songUrl: 'https://bev-streams.s3.eu-central-1.amazonaws.com/go/song.mp3',
+    lyricsUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/go/lyrics.lrc',
     duration: 240000,
   },
   {
@@ -273,9 +331,12 @@ const songs: songType[] = [
     title: 'Distance',
     artists: [artistNames.long_shot_party],
     features: [],
-    coverUrl: '/distance/cover.png',
-    songUrl: '/distance/song.mp3',
-    lyricsUrl: '/distance/lyrics.lrc',
+    coverUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/distance/cover.png',
+    songUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/distance/song.mp3',
+    lyricsUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/distance/lyrics.lrc',
     duration: 188000,
   },
   {
@@ -283,9 +344,11 @@ const songs: songType[] = [
     title: 'Specialz',
     artists: [artistNames.king_gnu],
     features: [],
-    coverUrl: '/specials/cover.png',
-    songUrl: '/specials/song.mp3',
-    // lyricsUrl: '/specials/lyrics.lrc',
+    coverUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/specials/cover.png',
+    songUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/specials/song.mp3',
+    // lyricsUrl: 'https://bev-streams.s3.eu-central-1.amazonaws.com/specials/lyrics.lrc',
     duration: 240000,
   },
   {
@@ -293,8 +356,10 @@ const songs: songType[] = [
     title: 'January 28th',
     artists: [artistNames.j_cole],
     features: [],
-    coverUrl: '/2014/cover.png',
-    songUrl: '/2014/january-28/song.mp3',
+    coverUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/2014/cover.png',
+    songUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/2014/january-28/song.mp3',
     // lyricsUrl: '/2014/january-28/lyrics.lrc',
     duration: 243000,
   },
@@ -303,9 +368,11 @@ const songs: songType[] = [
     title: 'Intro',
     artists: [artistNames.j_cole],
     features: [],
-    coverUrl: '/2014/cover.png',
-    songUrl: '/2014/intro/song.mp3',
-    // lyricsUrl: '/2014/intro/lyrics.lrc',
+    coverUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/2014/cover.png',
+    songUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/2014/intro/song.mp3',
+    // lyricsUrl: 'https://bev-streams.s3.eu-central-1.amazonaws.com/2014/intro/lyrics.lrc',
     duration: 129000,
   },
   {
@@ -313,9 +380,12 @@ const songs: songType[] = [
     title: 'Wet Dreamz',
     artists: [artistNames.j_cole],
     features: [],
-    coverUrl: '/2014/cover.png',
-    songUrl: '/2014/wet-dreams/song.mp3',
-    // lyricsUrl: '/2014/wet-dreams/lyrics.lrc',
+    coverUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/2014/cover.png',
+    songUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/2014/wet-dreams/song.mp3',
+    lyricsUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/2014/wet-dreams/lyrics.lrc',
     duration: 240000,
   },
   {
@@ -323,8 +393,10 @@ const songs: songType[] = [
     title: "03' Adolescence",
     artists: [artistNames.j_cole],
     features: [],
-    coverUrl: '/2014/cover.png',
-    songUrl: '/2014/03-adolescence/song.mp3',
+    coverUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/2014/cover.png',
+    songUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/2014/03-adolescence/song.mp3',
     // lyricsUrl: '/2014/03-adolescence/lyrics.lrc',
     duration: 265000,
   },
@@ -333,9 +405,11 @@ const songs: songType[] = [
     title: 'A Tale of 2 Citiez',
     artists: [artistNames.j_cole],
     features: [],
-    coverUrl: '/2014/cover.png',
-    songUrl: '/2014/ATO2C/song.mp3',
-    // lyricsUrl: '/2014/ATO2C/lyrics.lrc',
+    coverUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/2014/cover.png',
+    songUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/2014/ATO2C/song.mp3',
+    // lyricsUrl: 'https://bev-streams.s3.eu-central-1.amazonaws.com/2014/ATO2C/lyrics.lrc',
     duration: 270000,
   },
   {
@@ -343,9 +417,11 @@ const songs: songType[] = [
     title: 'Fire Squad',
     artists: [artistNames.j_cole],
     features: [],
-    coverUrl: '/2014/cover.png',
-    songUrl: '/2014/fire-squad/song.mp3',
-    // lyricsUrl: '/2014/ATO2C/lyrics.lrc',
+    coverUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/2014/cover.png',
+    songUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/2014/fire-squad/song.mp3',
+    // lyricsUrl: 'https://bev-streams.s3.eu-central-1.amazonaws.com/2014/ATO2C/lyrics.lrc',
     duration: 289000,
   },
   {
@@ -353,9 +429,11 @@ const songs: songType[] = [
     title: 'St. Tropez',
     artists: [artistNames.j_cole],
     features: [],
-    coverUrl: '/2014/cover.png',
-    songUrl: '/2014/st-tropez/song.mp3',
-    // lyricsUrl: '/2014/ATO2C/lyrics.lrc',
+    coverUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/2014/cover.png',
+    songUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/2014/st-tropez/song.mp3',
+    // lyricsUrl: 'https://bev-streams.s3.eu-central-1.amazonaws.com/2014/ATO2C/lyrics.lrc',
     duration: 258000,
   },
   {
@@ -363,9 +441,11 @@ const songs: songType[] = [
     title: 'G.O.M.D',
     artists: [artistNames.j_cole],
     features: [],
-    coverUrl: '/2014/cover.png',
-    songUrl: '/2014/gomd/song.mp3',
-    // lyricsUrl: '/2014/ATO2C/lyrics.lrc',
+    coverUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/2014/cover.png',
+    songUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/2014/gomd/song.mp3',
+    // lyricsUrl: 'https://bev-streams.s3.eu-central-1.amazonaws.com/2014/ATO2C/lyrics.lrc',
     duration: 301000,
   },
   {
@@ -373,9 +453,11 @@ const songs: songType[] = [
     title: 'No Role Modelz',
     artists: [artistNames.j_cole],
     features: [],
-    coverUrl: '/2014/cover.png',
-    songUrl: '/2014/nrm/song.mp3',
-    // lyricsUrl: '/2014/ATO2C/lyrics.lrc',
+    coverUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/2014/cover.png',
+    songUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/2014/nrm/song.mp3',
+    // lyricsUrl: 'https://bev-streams.s3.eu-central-1.amazonaws.com/2014/ATO2C/lyrics.lrc',
     duration: 273000,
   },
   {
@@ -383,9 +465,11 @@ const songs: songType[] = [
     title: 'Hello',
     artists: [artistNames.j_cole],
     features: [],
-    coverUrl: '/2014/cover.png',
-    songUrl: '/2014/hello/song.mp3',
-    // lyricsUrl: '/2014/ATO2C/lyrics.lrc',
+    coverUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/2014/cover.png',
+    songUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/2014/hello/song.mp3',
+    // lyricsUrl: 'https://bev-streams.s3.eu-central-1.amazonaws.com/2014/ATO2C/lyrics.lrc',
     duration: 219000,
   },
   {
@@ -393,9 +477,11 @@ const songs: songType[] = [
     title: 'Apparently',
     artists: [artistNames.j_cole],
     features: [],
-    coverUrl: '/2014/cover.png',
-    songUrl: '/2014/apparently/song.mp3',
-    // lyricsUrl: '/2014/ATO2C/lyrics.lrc',
+    coverUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/2014/cover.png',
+    songUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/2014/apparently/song.mp3',
+    // lyricsUrl: 'https://bev-streams.s3.eu-central-1.amazonaws.com/2014/ATO2C/lyrics.lrc',
     duration: 273000,
   },
   {
@@ -403,9 +489,11 @@ const songs: songType[] = [
     title: 'Love Yourz',
     artists: [artistNames.j_cole],
     features: [],
-    coverUrl: '/2014/cover.png',
-    songUrl: '/2014/love-yours/song.mp3',
-    // lyricsUrl: '/2014/ATO2C/lyrics.lrc',
+    coverUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/2014/cover.png',
+    songUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/2014/love-yours/song.mp3',
+    // lyricsUrl: 'https://bev-streams.s3.eu-central-1.amazonaws.com/2014/ATO2C/lyrics.lrc',
     duration: 213000,
   },
   {
@@ -413,9 +501,11 @@ const songs: songType[] = [
     title: 'Note to Self',
     artists: [artistNames.j_cole],
     features: [],
-    coverUrl: '/2014/cover.png',
-    songUrl: '/2014/nts/song.mp3',
-    // lyricsUrl: '/2014/ATO2C/lyrics.lrc',
+    coverUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/2014/cover.png',
+    songUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/2014/nts/song.mp3',
+    // lyricsUrl: 'https://bev-streams.s3.eu-central-1.amazonaws.com/2014/ATO2C/lyrics.lrc',
     duration: 875000,
   },
 ];
