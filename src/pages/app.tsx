@@ -1,6 +1,7 @@
-import playlists from '../assets/db/playlists';
+import playlists, { testPlaylist } from '../assets/db/playlists';
 
 import Playlist from '../components/playlist';
+import { Song } from '../components/song';
 
 /*
   Make playlists for:
@@ -8,12 +9,14 @@ import Playlist from '../components/playlist';
   ! Add artist links
   
  >< Judge me, I don't care (Tineyi & ${original artist's name})
-  <> Weeb Nation
- - Gamers GG (Gta Themes, Nintendo Wii)
-  - Hip Hop (M.A.A.D, Cole's library, FPS, Wow freestyle 6 God, It aint hard to tell)
-  - Save the semester mode
-  - Sandile Strict Session vol 4
-  - Tanatswa (Ganster Nkazana - Musikana Wemacider)
+  >< Weeb Nation
+  <> Hip Hop (M.A.A.D, TPAB, Cole's library, FPS, Wow freestyle 6 God, It aint hard to tell, Steve Biko. Award tour, we can get down)
+    <> 2014
+    <> TPAB
+    <> GKMC
+  <> Save the semester mode (Momo, Ufunani, Nguwe Wedwa, Long Lasting, Villo)
+  <> Sandile Strict Session vol 4
+  <> Tanatswa (The Notorious B.E.V)
   - Tanaka & Aneen (Vasikana va mwari)
   - Kudzi (Amai Papa Bear)
   - Rivo (Munghana Rulani & Prince Rhangani)
@@ -48,11 +51,13 @@ import Playlist from '../components/playlist';
   Ufunani
   Musazvituma / Time (Holy)
   Intro + Steve Biko + Award Tour(Tribe called quest) - Displays auto next
-  Uzozisola
   As it was
   M.A.A.D City
   Money Tress
   Neighbors
+  G.O.M.D
+  Apparently
+  Blue Bird (Naruto)
   It aint hard to tell (Nas)
   Something About us
 
@@ -73,6 +78,7 @@ function App() {
   return (
     <>
       <h2 className='font-bold text-3xl'>Quick Picks</h2>
+      <Song {...testPlaylist.songs[0]} />
       <h2 className='font-bold text-3xl'>Playlists</h2>
       <div>
         {playlists.map((playlist, key) => (

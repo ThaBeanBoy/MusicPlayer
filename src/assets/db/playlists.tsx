@@ -5,7 +5,8 @@ import songs from './songs';
 export const testPlaylist: playlistType = {
   id: 0,
   title: 'Birthday Playlist',
-  cover: '/african-americans-in-america/cover.png',
+  cover:
+    'https://bev-streams.s3.eu-central-1.amazonaws.com/african-americans-in-america/cover.png',
   songs: [songs[0], songs[1]],
   description: <>Custom description</>,
 };
@@ -53,6 +54,26 @@ const playlists: playlistType[] = [
       songs[27],
     ],
     description: <>For the weebs</>,
+  },
+  {
+    id: 3,
+    title: '2014 Forest Hills Drive',
+    cover: '/2014/cover.png',
+    songs: [
+      songs[29],
+      songs[28],
+      songs[30],
+      songs[31],
+      songs[32],
+      songs[33],
+      songs[34],
+      songs[35],
+      songs[36],
+      songs[37],
+      songs[38],
+      songs[39],
+      songs[40],
+    ],
   },
 ];
 

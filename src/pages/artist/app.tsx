@@ -72,13 +72,6 @@ export default function Artist() {
           </a>
         )}
 
-        <Button
-          icon={<IoChevronBack />}
-          onClick={goBack}
-          className='text-xl'
-          variant='flat'
-        />
-
         <h3 className='text-2xl font-bold'>Songs</h3>
         <div>
           {songs.map((song, key) => (
