@@ -10,7 +10,7 @@ import { Song } from '../components/song';
   
  >< Judge me, I don't care (Tineyi & ${original artist's name})
   >< Weeb Nation
-  <> Hip Hop (FPS, Wow freestyle 6 God, It aint hard to tell, Steve Biko. Award tour, we can get down)
+  <> Hip Hop
     <> 2014
       >< Songs
       <> Lyrics

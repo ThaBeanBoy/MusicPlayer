@@ -865,6 +865,97 @@ const songs: songType[] = [
       'https://bev-streams.s3.eu-central-1.amazonaws.com/gkmc/compton/lyrics.lrc',
     duration: 248000,
   },
+  {
+    id: 69,
+    title: 'First Person Shooter',
+    artists: [artistNames.drake],
+    features: [artistNames.j_cole],
+    coverUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/hiphop/fps/cover.png',
+    songUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/hiphop/fps/song.mp3',
+    lyricsUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/hiphop/fps/lyrics.lrc',
+    duration: 248000,
+  },
+  {
+    id: 70,
+    title: 'Wow Freestyle',
+    artists: [artistNames.jay_rock],
+    features: [artistNames.kendrick],
+    coverUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/hiphop/wow-freestyle/cover.png',
+    songUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/hiphop/wow-freestyle/song.mp3',
+    lyricsUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/hiphop/wow-freestyle/lyrics.lrc',
+    duration: 176000,
+  },
+  {
+    id: 71,
+    title: 'Energy',
+    artists: [artistNames.drake],
+    features: [],
+    coverUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/hiphop/drake-too-late/cover.png',
+    songUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/hiphop/drake-too-late/energy/song.mp3',
+    lyricsUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/hiphop/drake-too-late/energy/lyrics.lrc',
+    duration: 182000,
+  },
+  {
+    id: 72,
+    title: '6 God',
+    artists: [artistNames.drake],
+    features: [],
+    coverUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/hiphop/drake-too-late/cover.png',
+    songUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/hiphop/drake-too-late/6-god/song.mp3',
+    lyricsUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/hiphop/drake-too-late/6-god/lyrics.lrc',
+    duration: 181000,
+  },
+  {
+    id: 73,
+    title: 'World is Yours',
+    artists: [artistNames.nas],
+    features: [],
+    coverUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/hiphop/illmatic/cover.png',
+    songUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/hiphop/illmatic/wiy/song.mp3',
+    lyricsUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/hiphop/illmatic/wiy/lyrics.lrc',
+    duration: 291000,
+  },
+  {
+    id: 74,
+    title: 'Half Time',
+    artists: [artistNames.nas],
+    features: [],
+    coverUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/hiphop/illmatic/cover.png',
+    songUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/hiphop/illmatic/halftime/song.mp3',
+    lyricsUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/hiphop/illmatic/halftime/lyrics.lrc',
+    duration: 261000,
+  },
+  {
+    id: 75,
+    title: 'It Aint Hard To Tell',
+    artists: [artistNames.nas],
+    features: [],
+    coverUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/hiphop/illmatic/cover.png',
+    songUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/hiphop/illmatic/iahtt/song.mp3',
+    lyricsUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/hiphop/illmatic/iahtt/lyrics.lrc',
+    duration: 202000,
+  },
 ];
 
 export default songs;

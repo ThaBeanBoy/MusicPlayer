@@ -125,6 +125,7 @@ const playlists: playlistType[] = [
     cover:
       'https://bev-streams.s3.eu-central-1.amazonaws.com/playlist-covers/me.jpeg',
     songs: [
+      songs[0],
       songs[33],
       songs[32],
       songs[35],
@@ -141,6 +142,13 @@ const playlists: playlistType[] = [
       songs[51],
       songs[53],
       songs[56],
+      songs[69],
+      songs[70],
+      songs[71],
+      songs[72],
+      songs[73],
+      songs[74],
+      songs[75],
     ],
     description: <>These are some of my favourite hip hop tracks.</>,
   },

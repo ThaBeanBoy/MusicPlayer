@@ -49,6 +49,7 @@ const artists: artistType[] = [
   { id: 35, name: 'MC Eiht' },
   { id: 36, name: 'Dr Dre' },
   { id: 37, name: 'Jay Rock' },
+  { id: 38, name: 'Nas' },
 ];
 
 export const artistNames = {
@@ -90,6 +91,7 @@ export const artistNames = {
   mc_eiht: artists[35],
   dr_dre: artists[36],
   jay_rock: artists[37],
+  nas: artists[38],
 };
 
 export default artists;
