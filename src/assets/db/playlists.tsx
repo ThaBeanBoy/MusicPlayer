@@ -100,6 +100,25 @@ const playlists: playlistType[] = [
       songs[56],
     ],
   },
+  {
+    id: 5,
+    title: 'Good Kid M.A.A.D City',
+    cover: 'https://bev-streams.s3.eu-central-1.amazonaws.com/gkmc/cover.png',
+    songs: [
+      songs[57],
+      songs[58],
+      songs[59],
+      songs[60],
+      songs[61],
+      songs[62],
+      songs[63],
+      songs[64],
+      songs[65],
+      songs[66],
+      songs[67],
+      songs[68],
+    ],
+  },
 ];
 
 export default playlists;

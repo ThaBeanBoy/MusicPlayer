@@ -7,7 +7,7 @@ import { BsSearch } from 'react-icons/bs';
 import { Song } from './song';
 import { NavLink } from 'react-router-dom';
 import * as AspectRatio from '@radix-ui/react-aspect-ratio';
-import { millisToMinutesAndSeconds } from '../hooks/Time';
+import { milliTime } from '../hooks/Time';
 import { Artists } from './artist';
 import artistsDB from '../assets/db/artists';
 
@@ -75,6 +75,13 @@ export default function Playlist({
       </div>
     );
 
+  const duration = milliTime({
+    millis: songs
+      .map(({ duration }) => duration)
+      .reduce((partialSum, a) => partialSum + a, 0),
+    format: 'hms',
+  });
+
   return (
     <NavLink
       to={`/list/${playlist.id}`}
@@ -108,12 +115,7 @@ export default function Playlist({
         </span>
 
         <span className='bg-white text-xs px-2 py-1 absolute top-2 right-2 rounded-md opacity-0 group-hover:opacity-100 transition'>
-          {millisToMinutesAndSeconds(
-            songs
-              .map(({ duration }) => duration)
-              .reduce((partialSum, a) => partialSum + a, 0)
-          )}{' '}
-          minutes
+          {duration.string({ displaySeconds: false })}
         </span>
       </div>
       <div className='px-2 text-left w-full text-ellipsis truncate'>

@@ -7,7 +7,7 @@ import * as Slider from '@radix-ui/react-slider';
 
 import songContext from './context';
 
-import { millisToMinutesAndSeconds } from '../../hooks/Time';
+import { milliTime } from '../../hooks/Time';
 
 import Button from '../../components/button';
 import Playlist from '../../components/playlist';
@@ -88,12 +88,15 @@ export const CurrentPlaylist = forwardRef<
               {currentSong.playlist.title}
             </h2>
             <p>
-              {millisToMinutesAndSeconds(
-                currentSong.playlist?.songs
+              {currentSong.playlist?.songs.length} song
+              {currentSong.playlist?.songs.length > 1 && 's'}
+              {' - '}
+              {milliTime({
+                millis: currentSong.playlist?.songs
                   .map(({ duration }) => duration)
-                  .reduce((partialSum, a) => partialSum + a, 0)
-              )}{' '}
-              minutes long
+                  .reduce((partialSum, a) => partialSum + a, 0),
+                format: 'hms',
+              }).string({ displaySeconds: false })}
             </p>
           </div>
 
@@ -239,7 +242,7 @@ export const Controls = forwardRef<
         </div>
 
         <div className='w-full mb-3 flex gap-3 items-center text-sm'>
-          <span>{songTime.progress.get.string()}</span>
+          <span>{songTime.progress.get.string({ expanded: false })}</span>
           <Slider.Root
             className='relative flex items-center select-none flex-1 touch-none w-[200px] h-5'
             max={100}
@@ -257,7 +260,7 @@ export const Controls = forwardRef<
             <Slider.Thumb className='block w-5 h-5 bg-white shadow-[0_2px_10px] shadow-black rounded-[10px] hover:bg-blue-100 focus:outline-none focus:shadow-[0_0_0_5px] focus:border-blue-500' />
           </Slider.Root>
 
-          <span>{songTime.duration.get.string()}</span>
+          <span>{songTime.duration.get.string({ expanded: false })}</span>
         </div>
       </div>
     )

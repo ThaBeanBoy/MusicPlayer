@@ -12,17 +12,35 @@ export type useSongTimeType = {
       milliseconds: () => number;
       seconds: () => number;
       percentage: () => number;
-      string: () => string;
+      string: milliTimeStringBuilderType;
     };
   };
   duration: {
     get: {
       milliseconds: () => number;
       seconds: () => number;
-      string: () => string;
+      string: milliTimeStringBuilderType;
     };
   };
   setSong: (song: songType) => useSongTimeType;
+};
+
+export type milliTimeType = {
+  hours: number;
+  minutes: number;
+  seconds: number;
+  string: milliTimeStringBuilderType;
+};
+
+export type milliTimeStringBuilderType = (
+  args: milliTimeStringBuilderProps
+) => string;
+
+type milliTimeStringBuilderProps = {
+  displayHours?: boolean;
+  displayMinutes?: boolean;
+  displaySeconds?: boolean;
+  expanded?: boolean;
 };
 
 export function useSongTime(song?: songType): useSongTimeType {
@@ -66,7 +84,7 @@ export function useSongTime(song?: songType): useSongTimeType {
         milliseconds: () => progress,
         seconds: () => milliToSeconds(progress),
         percentage: () => (progress / duration) * 100,
-        string: () => millisToMinutesAndSeconds(progress),
+        string: milliTime({ millis: progress, format: 'ms' }).string,
       },
     },
 
@@ -74,7 +92,7 @@ export function useSongTime(song?: songType): useSongTimeType {
       get: {
         milliseconds: () => progress,
         seconds: () => milliToSeconds(duration),
-        string: () => millisToMinutesAndSeconds(duration),
+        string: milliTime({ millis: duration, format: 'ms' }).string,
       },
     },
 
@@ -89,8 +107,79 @@ export function useSongTime(song?: songType): useSongTimeType {
   return songTime;
 }
 
-export function millisToMinutesAndSeconds(millis: number) {
-  const minutes = Math.floor(millis / 60000);
-  const seconds = (millis % 60000) / 1000;
-  return minutes + ':' + (seconds < 10 ? '0' : '') + seconds.toFixed(0);
+const milliConverstion = {
+  hour: 3600000,
+  minute: 60000,
+  second: 1000,
+};
+
+export function milliTime({
+  millis,
+  format,
+}: {
+  millis: number;
+  format: 'hms' | 'ms' | 's';
+}): milliTimeType {
+  const hours =
+    format === 'hms' ? Math.floor(millis / milliConverstion.hour) : 0;
+  millis -= hours * milliConverstion.hour;
+
+  const minutes =
+    format === 'hms' || format === 'ms'
+      ? Math.floor(millis / milliConverstion.minute)
+      : 0;
+  millis -= minutes * milliConverstion.minute;
+
+  const seconds = Math.round(millis / milliConverstion.second);
+
+  const string: milliTimeStringBuilderType = ({
+    expanded = true,
+    displayHours = true,
+    displayMinutes = true,
+    displaySeconds = true,
+  }: milliTimeStringBuilderProps) => {
+    const hourString = {
+      formated: displayHours
+        ? formatValueUnit({ value: hours, unit: 'hour' })
+        : '',
+      value: displayHours ? hours.toString() : '',
+    };
+
+    const minutesString = {
+      formated: displayMinutes
+        ? formatValueUnit({ value: minutes, unit: 'minute' })
+        : '',
+      value: displayMinutes ? minutes : '',
+    };
+
+    const secondsString = {
+      formated: displaySeconds
+        ? formatValueUnit({ value: seconds, unit: 'second' })
+        : '',
+      value: displaySeconds ? seconds.toString() : '',
+    };
+
+    if (expanded)
+      return `${hourString.formated} ${minutesString.formated} ${secondsString.formated}`;
+
+    switch (format) {
+      case 's':
+        return secondsString.value;
+
+      case 'ms':
+        return `${minutesString.value}:${
+          displaySeconds && seconds < 10 ? '0' : ''
+        }${secondsString.value}`;
+
+      default:
+        return `${hourString.value}:${minutesString.value}:${
+          seconds < 10 ? '0' : ''
+        }${seconds}`;
+    }
+  };
+
+  return { hours, minutes, seconds, string };
 }
+
+const formatValueUnit = ({ value, unit }: { value: number; unit: string }) =>
+  value > 0 ? `${value} ${unit}${value > 1 ? 's' : ''}` : '';

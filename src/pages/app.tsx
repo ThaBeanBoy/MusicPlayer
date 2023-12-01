@@ -11,9 +11,13 @@ import { Song } from '../components/song';
  >< Judge me, I don't care (Tineyi & ${original artist's name})
   >< Weeb Nation
   <> Hip Hop (M.A.A.D, TPAB, Cole's library, FPS, Wow freestyle 6 God, It aint hard to tell, Steve Biko. Award tour, we can get down)
-    >< 2014
+    <> 2014
+      >< Songs
+      <> Lyrics
     <> TPAB
-    <> GKMC
+      >< Songs
+      <> Lyrics
+    >< GKMC
   <> Save the semester mode (Momo, Ufunani, Nguwe Wedwa, Long Lasting, Villo)
   <> Sandile Strict Session vol 4
   <> Tanatswa (The Notorious B.E.V)

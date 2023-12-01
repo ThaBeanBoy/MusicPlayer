@@ -709,6 +709,162 @@ const songs: songType[] = [
       'https://bev-streams.s3.eu-central-1.amazonaws.com/TPAB/mortal-man/lyrics.lrc',
     duration: 728000,
   },
+  {
+    id: 57,
+    title: 'Sherane aka Master Splinters Daughter',
+    artists: [artistNames.kendrick],
+    features: [],
+    coverUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/gkmc/cover.png',
+    songUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/gkmc/sherane/song.mp3',
+    lyricsUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/gkmc/sherane/lyrics.lrc',
+    duration: 274000,
+  },
+  {
+    id: 58,
+    title: 'Bitch Dont Kill My Vibe',
+    artists: [artistNames.kendrick],
+    features: [],
+    coverUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/gkmc/cover.png',
+    songUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/gkmc/bdkmv/song.mp3',
+    lyricsUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/gkmc/bdkmv/lyrics.lrc',
+    duration: 311000,
+  },
+  {
+    id: 59,
+    title: 'Backseat Freestyle',
+    artists: [artistNames.kendrick],
+    features: [],
+    coverUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/gkmc/cover.png',
+    songUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/gkmc/bsf/song.mp3',
+    lyricsUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/gkmc/bsf/lyrics.lrc',
+    duration: 213000,
+  },
+  {
+    id: 60,
+    title: 'The Art of Peer Pressure',
+    artists: [artistNames.kendrick],
+    features: [],
+    coverUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/gkmc/cover.png',
+    songUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/gkmc/taopp/song.mp3',
+    lyricsUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/gkmc/taopp/lyrics.lrc',
+    duration: 325000,
+  },
+  {
+    id: 61,
+    title: 'Money Trees',
+    artists: [artistNames.kendrick],
+    features: [artistNames.jay_rock],
+    coverUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/gkmc/cover.png',
+    songUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/gkmc/money-trees/song.mp3',
+    lyricsUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/gkmc/money-trees/lyrics.lrc',
+    duration: 387000,
+  },
+  {
+    id: 62,
+    title: 'Poetic Justice',
+    artists: [artistNames.kendrick],
+    features: [artistNames.drake],
+    coverUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/gkmc/cover.png',
+    songUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/gkmc/pj/song.mp3',
+    lyricsUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/gkmc/pj/lyrics.lrc',
+    duration: 301000,
+  },
+  {
+    id: 63,
+    title: 'good kid',
+    artists: [artistNames.kendrick],
+    features: [],
+    coverUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/gkmc/cover.png',
+    songUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/gkmc/good-kid/song.mp3',
+    lyricsUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/gkmc/good-kid/lyrics.lrc',
+    duration: 215000,
+  },
+  {
+    id: 64,
+    title: 'm.A.A.d city',
+    artists: [artistNames.kendrick],
+    features: [artistNames.mc_eiht],
+    coverUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/gkmc/cover.png',
+    songUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/gkmc/maad-city/song.mp3',
+    lyricsUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/gkmc/maad-city/lyrics.lrc',
+    duration: 351000,
+  },
+  {
+    id: 65,
+    title: 'Swimming Pools (Drank)',
+    artists: [artistNames.kendrick],
+    features: [],
+    coverUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/gkmc/cover.png',
+    songUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/gkmc/swimming-pool/song.mp3',
+    lyricsUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/gkmc/swimming-pool/lyrics.lrc',
+    duration: 248000,
+  },
+  {
+    id: 66,
+    title: 'Sing About Me Im Dying Of Thirst',
+    artists: [artistNames.kendrick],
+    features: [],
+    coverUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/gkmc/cover.png',
+    songUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/gkmc/sam/song.mp3',
+    lyricsUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/gkmc/sam/lyrics.lrc',
+    duration: 724000,
+  },
+  {
+    id: 67,
+    title: 'Real',
+    artists: [artistNames.kendrick],
+    features: [artistNames.anna_wise],
+    coverUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/gkmc/cover.png',
+    songUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/gkmc/real/song.mp3',
+    lyricsUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/gkmc/real/lyrics.lrc',
+    duration: 443000,
+  },
+  {
+    id: 68,
+    title: 'Compton',
+    artists: [artistNames.kendrick],
+    features: [artistNames.dr_dre],
+    coverUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/gkmc/cover.png',
+    songUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/gkmc/compton/song.mp3',
+    lyricsUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/gkmc/compton/lyrics.lrc',
+    duration: 248000,
+  },
 ];
 
 export default songs;

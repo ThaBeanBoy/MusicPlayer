@@ -45,6 +45,10 @@ const artists: artistType[] = [
   { id: 31, name: 'James Fauntleroy' },
   { id: 32, name: 'Ronald Isley' },
   { id: 33, name: 'Rapsody' },
+  { id: 34, name: 'Drake' },
+  { id: 35, name: 'MC Eiht' },
+  { id: 36, name: 'Dr Dre' },
+  { id: 37, name: 'Jay Rock' },
 ];
 
 export const artistNames = {
@@ -82,6 +86,10 @@ export const artistNames = {
   james_fauntleroy: artists[31],
   ronald_isley: artists[32],
   rapsody: artists[33],
+  drake: artists[34],
+  mc_eiht: artists[35],
+  dr_dre: artists[36],
+  jay_rock: artists[37],
 };
 
 export default artists;

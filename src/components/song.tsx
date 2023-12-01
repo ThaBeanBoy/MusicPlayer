@@ -1,5 +1,5 @@
 import { BsFillPlayFill, BsPauseFill } from 'react-icons/bs';
-import { millisToMinutesAndSeconds } from '../hooks/Time';
+import { milliTime } from '../hooks/Time';
 import { playlistType, songType } from '../types';
 import { MouseEventHandler, useContext } from 'react';
 import songContext from '../context/song/context';
@@ -85,7 +85,13 @@ export function Song({
             />
           </div>
 
-          {!isBeingPlayed && <span>{millisToMinutesAndSeconds(duration)}</span>}
+          {!isBeingPlayed && (
+            <span>
+              {milliTime({ millis: duration, format: 'ms' }).string({
+                expanded: false,
+              })}
+            </span>
+          )}
         </button>
 
         {isBeingPlayed && (

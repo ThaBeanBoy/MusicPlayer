@@ -2,7 +2,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import playlists from '../../assets/db/playlists';
 import Playlist from '../../components/playlist';
 import { Artists } from '../../components/artist';
-import { millisToMinutesAndSeconds } from '../../hooks/Time';
+import { milliTime } from '../../hooks/Time';
 import { useContext } from 'react';
 import songContext from '../../context/song/context';
 import { cn } from '../../utils/cn';
@@ -26,6 +26,13 @@ export default function List() {
     .map((song) => song.artists)
     .reduce((prev, next) => prev.concat(next));
 
+  const duration = milliTime({
+    millis: songs
+      .map(({ duration }) => duration)
+      .reduce((partialSum, a) => partialSum + a, 0),
+    format: 'hms',
+  });
+
   return (
     <div className='max-w-6xl w-fit mx-auto items-start flex flex-col md:flex-row gap-4'>
       <Button
@@ -44,13 +51,8 @@ export default function List() {
         <h2 className='font-bold text-2xl'>{title}</h2>
         <Artists artists={artists} provideArtistLink />
         <p>
-          {songs.length} songs -{' '}
-          {millisToMinutesAndSeconds(
-            playlist.songs
-              .map(({ duration }) => duration)
-              .reduce((partialSum, a) => partialSum + a, 0)
-          )}{' '}
-          minutes
+          {songs.length} song{songs.length > 1 && 's'} -
+          {duration.string({ displaySeconds: false })}
         </p>
         {description && (
           <>
