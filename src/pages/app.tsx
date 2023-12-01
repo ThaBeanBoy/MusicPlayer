@@ -10,7 +10,7 @@ import { Song } from '../components/song';
   
  >< Judge me, I don't care (Tineyi & ${original artist's name})
   >< Weeb Nation
-  <> Hip Hop (M.A.A.D, TPAB, Cole's library, FPS, Wow freestyle 6 God, It aint hard to tell, Steve Biko. Award tour, we can get down)
+  <> Hip Hop (FPS, Wow freestyle 6 God, It aint hard to tell, Steve Biko. Award tour, we can get down)
     <> 2014
       >< Songs
       <> Lyrics
@@ -18,6 +18,22 @@ import { Song } from '../components/song';
       >< Songs
       <> Lyrics
     >< GKMC
+    <> Nas
+      <> World is Yours
+      <> Halftime
+      <> Represent
+      <> It Aint Hard To Tell
+    <> A Tribe Called Quest
+      <> Steve Biko
+      <> Award Tour
+      <> We Can Get Down
+      <> Electric Relaxation
+      <> Oh My God
+    <> Digable Planets
+      <> Rebirth of Slick
+      <> Where I'm From
+    <> Scum Fuck Flower Boy
+    <> IGOR
   <> Save the semester mode (Momo, Ufunani, Nguwe Wedwa, Long Lasting, Villo)
   <> Sandile Strict Session vol 4
   <> Tanatswa (The Notorious B.E.V)
@@ -25,7 +41,7 @@ import { Song } from '../components/song';
   - Kudzi (Amai Papa Bear)
   - Rivo (Munghana Rulani & Prince Rhangani)
   - Sesi (Khosikadzi va mavenda)
-  - Mpumi, Nkosana & Andrew (name: Past Paper Chowers United, playlist: E Les Foyer Cremming) | Andrew hip hop Idlozi
+  - Mpumi, Nkosana, Andrew & Joseph (name: Past Paper Chowers United, playlist: E Les Foyer Cremming) | Andrew hip hop Idlozi
   - Delulu's child (not destiny's child) - Electrotechnics Engineer Abongile -> Kwa Zulu & Snr AWS Cloud Engineer Mohlakoane -> Basetsana babapedi
   - Group Leader Tshabalala
   - Mudhara Kayz
@@ -49,6 +65,7 @@ import { Song } from '../components/song';
   - Precious, Paida, Tylon, Rethabile
   - Tshego and the gang (including Leon)
   - Russy and friend
+  - Rethabile
 
   # DEMO
 

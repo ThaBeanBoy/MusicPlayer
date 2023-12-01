@@ -737,7 +737,7 @@ const songs: songType[] = [
   },
   {
     id: 59,
-    title: 'Backseat Freestyle',
+    title: 'Backstreet Freestyle',
     artists: [artistNames.kendrick],
     features: [],
     coverUrl:

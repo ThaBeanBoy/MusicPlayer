@@ -3,14 +3,10 @@ import playlists from '../../assets/db/playlists';
 import Playlist from '../../components/playlist';
 import { Artists } from '../../components/artist';
 import { milliTime } from '../../hooks/Time';
-import { useContext } from 'react';
-import songContext from '../../context/song/context';
-import { cn } from '../../utils/cn';
 import Button from '../../components/button';
 import { IoChevronBack } from 'react-icons/io5';
 
 export default function List() {
-  const currentSong = useContext(songContext);
   const { id } = useParams();
   const navigate = useNavigate();
 
@@ -62,11 +58,7 @@ export default function List() {
         )}
       </div>
 
-      <div
-        className={cn('w-full', {
-          'pb-[75px]': currentSong?.current !== undefined,
-        })}
-      >
+      <div className={'w-full'}>
         <Playlist playlist={playlist} searchbar className='w-full max-w-lg' />
         {description && (
           <>

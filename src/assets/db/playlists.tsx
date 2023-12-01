@@ -119,6 +119,31 @@ const playlists: playlistType[] = [
       songs[68],
     ],
   },
+  {
+    id: 6,
+    title: "Tineyi's Hip Hop Tracks",
+    cover:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/playlist-covers/me.jpeg',
+    songs: [
+      songs[33],
+      songs[32],
+      songs[35],
+      songs[36],
+      songs[38],
+      songs[59],
+      songs[61],
+      songs[64],
+      songs[66],
+      songs[67],
+      songs[41],
+      songs[43],
+      songs[47],
+      songs[51],
+      songs[53],
+      songs[56],
+    ],
+    description: <>These are some of my favourite hip hop tracks.</>,
+  },
 ];
 
 export default playlists;
