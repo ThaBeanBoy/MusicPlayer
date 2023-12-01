@@ -36,6 +36,15 @@ const artists: artistType[] = [
   { id: 22, name: 'Long Shot Party' },
   { id: 23, name: 'King Gnu' },
   { id: 24, name: 'J. Cole' },
+  { id: 25, name: 'Kendrick Lamar' },
+  { id: 26, name: 'Thundercat' },
+  { id: 27, name: 'George Clinton' },
+  { id: 28, name: 'Bilal' },
+  { id: 29, name: 'Anna Wise' },
+  { id: 30, name: 'Snoop Dogg' },
+  { id: 31, name: 'James Fauntleroy' },
+  { id: 32, name: 'Ronald Isley' },
+  { id: 33, name: 'Rapsody' },
 ];
 
 export const artistNames = {
@@ -64,6 +73,15 @@ export const artistNames = {
   long_shot_party: artists[22],
   king_gnu: artists[23],
   j_cole: artists[24],
+  kendrick: artists[25],
+  thundercat: artists[26],
+  george_clinton: artists[27],
+  bilal: artists[28],
+  anna_wise: artists[29],
+  snoop_dogg: artists[30],
+  james_fauntleroy: artists[31],
+  ronald_isley: artists[32],
+  rapsody: artists[33],
 };
 
 export default artists;

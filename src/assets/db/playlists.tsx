@@ -77,6 +77,29 @@ const playlists: playlistType[] = [
       songs[40],
     ],
   },
+  {
+    id: 4,
+    title: 'To Pimp A Butterfly',
+    cover: 'https://bev-streams.s3.eu-central-1.amazonaws.com/TPAB/cover.png',
+    songs: [
+      songs[41],
+      songs[42],
+      songs[43],
+      songs[44],
+      songs[45],
+      songs[46],
+      songs[47],
+      songs[48],
+      songs[49],
+      songs[50],
+      songs[51],
+      songs[52],
+      songs[53],
+      songs[54],
+      songs[55],
+      songs[56],
+    ],
+  },
 ];
 
 export default playlists;

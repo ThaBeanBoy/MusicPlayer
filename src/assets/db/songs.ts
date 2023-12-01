@@ -360,7 +360,7 @@ const songs: songType[] = [
       'https://bev-streams.s3.eu-central-1.amazonaws.com/2014/cover.png',
     songUrl:
       'https://bev-streams.s3.eu-central-1.amazonaws.com/2014/january-28/song.mp3',
-    // lyricsUrl: '/2014/january-28/lyrics.lrc',
+    // lyricsUrl: 'https://bev-streams.s3.eu-central-1.amazonaws.com/2014/january-28/lyrics.lrc',
     duration: 243000,
   },
   {
@@ -397,7 +397,7 @@ const songs: songType[] = [
       'https://bev-streams.s3.eu-central-1.amazonaws.com/2014/cover.png',
     songUrl:
       'https://bev-streams.s3.eu-central-1.amazonaws.com/2014/03-adolescence/song.mp3',
-    // lyricsUrl: '/2014/03-adolescence/lyrics.lrc',
+    // lyricsUrl: 'https://bev-streams.s3.eu-central-1.amazonaws.com/2014/03-adolescence/lyrics.lrc',
     duration: 265000,
   },
   {
@@ -507,6 +507,207 @@ const songs: songType[] = [
       'https://bev-streams.s3.eu-central-1.amazonaws.com/2014/nts/song.mp3',
     // lyricsUrl: 'https://bev-streams.s3.eu-central-1.amazonaws.com/2014/ATO2C/lyrics.lrc',
     duration: 875000,
+  },
+  {
+    id: 41,
+    title: "Wesley's Theory",
+    artists: [artistNames.kendrick],
+    features: [artistNames.george_clinton, artistNames.thundercat],
+    coverUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/TPAB/cover.png',
+    songUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/TPAB/wesleys-theory/song.mp3',
+    // lyricsUrl: 'https://bev-streams.s3.eu-central-1.amazonaws.com/2014/ATO2C/lyrics.lrc',
+    duration: 288000,
+  },
+  {
+    id: 42,
+    title: 'For Free? (Interlude)',
+    artists: [artistNames.kendrick],
+    features: [],
+    coverUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/TPAB/cover.png',
+    songUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/TPAB/for-free/song.mp3',
+    // lyricsUrl: 'https://bev-streams.s3.eu-central-1.amazonaws.com/2014/ATO2C/lyrics.lrc',
+    duration: 131000,
+  },
+  {
+    id: 43,
+    title: 'King Kunta',
+    artists: [artistNames.kendrick],
+    features: [],
+    coverUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/TPAB/cover.png',
+    songUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/TPAB/king-kunta/song.mp3',
+    // lyricsUrl: 'https://bev-streams.s3.eu-central-1.amazonaws.com/2014/ATO2C/lyrics.lrc',
+    duration: 235000,
+  },
+  {
+    id: 44,
+    title: 'Institutionalized',
+    artists: [artistNames.kendrick],
+    features: [
+      artistNames.bilal,
+      artistNames.anna_wise,
+      artistNames.snoop_dogg,
+    ],
+    coverUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/TPAB/cover.png',
+    songUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/TPAB/institution/song.mp3',
+    // lyricsUrl: 'https://bev-streams.s3.eu-central-1.amazonaws.com/2014/ATO2C/lyrics.lrc',
+    duration: 272000,
+  },
+  {
+    id: 45,
+    title: 'These Walls',
+    artists: [artistNames.kendrick],
+    features: [
+      artistNames.bilal,
+      artistNames.anna_wise,
+      artistNames.thundercat,
+    ],
+    coverUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/TPAB/cover.png',
+    songUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/TPAB/these-walls/song.mp3',
+    // lyricsUrl: 'https://bev-streams.s3.eu-central-1.amazonaws.com/2014/ATO2C/lyrics.lrc',
+    duration: 301000,
+  },
+  {
+    id: 46,
+    title: 'God Is Gangsta',
+    artists: [artistNames.kendrick],
+    features: [],
+    coverUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/TPAB/cover.png',
+    songUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/TPAB/gig/song.mp3',
+    // lyricsUrl: 'https://bev-streams.s3.eu-central-1.amazonaws.com/2014/ATO2C/lyrics.lrc',
+    duration: 441000,
+  },
+  {
+    id: 47,
+    title: 'Alright',
+    artists: [artistNames.kendrick],
+    features: [],
+    coverUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/TPAB/cover.png',
+    songUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/TPAB/alright/song.mp3',
+    // lyricsUrl: 'https://bev-streams.s3.eu-central-1.amazonaws.com/2014/ATO2C/lyrics.lrc',
+    duration: 220000,
+  },
+  {
+    id: 48,
+    title: 'For Sale? (Interlude)',
+    artists: [artistNames.kendrick],
+    features: [],
+    coverUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/TPAB/cover.png',
+    songUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/TPAB/for-sale/song.mp3',
+    // lyricsUrl: 'https://bev-streams.s3.eu-central-1.amazonaws.com/2014/ATO2C/lyrics.lrc',
+    duration: 292000,
+  },
+  {
+    id: 49,
+    title: 'Momma',
+    artists: [artistNames.kendrick],
+    features: [],
+    coverUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/TPAB/cover.png',
+    songUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/TPAB/momma/song.mp3',
+    // lyricsUrl: 'https://bev-streams.s3.eu-central-1.amazonaws.com/2014/ATO2C/lyrics.lrc',
+    duration: 284000,
+  },
+  {
+    id: 50,
+    title: 'Hood Politics',
+    artists: [artistNames.kendrick],
+    features: [],
+    coverUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/TPAB/cover.png',
+    songUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/TPAB/hp/song.mp3',
+    // lyricsUrl: 'https://bev-streams.s3.eu-central-1.amazonaws.com/2014/ATO2C/lyrics.lrc',
+    duration: 273000,
+  },
+  {
+    id: 51,
+    title: 'How Much A Dollar Cost',
+    artists: [artistNames.kendrick],
+    features: [artistNames.james_fauntleroy, artistNames.ronald_isley],
+    coverUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/TPAB/cover.png',
+    songUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/TPAB/hmadc/song.mp3',
+    // lyricsUrl: 'https://bev-streams.s3.eu-central-1.amazonaws.com/2014/ATO2C/lyrics.lrc',
+    duration: 262000,
+  },
+  {
+    id: 52,
+    title: 'Complexion (A Zulu Love)',
+    artists: [artistNames.kendrick],
+    features: [artistNames.rapsody],
+    coverUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/TPAB/cover.png',
+    songUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/TPAB/complexion/song.mp3',
+    // lyricsUrl: 'https://bev-streams.s3.eu-central-1.amazonaws.com/2014/ATO2C/lyrics.lrc',
+    duration: 264000,
+  },
+  {
+    id: 53,
+    title: 'The Blacker The Berry',
+    artists: [artistNames.kendrick],
+    features: [],
+    coverUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/TPAB/cover.png',
+    songUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/TPAB/tbtb/song.mp3',
+    // lyricsUrl: 'https://bev-streams.s3.eu-central-1.amazonaws.com/2014/ATO2C/lyrics.lrc',
+    duration: 329000,
+  },
+  {
+    id: 54,
+    title: 'You Aint Gotta Lie (Momma Said)',
+    artists: [artistNames.kendrick],
+    features: [],
+    coverUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/TPAB/cover.png',
+    songUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/TPAB/yagl/song.mp3',
+    // lyricsUrl: 'https://bev-streams.s3.eu-central-1.amazonaws.com/2014/ATO2C/lyrics.lrc',
+    duration: 242000,
+  },
+  {
+    id: 55,
+    title: 'i',
+    artists: [artistNames.kendrick],
+    features: [],
+    coverUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/TPAB/cover.png',
+    songUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/TPAB/i/song.mp3',
+    // lyricsUrl: 'https://bev-streams.s3.eu-central-1.amazonaws.com/2014/ATO2C/lyrics.lrc',
+    duration: 337000,
+  },
+  {
+    id: 56,
+    title: 'Mortal Man',
+    artists: [artistNames.kendrick],
+    features: [],
+    coverUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/TPAB/cover.png',
+    songUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/TPAB/mortal-man/song.mp3',
+    lyricsUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/TPAB/mortal-man/lyrics.lrc',
+    duration: 728000,
   },
 ];
 

@@ -129,7 +129,7 @@ export default function Playlist({
 
 export function getPlaylistArtists({ songs }: playlistType) {
   const artists = songs
-    .map((song) => song.artists)
+    .map(({ artists, features }) => [...artists, ...features])
     .reduce((prev, next) => prev.concat(next));
 
   return [...new Set(artists.map(({ id }) => id))].map((id) => artistsDB[id]);
