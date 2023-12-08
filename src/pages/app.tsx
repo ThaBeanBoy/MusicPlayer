@@ -101,7 +101,7 @@ import { Song } from '../components/song';
 
 function App() {
   return (
-    <>
+    <main>
       <h2 className='font-bold text-3xl'>Quick Picks</h2>
       <Song {...testPlaylist.songs[0]} />
       <h2 className='font-bold text-3xl'>Playlists</h2>
@@ -115,7 +115,7 @@ function App() {
         className={cn('max-w-md', { 'pb-[74.8px]': Song?.current })}
         searchbar
       /> */}
-    </>
+    </main>
   );
 }
 

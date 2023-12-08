@@ -59,10 +59,11 @@ export default function Layout() {
         <nav className='capitalize gap-3 items-center hidden sm:flex'>
           <NavLink to='/'>home</NavLink>
           <NavLink to='/admin'>admin</NavLink>
+          <NavLink to='/auth/sign-up'>sign up</NavLink>
         </nav>
       </header>
 
-      <main className='w-full'>{<Outlet />}</main>
+      <div className='w-full h-[calc(100vh-64.8px)]'>{<Outlet />}</div>
 
       {Song && Song.current && (
         <div

@@ -21,6 +21,9 @@ import Artist from './pages/artist/app.tsx';
 import ArtistError from './pages/artist/404.tsx';
 import Admin from './pages/admin/app.tsx';
 
+import AuthLayout from './pages/auth/layout.tsx';
+import SignUp from './pages/auth/signUp.tsx';
+
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path='' element={<Layout />}>
@@ -31,6 +34,11 @@ const router = createBrowserRouter(
         element={<Artist />}
         errorElement={<ArtistError />}
       />
+
+      <Route path='auth' element={<AuthLayout />}>
+        <Route path='sign-up' element={<SignUp />} />
+      </Route>
+
       <Route path='/admin' element={<Admin />} />
       <Route path='*' element={<NotFound />} />
     </Route>
