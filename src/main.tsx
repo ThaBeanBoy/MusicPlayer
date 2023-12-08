@@ -21,7 +21,7 @@ import Layout from './pages/layout.tsx';
 import ListError from './pages/list/404.tsx';
 import Artist from './pages/artist/app.tsx';
 import ArtistError from './pages/artist/404.tsx';
-import Admin from './pages/admin/app.tsx';
+import UserInfo from './pages/dashboard/app.tsx';
 
 import AuthLayout from './pages/auth/layout.tsx';
 import SignUp from './pages/auth/signUp.tsx';
@@ -44,7 +44,7 @@ const router = createBrowserRouter(
         <Route path='sign-up' element={<SignUp />} />
       </Route>
 
-      <Route path='/admin' element={<Admin />} />
+      <Route path='/admin' element={<UserInfo />} />
       <Route path='*' element={<NotFound />} />
     </Route>
   )

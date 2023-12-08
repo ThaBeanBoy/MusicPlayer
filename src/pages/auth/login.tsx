@@ -2,29 +2,38 @@ import { FormEvent } from 'react';
 import Input, { useInput } from '../../components/input';
 import { MdOutlineEmail, MdOutlineLock } from 'react-icons/md';
 import Button from '../../components/button';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { FaFacebookF, FaTwitter } from 'react-icons/fa';
 import { FcGoogle } from 'react-icons/fc';
 import supabase from '../../backend/supabase';
+import useToast from '../../context/toast';
 
 export default function Login() {
+  const navigate = useNavigate();
   const emailInput = useInput();
   const passwordInput = useInput();
+
+  const toast = useToast();
 
   const handleLogin = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const { data, error } = await supabase.auth.signInWithPassword({
+    const { error } = await supabase.auth.signInWithPassword({
       email: emailInput.value,
       password: passwordInput.value,
     });
 
     if (error) {
-      alert('Something went wrong');
-      console.error(error);
+      toast({
+        children: <>{error.message}</>,
+        className: 'border border-red-600',
+      });
+
+      return;
     }
 
-    console.log(data);
+    toast({ children: 'Successfully logged in' });
+    navigate(-1);
   };
 
   return (

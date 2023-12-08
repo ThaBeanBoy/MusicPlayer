@@ -43,8 +43,6 @@ export default function Layout() {
   const defaultSlide = Song?.playlist ? 1 : 0;
   const [activeSlide, setActiveSlide] = useState(defaultSlide);
 
-  const toast = useToast();
-
   useEffect(() => toast({ children: <>Hi</> }), []);
 
   const screen = useScreen();

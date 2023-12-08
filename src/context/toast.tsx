@@ -21,13 +21,13 @@ export function ToastProvider({ children }: { children: ReactNode }) {
         {children}
 
         <Toast.Root
+          {...props}
           className={cn(
-            'bg-white fixed right-4 bottom-4 w-full max-w-md rounded-lg shadow-[hsl(206_22%_7%_/_35%)_0px_10px_38px_-10px,_hsl(206_22%_7%_/_20%)_0px_10px_20px_-15px] p-4 data-[state=open]:animate-slideIn data-[state=closed]:animate-hide data-[swipe=move]:translate-x-[var(--radix-toast-swipe-move-x)] data-[swipe=cancel]:translate-x-0 data-[swipe=cancel]:transition-[transform_200ms_ease-out] data-[swipe=end]:animate-swipeOut',
+            'bg-white fixed text-sm right-4 bottom-4 z-50 w-full max-w-md rounded-lg shadow-[hsl(206_22%_7%_/_35%)_0px_10px_38px_-10px,_hsl(206_22%_7%_/_20%)_0px_10px_20px_-15px] p-4 data-[state=open]:animate-slideIn data-[state=closed]:animate-hide data-[swipe=move]:translate-x-[var(--radix-toast-swipe-move-x)] data-[swipe=cancel]:translate-x-0 data-[swipe=cancel]:transition-[transform_200ms_ease-out] data-[swipe=end]:animate-swipeOut',
             props.className
           )}
           open={open}
           onOpenChange={setOpen}
-          {...props}
         />
 
         <Toast.Viewport />
