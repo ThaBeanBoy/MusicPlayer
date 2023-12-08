@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useState } from 'react';
 
 import { NavLink, Outlet } from 'react-router-dom';
 
@@ -6,6 +6,7 @@ import songContext from '../context/song/context';
 
 import * as Dialog from '@radix-ui/react-dialog';
 import * as Avatar from '@radix-ui/react-avatar';
+import * as NavigationMenu from '@radix-ui/react-navigation-menu';
 
 import { Song as SongCompoonent } from '../components/song';
 
@@ -36,8 +37,6 @@ export type songDialogControlsType = {
 export default function Layout() {
   const auth = useAuth();
 
-  useEffect(() => console.log(auth), []);
-
   const Song = useContext(songContext);
 
   const defaultSlide = Song?.playlist ? 1 : 0;
@@ -59,30 +58,51 @@ export default function Layout() {
           <span className='text-2xl'>🍰</span>
         </NavLink>
 
-        <nav className='capitalize gap-3 items-center hidden sm:flex'>
-          <NavLink to='/'>home</NavLink>
-          <Input icon={<BsSearch />} />
-          {auth.user ? (
-            <AspectRatio
-              ratio={1}
-              className='w-9 h-9 rounded-lg overflow-hidden'
-            >
-              <Avatar.Root>
-                <Avatar.Image
-                  className='h-full w-full object-cover'
-                  src={auth.user.profile_img_src || undefined}
-                  alt={auth.user.username}
-                />
-                <Avatar.Fallback>A</Avatar.Fallback>
-              </Avatar.Root>
-            </AspectRatio>
-          ) : (
-            <>
-              <NavLink to='/auth/'>login</NavLink>
-              <NavLink to='/auth/sign-up'>sign up</NavLink>
-            </>
-          )}
-        </nav>
+        <NavigationMenu.Root className='relative z-[1] flex w-screen justify-end'>
+          <NavigationMenu.List className='capitalize gap-3 items-center hidden sm:flex'>
+            <NavigationMenu.Item>
+              <NavLink to='/'>home</NavLink>
+            </NavigationMenu.Item>
+
+            {!auth.user && (
+              <>
+                <NavLink to='/auth/'>login</NavLink>
+                <NavLink to='/auth/sign-up'>sign up</NavLink>
+              </>
+            )}
+
+            <NavigationMenu.List>
+              <Input icon={<BsSearch />} />
+            </NavigationMenu.List>
+
+            {auth.user && (
+              <NavigationMenu.Item className='relative'>
+                <NavigationMenu.Trigger>
+                  <AspectRatio
+                    ratio={1}
+                    className='w-9 h-9 rounded-lg overflow-hidden'
+                  >
+                    <Avatar.Root>
+                      <Avatar.Image
+                        className='h-full w-full object-cover'
+                        src={auth.user.profile_img_src || undefined}
+                        alt={auth.user.username}
+                      />
+                      <Avatar.Fallback>A</Avatar.Fallback>
+                    </Avatar.Root>
+                  </AspectRatio>
+                </NavigationMenu.Trigger>
+                <NavigationMenu.Content className='bg-white rounded-lg p-4 shadow-md data-[motion=from-start]:animate-enterFromLeft data-[motion=from-end]:animate-enterFromRight data-[motion=to-start]:animate-exitToLeft data-[motion=to-end]:animate-exitToRight absolute top-12 right-0 w-full sm:w-auto'>
+                  <Button
+                    label='logout'
+                    onClick={() => auth.signOut()}
+                    desctructive
+                  />
+                </NavigationMenu.Content>
+              </NavigationMenu.Item>
+            )}
+          </NavigationMenu.List>
+        </NavigationMenu.Root>
       </header>
 
       <div

@@ -55,7 +55,7 @@ export default function Login() {
         <Button
           type='submit'
           className='mt-2 w-full col-span-2'
-          label='sign up'
+          label='login'
           disabled={!emailInput.valid || !passwordInput.valid}
         />
       </form>

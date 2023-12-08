@@ -111,7 +111,7 @@ export default function Playlist({
             { 'opacity-100': isBeingPlayed }
           )}
         >
-          Is Playing
+          Playing
         </span>
 
         <span className='bg-white text-xs px-2 py-1 absolute top-2 right-2 rounded-md opacity-0 group-hover:opacity-100 transition'>
