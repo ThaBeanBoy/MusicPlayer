@@ -78,19 +78,21 @@ export default function Layout() {
             {auth.user && (
               <NavigationMenu.Item className='relative'>
                 <NavigationMenu.Trigger>
-                  <AspectRatio
-                    ratio={1}
-                    className='w-9 h-9 rounded-lg overflow-hidden'
-                  >
-                    <Avatar.Root>
-                      <Avatar.Image
-                        className='h-full w-full object-cover'
-                        src={auth.user.profile_img_src || undefined}
-                        alt={auth.user.username}
-                      />
-                      <Avatar.Fallback>A</Avatar.Fallback>
-                    </Avatar.Root>
-                  </AspectRatio>
+                  <NavLink to='/dashboard/'>
+                    <AspectRatio
+                      ratio={1}
+                      className='w-9 h-9 rounded-lg overflow-hidden'
+                    >
+                      <Avatar.Root>
+                        <Avatar.Image
+                          className='h-full w-full object-cover'
+                          src={auth.user.profile_img_src || undefined}
+                          alt={auth.user.username}
+                        />
+                        <Avatar.Fallback>A</Avatar.Fallback>
+                      </Avatar.Root>
+                    </AspectRatio>
+                  </NavLink>
                 </NavigationMenu.Trigger>
                 <NavigationMenu.Content className='bg-white rounded-lg p-4 shadow-md data-[motion=from-start]:animate-enterFromLeft data-[motion=from-end]:animate-enterFromRight data-[motion=to-start]:animate-exitToLeft data-[motion=to-end]:animate-exitToRight absolute top-12 right-0 w-full sm:w-auto'>
                   <Button

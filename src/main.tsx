@@ -28,6 +28,8 @@ import SignUp from './pages/auth/signUp.tsx';
 import Login from './pages/auth/login.tsx';
 import { ToastProvider } from './context/toast.tsx';
 
+import DashboardLayout from './pages/dashboard/layout.tsx';
+
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path='' element={<Layout />}>
@@ -44,7 +46,9 @@ const router = createBrowserRouter(
         <Route path='sign-up' element={<SignUp />} />
       </Route>
 
-      <Route path='/admin' element={<UserInfo />} />
+      <Route path='dashboard' element={<DashboardLayout />}>
+        <Route path='' element={<UserInfo />} />
+      </Route>
       <Route path='*' element={<NotFound />} />
     </Route>
   )
