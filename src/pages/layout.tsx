@@ -5,6 +5,8 @@ import { NavLink, Outlet } from 'react-router-dom';
 import songContext from '../context/song/context';
 
 import * as Dialog from '@radix-ui/react-dialog';
+import * as Avatar from '@radix-ui/react-avatar';
+
 import { Song as SongCompoonent } from '../components/song';
 
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -19,9 +21,10 @@ import { useScreen } from '../hooks/windowDimensions';
 import CurrentSongProgress from '../components/songProgress';
 import Button from '../components/button';
 import Input from '../components/input';
+import AspectRatio from '../components/aspectRation';
+
 import { Controls, CurrentPlaylist, Lyrics } from '../context/song/ui';
 import { BsSearch } from 'react-icons/bs';
-import { TbFilterSearch } from 'react-icons/tb';
 import useAuth from '../context/auth';
 
 export type songDialogControlsType = {
@@ -56,19 +59,39 @@ export default function Layout() {
           <span className='text-2xl'>🍰</span>
         </NavLink>
 
-        <div className='flex items-center gap-1'>
-          <Input icon={<BsSearch />} />
-          <Button icon={<TbFilterSearch />} variant='flat' />
-        </div>
-
         <nav className='capitalize gap-3 items-center hidden sm:flex'>
           <NavLink to='/'>home</NavLink>
-          <NavLink to='/admin'>admin</NavLink>
-          <NavLink to='/auth/sign-up'>sign up</NavLink>
+          <Input icon={<BsSearch />} />
+          {auth.user ? (
+            <AspectRatio
+              ratio={1}
+              className='w-9 h-9 rounded-lg overflow-hidden'
+            >
+              <Avatar.Root>
+                <Avatar.Image
+                  className='h-full w-full object-cover'
+                  src={auth.user.profile_img_src || undefined}
+                  alt={auth.user.username}
+                />
+                <Avatar.Fallback>A</Avatar.Fallback>
+              </Avatar.Root>
+            </AspectRatio>
+          ) : (
+            <>
+              <NavLink to='/auth/'>login</NavLink>
+              <NavLink to='/auth/sign-up'>sign up</NavLink>
+            </>
+          )}
         </nav>
       </header>
 
-      <div className='w-full h-[calc(100vh-64.8px)]'>{<Outlet />}</div>
+      <div
+        className={cn('w-full h-[calc(100vh-64.8px)]', {
+          'pb-[75px]': Song?.current,
+        })}
+      >
+        {<Outlet />}
+      </div>
 
       {Song && Song.current && (
         <div

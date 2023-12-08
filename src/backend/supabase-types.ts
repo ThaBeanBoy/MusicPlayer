@@ -173,14 +173,17 @@ export interface Database {
       user_info: {
         Row: {
           id: string
+          profile_img_src: string | null
           username: string
         }
         Insert: {
           id: string
+          profile_img_src?: string | null
           username: string
         }
         Update: {
           id?: string
+          profile_img_src?: string | null
           username?: string
         }
         Relationships: [

@@ -3,7 +3,7 @@ Author: https://github.com/daniellaera
 GitHub: https://github.com/daniellaera/react-supabase-auth-provider/blob/main/src/hooks/Auth.tsx
 YouTube: https://www.youtube.com/watch?v=r7SAlIlMs1k
 */
-import { Session, User } from '@supabase/supabase-js';
+import { Session, User as SupabaseUser } from '@supabase/supabase-js';
 import {
   useContext,
   useState,
@@ -14,6 +14,12 @@ import {
 import supabase from '../backend/supabase';
 
 // create a context for authentication
+export type User = SupabaseUser & {
+  id: string;
+  profile_img_src: string | null;
+  username: string;
+};
+
 const AuthContext = createContext<{
   session: Session | null | undefined;
   user: User | null | undefined;
@@ -25,6 +31,19 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [session, setSession] = useState<Session | null>();
   const [loading, setLoading] = useState(true);
 
+  const loadUser = async (session: Session) => {
+    if (session.user) {
+      const { data: user_infos } = await supabase
+        .from('user_info')
+        .select()
+        .eq('id', session?.user.id);
+
+      if (user_infos) {
+        setUser({ ...session?.user, ...user_infos[0] });
+      }
+    }
+  };
+
   useEffect(() => {
     const setData = async () => {
       const {
@@ -33,14 +52,19 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       } = await supabase.auth.getSession();
       if (error) throw error;
       setSession(session);
-      setUser(session?.user);
+      if (session) {
+        await loadUser(session);
+      }
       setLoading(false);
     };
 
     const { data: listener } = supabase.auth.onAuthStateChange(
-      (_event, session) => {
+      async (_event, session) => {
         setSession(session);
-        setUser(session?.user);
+        if (session) {
+          await loadUser(session);
+        }
+
         setLoading(false);
       }
     );

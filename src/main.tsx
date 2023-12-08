@@ -14,8 +14,10 @@ import NotFound from './pages/404.tsx';
 
 import './index.css';
 
-import Layout from './pages/layout.tsx';
 import { SongProvider } from './context/song/context.tsx';
+import { AuthProvider } from './context/auth.tsx';
+
+import Layout from './pages/layout.tsx';
 import ListError from './pages/list/404.tsx';
 import Artist from './pages/artist/app.tsx';
 import ArtistError from './pages/artist/404.tsx';
@@ -23,7 +25,7 @@ import Admin from './pages/admin/app.tsx';
 
 import AuthLayout from './pages/auth/layout.tsx';
 import SignUp from './pages/auth/signUp.tsx';
-import { AuthProvider } from './context/auth.tsx';
+import Login from './pages/auth/login.tsx';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -37,6 +39,7 @@ const router = createBrowserRouter(
       />
 
       <Route path='auth' element={<AuthLayout />}>
+        <Route path='' element={<Login />} />
         <Route path='sign-up' element={<SignUp />} />
       </Route>
 
