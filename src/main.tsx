@@ -26,6 +26,7 @@ import Admin from './pages/admin/app.tsx';
 import AuthLayout from './pages/auth/layout.tsx';
 import SignUp from './pages/auth/signUp.tsx';
 import Login from './pages/auth/login.tsx';
+import { ToastProvider } from './context/toast.tsx';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -51,10 +52,12 @@ const router = createBrowserRouter(
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <AuthProvider>
-      <SongProvider>
-        <RouterProvider router={router} />
-      </SongProvider>
-    </AuthProvider>
+    <ToastProvider>
+      <AuthProvider>
+        <SongProvider>
+          <RouterProvider router={router} />
+        </SongProvider>
+      </AuthProvider>
+    </ToastProvider>
   </React.StrictMode>
 );

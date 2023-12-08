@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 
 import { NavLink, Outlet } from 'react-router-dom';
 
@@ -27,6 +27,7 @@ import AspectRatio from '../components/aspectRation';
 import { Controls, CurrentPlaylist, Lyrics } from '../context/song/ui';
 import { BsSearch } from 'react-icons/bs';
 import useAuth from '../context/auth';
+import useToast from '../context/toast';
 
 export type songDialogControlsType = {
   open: () => void;
@@ -41,6 +42,10 @@ export default function Layout() {
 
   const defaultSlide = Song?.playlist ? 1 : 0;
   const [activeSlide, setActiveSlide] = useState(defaultSlide);
+
+  const toast = useToast();
+
+  useEffect(() => toast({ children: <>Hi</> }), []);
 
   const screen = useScreen();
 
@@ -72,7 +77,7 @@ export default function Layout() {
             )}
 
             <NavigationMenu.List>
-              <Input icon={<BsSearch />} />
+              <Input icon={<BsSearch />} placeholder='search' />
             </NavigationMenu.List>
 
             {auth.user && (
