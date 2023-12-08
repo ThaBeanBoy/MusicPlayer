@@ -50,6 +50,30 @@ const artists: artistType[] = [
   { id: 36, name: 'Dr Dre' },
   { id: 37, name: 'Jay Rock' },
   { id: 38, name: 'Nas' },
+  {
+    id: 39,
+    name: 'DJ Softy',
+    coverUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/softy/cover.jpeg',
+    description: (
+      <>
+        <p>
+          DJ Softy is currently studying Computer Science & Infos, and he has
+          visions of integrating house and amapiano with his very own artificial
+          intelligence he's developing
+        </p>
+        <p>
+          Currently negotiating a record contract with Kabaza De Small & Dj
+          Maphorisa, this rising star has already accumulated trillions of
+          dollars, <b>(yes, US Dollars!! Not Rands like you poverty people)</b>
+        </p>
+        <p>
+          Ladies & gentlemen, his future is looking too bright, there's a rising
+          star amongst us👍
+        </p>
+      </>
+    ),
+  },
 ];
 
 export const artistNames = {
@@ -92,6 +116,7 @@ export const artistNames = {
   dr_dre: artists[36],
   jay_rock: artists[37],
   nas: artists[38],
+  dj_softy: artists[39],
 };
 
 export default artists;

@@ -53,7 +53,7 @@ export default function List() {
         {description && (
           <>
             <hr className='my-4 hidden md:block' />{' '}
-            <p className='text-sm hidden md:block'>{description}</p>
+            <p className='prose text-sm hidden md:block'>{description}</p>
           </>
         )}
       </div>
@@ -62,8 +62,8 @@ export default function List() {
         <Playlist playlist={playlist} searchbar className='w-full max-w-lg' />
         {description && (
           <>
-            <hr className='my-4 md:hidden' />{' '}
-            <p className='text-sm md:hidden pb-4'>{description}</p>
+            <hr className='my-4 md:hidden' />
+            <div className='prose text-sm md:hidden'>{description}</div>
           </>
         )}
       </div>

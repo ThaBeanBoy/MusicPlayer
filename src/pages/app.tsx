@@ -34,12 +34,22 @@ import { Song } from '../components/song';
       <> Where I'm From
     <> Scum Fuck Flower Boy
     <> IGOR
+    <> AC/DC
   <> Save the semester mode (Momo, Ufunani, Nguwe Wedwa, Long Lasting, Villo)
-  <> Sandile Strict Session vol 4
+  >< Sandile Strict Session vol 4
   <> Tanatswa (The Notorious B.E.V)
-  - Tanaka & Aneen (Vasikana va mwari)
-  - Kudzi (Amai Papa Bear)
-  - Rivo (Munghana Rulani & Prince Rhangani)
+  <> Tanaka & Aneen (Vasikana va mwari)
+  <> Kudzi (Amai Papa Bear)
+  <> Rivo (Munghana Rulani & Prince Rhangani)
+  <> Mama
+    <> Mai Charamba
+    <> Shingisai
+    <> Mercy
+  - Baba
+  - Kundi, Uzozisola, Winky, Lambo mercy
+  - Charlene & Primrose (My Sisters)
+  - Taps
+  - Amai Aku
   - Sesi (Khosikadzi va mavenda)
   - Mpumi, Nkosana, Andrew & Joseph (name: Past Paper Chowers United, playlist: E Les Foyer Cremming) | Andrew hip hop Idlozi
   - Delulu's child (not destiny's child) - Electrotechnics Engineer Abongile -> Kwa Zulu & Snr AWS Cloud Engineer Mohlakoane -> Basetsana babapedi
@@ -48,12 +58,6 @@ import { Song } from '../components/song';
   - Zim dancehall
   - Jared, Nepo,  Gamers GG & Royal College (Anime)
   - Morena aka Moreezy (Classics)
-  - Mama
-  - Baba
-  - Kundi, Uzozisola, Winky, Lambo mercy
-  - Charlene & Primrose (My Sisters)
-  - Taps
-  - Amai Aku
   - Yongama
   - Amber (Daft punk)
   - High class papi

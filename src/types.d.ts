@@ -4,7 +4,7 @@ export type artistType = {
   link?: string;
   coverUrl?: string;
   profileUrl?: string;
-  description?: string;
+  description?: React.ReactNode;
 };
 
 export type personType = {

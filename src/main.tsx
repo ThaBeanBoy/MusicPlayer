@@ -19,6 +19,7 @@ import { SongProvider } from './context/song/context.tsx';
 import ListError from './pages/list/404.tsx';
 import Artist from './pages/artist/app.tsx';
 import ArtistError from './pages/artist/404.tsx';
+import Admin from './pages/admin/app.tsx';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -30,6 +31,7 @@ const router = createBrowserRouter(
         element={<Artist />}
         errorElement={<ArtistError />}
       />
+      <Route path='/admin' element={<Admin />} />
       <Route path='*' element={<NotFound />} />
     </Route>
   )

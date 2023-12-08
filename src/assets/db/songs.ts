@@ -956,6 +956,18 @@ const songs: songType[] = [
       'https://bev-streams.s3.eu-central-1.amazonaws.com/hiphop/illmatic/iahtt/lyrics.lrc',
     duration: 202000,
   },
+  {
+    id: 76,
+    title: 'Strict Session',
+    artists: [artistNames.dj_softy],
+    features: [],
+    coverUrl:
+      'https://bev-streams.s3.eu-central-1.amazonaws.com/softy/cover.jpeg',
+    songUrl: 'https://bev-streams.s3.eu-central-1.amazonaws.com/softy/song.mp3',
+    // lyricsUrl:
+    //   'https://bev-streams.s3.eu-central-1.amazonaws.com/hiphop/illmatic/iahtt/lyrics.lrc',
+    duration: 4400000,
+  },
 ];
 
 export default songs;

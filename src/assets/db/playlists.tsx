@@ -152,6 +152,19 @@ const playlists: playlistType[] = [
     ],
     description: <>These are some of my favourite hip hop tracks.</>,
   },
+  {
+    id: 7,
+    title: "Softy's Strict Session Volume 4",
+    cover: 'https://bev-streams.s3.eu-central-1.amazonaws.com/softy/cover.jpeg',
+    songs: [songs[76]],
+    description: (
+      <>
+        <p>
+          This mix was made by Sandile aka <b>Dj Softy</b>. For some reason
+        </p>
+      </>
+    ),
+  },
 ];
 
 export default playlists;

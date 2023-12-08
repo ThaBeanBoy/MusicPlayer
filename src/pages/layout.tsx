@@ -58,6 +58,7 @@ export default function Layout() {
 
         <nav className='capitalize gap-3 items-center hidden sm:flex'>
           <NavLink to='/'>home</NavLink>
+          <NavLink to='/admin'>admin</NavLink>
         </nav>
       </header>
 

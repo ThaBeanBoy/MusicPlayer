@@ -8,7 +8,7 @@ import { IoChevronBack } from 'react-icons/io5';
 import Playlist, { getPlaylistArtists } from '../../components/playlist';
 
 import * as AspectRatio from '@radix-ui/react-aspect-ratio';
-import { BsFillPlayFill } from 'react-icons/bs';
+import { FiShare2 } from 'react-icons/fi';
 export default function Artist() {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -44,14 +44,14 @@ export default function Artist() {
           </div>
           <div className='absolute left-1/2 -translate-x-1/2 bottom-4 max-w-2xl mx-auto w-full text-white'>
             <h2 className='text-3xl font-bold mb-4'>{name}</h2>
-            <p className='text-sm tracking-wide mb-4'>
+            <div className='prose text-white text-sm tracking-wide mb-4'>
               {description}{' '}
               {link && (
                 <a href={link} target='_blank'>
                   wiki
                 </a>
               )}
-            </p>
+            </div>
             <div className='flex gap-2'>
               <Button
                 label='Back'
@@ -59,7 +59,7 @@ export default function Artist() {
                 className='flex-row-reverse'
                 onClick={goBack}
               />
-              <Button label='play' icon={<BsFillPlayFill />} />
+              <Button label='share' icon={<FiShare2 />} />
             </div>
           </div>
         </div>
@@ -72,13 +72,15 @@ export default function Artist() {
           </a>
         )}
 
-        <h3 className='text-2xl font-bold'>Songs</h3>
+        <h3 className='text-2xl font-bold'>Song{songs.length > 1 && 's'}</h3>
         <div>
           {songs.map((song, key) => (
             <Song {...song} key={`song-${key}`} className='max-w-none' />
           ))}
         </div>
-        <h3 className='text-2xl font-bold'>In Playlist/s</h3>
+        <h3 className='text-2xl font-bold'>
+          In Playlist{playlists.length > 1 && 's'}
+        </h3>
         <div>
           {playlists.map((playlist, key) => (
             <Playlist
