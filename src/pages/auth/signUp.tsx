@@ -3,12 +3,18 @@ import { FormEvent } from 'react';
 import { MdOutlineEmail, MdOutlineLock } from 'react-icons/md';
 import { FaFacebookF, FaTwitter } from 'react-icons/fa';
 import { FcGoogle } from 'react-icons/fc';
+import { LuUser } from 'react-icons/lu';
+
+import { NavLink } from 'react-router-dom';
+
 import Button from '../../components/button';
 import Input, { useInput } from '../../components/input';
-import { NavLink } from 'react-router-dom';
+
 import { passwordChecks } from '../../utils/checkTemplates';
+import supabase from '../../backend/supabase';
 
 export default function SignUp() {
+  const usernameInput = useInput();
   const emailInput = useInput();
   const passwordInput = useInput(passwordChecks);
   const confirmPasswordInput = useInput([
@@ -20,20 +26,46 @@ export default function SignUp() {
     },
   ]);
 
-  const handleSignUp = (e: FormEvent<HTMLFormElement>) => {
+  const handleSignUp = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    console.log(emailInput);
-    console.log(passwordInput);
+    const { data, error } = await supabase.auth.signUp({
+      email: emailInput.value,
+      password: passwordInput.value,
+    });
+
+    if (error) {
+      console.error(error);
+      return;
+    }
+
+    if (data.user !== null) {
+      const { error } = await supabase
+        .from('user_info')
+        .insert({ id: data.user?.id, username: usernameInput.value });
+
+      if (error) console.error(error);
+    }
+
+    console.log(data);
   };
 
   return (
     <main className='w-full max-w-lg'>
-      <h1 className='text-3xl font-bold mb-6'>Sign Up</h1>
+      <h1 className='text-3xl font-bold text-center mb-6'>Sign Up</h1>
       <form
         onSubmit={handleSignUp}
         className='w-full flex flex-col sm:grid grid-cols-2 gap-2'
       >
+        <Input
+          type='text'
+          label='username'
+          wrapperClassname='max-w-none col-span-2'
+          icon={<LuUser />}
+          required
+          {...usernameInput.inputProps}
+        />
+
         <Input
           type='email'
           label='email'
@@ -66,6 +98,7 @@ export default function SignUp() {
           className='mt-2 w-full col-span-2'
           label='sign up'
           disabled={
+            !usernameInput.valid ||
             !emailInput.valid ||
             !passwordInput.valid ||
             confirmPasswordInput.value !== passwordInput.value

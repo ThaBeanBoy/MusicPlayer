@@ -23,6 +23,7 @@ import Admin from './pages/admin/app.tsx';
 
 import AuthLayout from './pages/auth/layout.tsx';
 import SignUp from './pages/auth/signUp.tsx';
+import { AuthProvider } from './context/auth.tsx';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -47,8 +48,10 @@ const router = createBrowserRouter(
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <SongProvider>
-      <RouterProvider router={router} />
-    </SongProvider>
+    <AuthProvider>
+      <SongProvider>
+        <RouterProvider router={router} />
+      </SongProvider>
+    </AuthProvider>
   </React.StrictMode>
 );

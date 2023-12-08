@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 
 import { NavLink, Outlet } from 'react-router-dom';
 
@@ -22,6 +22,7 @@ import Input from '../components/input';
 import { Controls, CurrentPlaylist, Lyrics } from '../context/song/ui';
 import { BsSearch } from 'react-icons/bs';
 import { TbFilterSearch } from 'react-icons/tb';
+import useAuth from '../context/auth';
 
 export type songDialogControlsType = {
   open: () => void;
@@ -30,6 +31,10 @@ export type songDialogControlsType = {
 };
 
 export default function Layout() {
+  const auth = useAuth();
+
+  useEffect(() => console.log(auth), []);
+
   const Song = useContext(songContext);
 
   const defaultSlide = Song?.playlist ? 1 : 0;
