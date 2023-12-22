@@ -1,3 +1,3 @@
 export default function UserInfo() {
-  return <div>Admin</div>;
+  return <main>Profile Editor</main>;
 }

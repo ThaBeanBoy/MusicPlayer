@@ -22,10 +22,10 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   ) => (
     <button
       className={cn(
-        'bg-blue-500 border-blue-500 flex items-center justify-center gap-2 rounded-lg border px-4 py-2 font-semibold capitalize text-white shadow-md',
+        'bg-blue-500 border-blue-500 flex items-center justify-center gap-2 transition rounded-lg border px-4 py-2 font-semibold capitalize text-white shadow-md',
         {
           // hollow variant
-          'text-blue-500 bg-white ': variant === 'hollow',
+          'text-blue-500 bg-white hover:bg-blue-50': variant === 'hollow',
 
           // icon only
           'h-10 w-10 rounded-md p-0': !label,
