@@ -17,6 +17,7 @@
     "@types/node": "^20.9.0",
     "@types/passport": "^1.0.15",
     "@types/passport-local": "^1.0.38",
+    "@types/url-parse": "^1.4.11",
     "@types/validator": "^13.11.6",
     "concurrently": "^8.2.2",
     "nodemon": "^3.0.1",
@@ -34,6 +35,8 @@
     "express-rate-limit": "^7.1.4",
     "helmet": "^7.1.0",
     "http-status": "^1.7.3",
-    "validator": "^13.11.0"
+    "url-parse": "^1.5.10",
+    "validator": "^13.11.0",
+    "ytmusic-api": "^4.4.0"
   }
 }

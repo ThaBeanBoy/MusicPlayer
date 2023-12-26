@@ -7,7 +7,10 @@ import openFilePicker from '../../utils/filePicker';
 import { FormEvent, useEffect, useState } from 'react';
 import { AspectRatio } from '@radix-ui/react-aspect-ratio';
 import { IoIosClose } from 'react-icons/io';
+import { AiOutlineLoading3Quarters } from 'react-icons/ai';
 import { CiImageOn } from 'react-icons/ci';
+import useToast from '../../context/toast';
+import axios from 'axios';
 
 export default function ArtistAdmin() {
   return (
@@ -33,8 +36,12 @@ export default function ArtistAdmin() {
 }
 
 function NewArtistForm() {
+  const toast = useToast();
+
+  const artistUrl = useInput();
   const artistName = useInput();
 
+  const [searching, setSearching] = useState(false);
   const [coverImage, setCoverImage] = useState<File | undefined>(undefined);
   const [coverImageSrc, setCoverImageSrc] = useState<
     string | ArrayBuffer | null | undefined
@@ -59,6 +66,33 @@ function NewArtistForm() {
     // uploading data to db
   };
 
+  const searchArtist = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setSearching(true);
+
+    try {
+      await axios.post('/api/admin/artist', {
+        params: {
+          artist: artistUrl.value,
+        },
+      });
+    } catch (error) {
+      let errorMessage = 'something went wrong';
+
+      if (axios.isAxiosError(error) && error.response) {
+        const { data } = error.response;
+        errorMessage = data.message;
+      }
+
+      toast({
+        children: errorMessage,
+        className: 'border border-red-600',
+      });
+    } finally {
+      setSearching(false);
+    }
+  };
+
   const selectArtistCover = async () => {
     const coverImage = await openFilePicker({ accept: ['jpg', 'png'] });
     setCoverImage(coverImage[0]);
@@ -67,45 +101,64 @@ function NewArtistForm() {
   const removeCoverImage = () => setCoverImage(undefined);
 
   return (
-    <form onSubmit={createNewArtist}>
-      <div className='flex gap-4'>
-        <div className='flex-1'>
-          <Input label='artist name' {...artistName.inputProps} required />
-          <Input label='external url' />
-        </div>
-        {coverImageSrc ? (
-          <div className='relative w-[125px]'>
-            <Button
-              onClick={removeCoverImage}
-              icon={<IoIosClose />}
-              className='absolute w-5 h-5 text-2xl top-1 left-1 z-50 p-0'
-            />
-            <AspectRatio
-              ratio={1}
-              className='w-[125px] h-[125px] rounded-lg overflow-hidden'
-            >
-              <img
-                src={coverImageSrc?.toString()}
-                className='h-full w-full object-cover brightness-75'
-                alt='artist cover'
-              />
-            </AspectRatio>
+    <div>
+      <form className='flex gap-4' onSubmit={searchArtist}>
+        <Input className='max-w-none flex-1' {...artistUrl.inputProps} />
+        <Button
+          label={
+            searching ? (
+              <AiOutlineLoading3Quarters className='animate-spin' />
+            ) : (
+              'scrape'
+            )
+          }
+          className='w-[125px]'
+          disabled={searching}
+        />
+      </form>
+
+      <hr className='my-4' />
+
+      <form onSubmit={createNewArtist}>
+        <div className='flex gap-4'>
+          <div className='flex-1'>
+            <Input label='artist name' {...artistName.inputProps} required />
+            <Input label='external url' />
           </div>
-        ) : (
-          <Button
-            label='select'
-            icon={<CiImageOn />}
-            className='w-[125px] h-[125px]'
-            variant='hollow'
-            onClick={selectArtistCover}
-          />
-        )}
-      </div>
-      <Button
-        label='create artist'
-        className='mt-4 w-full max-w-none'
-        disabled={!artistName.valid}
-      />
-    </form>
+          {coverImageSrc ? (
+            <div className='relative w-[125px]'>
+              <Button
+                onClick={removeCoverImage}
+                icon={<IoIosClose />}
+                className='absolute w-5 h-5 text-2xl top-1 left-1 z-50 p-0'
+              />
+              <AspectRatio
+                ratio={1}
+                className='w-[125px] h-[125px] rounded-lg overflow-hidden'
+              >
+                <img
+                  src={coverImageSrc?.toString()}
+                  className='h-full w-full object-cover brightness-75'
+                  alt='artist cover'
+                />
+              </AspectRatio>
+            </div>
+          ) : (
+            <Button
+              label='select'
+              icon={<CiImageOn />}
+              className='w-[125px] h-[125px]'
+              variant='hollow'
+              onClick={selectArtistCover}
+            />
+          )}
+        </div>
+        <Button
+          label='create artist'
+          className='mt-4 w-full max-w-none'
+          disabled={!artistName.valid}
+        />
+      </form>
+    </div>
   );
 }

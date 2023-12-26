@@ -30,7 +30,8 @@
     "react-router-dom": "^6.20.0",
     "swiper": "^11.0.4",
     "tailwind-merge": "^2.0.0",
-    "validator": "^13.11.0"
+    "validator": "^13.11.0",
+    "ytmusic-api": "^4.4.0"
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.10",
