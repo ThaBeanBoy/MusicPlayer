@@ -35,6 +35,7 @@
     "express-rate-limit": "^7.1.4",
     "helmet": "^7.1.0",
     "http-status": "^1.7.3",
+    "image-downloader": "^4.3.0",
     "url-parse": "^1.5.10",
     "validator": "^13.11.0",
     "ytmusic-api": "^4.4.0"

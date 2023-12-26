@@ -72,9 +72,7 @@ function NewArtistForm() {
 
     try {
       await axios.post('/api/admin/artist', {
-        params: {
-          artist: artistUrl.value,
-        },
+        artist: artistUrl.value,
       });
     } catch (error) {
       let errorMessage = 'something went wrong';
@@ -103,7 +101,11 @@ function NewArtistForm() {
   return (
     <div>
       <form className='flex gap-4' onSubmit={searchArtist}>
-        <Input className='max-w-none flex-1' {...artistUrl.inputProps} />
+        <Input
+          className='max-w-none flex-1'
+          name='artist'
+          {...artistUrl.inputProps}
+        />
         <Button
           label={
             searching ? (
